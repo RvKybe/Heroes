@@ -1,8 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IHero} from "../../../interfaces/hero.interface";
-import {ManageAbilitiesService} from "../../../services/manage-abilities.service";
-import {EHero} from "../../../enums/hero.enum";
-import {IndexHtmlTransformResult} from "@angular-devkit/build-angular/src/utils/index-file/index-html-generator";
 
 @Component({
     selector: 'app-output-hero',
