@@ -1,0 +1,19 @@
+.hero {
+  margin-bottom: 10px;
+  background-color: beige;
+  padding: 10px;
+  border-radius: 3px;
+}
+.hero__title {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 87%;
+  padding: 0 30px;
+}
+.ability-item {
+  display: inline-block;
+  background-color: cadetblue;
+  border-radius: 3px;
+  margin-right: 5px;
+  padding: 3px;
+}

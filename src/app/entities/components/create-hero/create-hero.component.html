@@ -1,0 +1,61 @@
+<form [formGroup]="form">
+  <div class="dx-fieldset">
+    <div class="dx-field">
+      <div class="dx-field-label">
+        Имя:
+      </div>
+      <div class="dx-field-value">
+        <dx-text-box [showClearButton]="true"
+                     [isValid]="nameFormControl.valid || nameFormControl.untouched"
+                     [formControl]="nameFormControl"
+                     placeholder="John Smith"
+        ></dx-text-box>
+      </div>
+    </div>
+    <div class="dx-field">
+      <div class="dx-field-label">
+        Сила:
+      </div>
+      <div class="dx-field-value">
+        <dx-text-box [showClearButton]="true"
+                     [isValid]="powerFormControl.valid || powerFormControl.untouched"
+                     [formControl]="powerFormControl"
+                     placeholder="6"
+        ></dx-text-box>
+      </div>
+    </div>
+    <div class="dx-field">
+      <div class="dx-field-label">
+        Способности:
+      </div>
+      <div class="dx-field-value">
+        <dx-tag-box [dataSource]="(abilities$ | async)"
+                    [hideSelectedItems]="true"
+                    [isValid]="abilityFormControl.valid || abilityFormControl.untouched"
+                    [formControl]="abilityFormControl"
+                    displayExpr="name"
+                    valueExpr="id"
+                    placeholder="Teleportation"
+        ></dx-tag-box>
+      </div>
+    </div>
+    <div class="dx-field">
+      <div class="dx-field-label">
+        Уровень:
+      </div>
+      <div class="dx-field-value">
+        <dx-text-box [isValid]="levelFormControl.valid || levelFormControl.untouched"
+                     [formControl]="levelFormControl"
+                     placeholder="13"
+        ></dx-text-box>
+      </div>
+    </div>
+    <div [textContent]="errorMessage"
+    ></div>
+    <div class="button-container">
+      <dx-button [text]="submitButtonText"
+                 (onClick)="submit()"
+      ></dx-button>
+    </div>
+  </div>
+</form>

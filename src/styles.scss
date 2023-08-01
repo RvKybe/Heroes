@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+$highlight: red;
+$background: beige;
+.textbox-attention {
+  outline: 2px solid $highlight;
+}
+@mixin flexWrapper ($jc: flex-end) {
+  display: flex;
+  justify-content: $jc;
+}
+.button-container {
+  @include flexWrapper(flex-end);
+  width: 90%;
+}
+.dx-fieldset {
+  width: 100%;
+  background-color: $background;
+  padding: 10px;
+  border-radius: 3px;
+}
+form {
+  width: 90%;
+}

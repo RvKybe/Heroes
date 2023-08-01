@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  flex-wrap: wrap;
+}
+.left-column {
+  width: 40%;
+  height: 100%;
+}
+.right-column {
+  width: 60%;
+}
+
