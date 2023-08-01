@@ -14,14 +14,15 @@ import {Subscription} from "rxjs";
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent implements OnInit, OnDestroy {
-  public possibleAbilities!: IAbility[];
-  public sort: string = 'fromLowLevel';
-  public iconName: string = 'chevronup';
-  public sortName: string = 'возрастанию';
-  public abilitySubscription!: Subscription;
-  public formChangeSubscription!: Subscription;
 
   form:FormGroup = this._formBuilderService.filterForm;
+
+  public possibleAbilities: IAbility[] = [];
+  public sort: string = 'fromLowLevel';
+  public iconName: string = 'chevronup';
+  public outputSortName: string = 'возрастанию';
+  public abilitySubscription!: Subscription;
+  public formChangeSubscription!: Subscription;
 
   constructor(
     private readonly _manageAbilitiesService: ManageAbilitiesService,
@@ -31,24 +32,11 @@ export class FiltersComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.form.get([EFilters.SORT_MODE])?.patchValue(1);
-    this._filterFormService.form = this.form;
-    this.abilitySubscribe();
-    this.formChangeSubscription = this.form.valueChanges
-      .subscribe((): void => {
-        this._manageHeroesService.sortHeroes(this.form.get(`${[EFilters.SORT_MODE]}`)?.value);
-        this._manageHeroesService.filterHeroes(this.form);
-      });
-  }
+    this._filterFormService.form = this.form.value;
+    this.initAbilitySubscription();
+    this.initFilterFormChangeSubscription();
 
-  /**
-   * Подписка на изменения в списке способностей
-   */
-  public abilitySubscribe(): void {
-    this.abilitySubscription = this._manageAbilitiesService.abilityStream$
-      .subscribe((abilities: IAbility[]) => this.possibleAbilities = abilities);
   }
-
   public ngOnDestroy(): void {
     this.abilitySubscription.unsubscribe();
     this.formChangeSubscription.unsubscribe();
@@ -62,30 +50,65 @@ export class FiltersComponent implements OnInit, OnDestroy {
     switch(this.sort) {
       case 'fromLowLevel':
         this.iconName = 'chevronup';
-        this.sortName = 'возрастанию';
+        this.outputSortName = 'возрастанию';
         break;
       case 'fromHighLevel':
         this.iconName = 'chevrondown';
-        this.sortName = 'убыванию';
+        this.outputSortName = 'убыванию';
         break;
     }
     const sortMode: number = this.sort === 'fromLowLevel' ? 1 : -1;
-    this.form.get(`${[EFilters.SORT_MODE]}`)?.patchValue(sortMode);
+    this.form.get([EFilters.SORT_MODE])?.setValue(sortMode);
   }
 
+  /**
+   * Создаёт подписку на поток способностей
+   * @private
+   */
+  private initAbilitySubscription(): void {
+    this.abilitySubscription = this._manageAbilitiesService.abilityStream$
+        .subscribe((abilities: IAbility[]) => this.possibleAbilities = abilities);
+  }
+
+  /**
+   * Создаёт подписку на изменения формы фильтрации
+   * @private
+   */
+  private initFilterFormChangeSubscription(): void {
+    this.formChangeSubscription = this.form.valueChanges.subscribe((): void => {
+          this._manageHeroesService.sortFilterHeroes(this.form.value);
+        });
+  }
+
+  /**
+   * Возвращает контроллер bottomLevel формы
+   * return {FormControl}
+   */
   public get bottomLevelFormControl(): FormControl<string | null> {
     return this.form.get([EFilters.BOTTOM_LEVEL]) as FormControl<string | null>;
   }
+
+  /**
+   * Возвращает контроллер topLevel формы
+   * return {FormControl}
+   */
   public get topLevelFormControl(): FormControl<string | null> {
     return this.form.get([EFilters.TOP_LEVEL]) as FormControl<string | null>;
   }
+
+  /**
+   * Возвращает контроллер abilities формы
+   * return {FormControl}
+   */
   public get abilitiesFormControl(): FormControl<string | null> {
     return this.form.get([EFilters.ABILITIES]) as FormControl<string | null>;
   }
+
+  /**
+   * Возвращает контроллер heroName формы
+   * return {FormControl}
+   */
   public get heroNameFormControl(): FormControl<string | null> {
     return this.form.get([EFilters.HERO_NAME]) as FormControl<string | null>;
-  }
-  public get sortModeFormControl(): FormControl<string | null> {
-    return this.form.get([EFilters.SORT_MODE]) as FormControl<string | null>;
   }
 }

@@ -1,7 +1,9 @@
+import {EAbility} from "../enums/ability.enum";
+
 /**
  * Интерфейс способности
  */
 export interface IAbility {
-    id: number;
-    name: string;
+    [EAbility.ID]: number;
+    [EAbility.NAME]: string;
 }

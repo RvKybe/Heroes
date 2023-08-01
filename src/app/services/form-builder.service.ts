@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EHero} from "../enums/hero.enum";
-import {numberValidator} from "../validators/number-validator.directive";
+import {numberValidator} from "../validators/number-validator.validator";
 import {EFilters} from "../enums/filterFrom.enum";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormBuilderService {
-
-  constructor() { }
+  /**
+   * Возвращает форму для создания или редактирования героя
+   * return {FormGroup}
+   */
   public get heroForm(): FormGroup {
     return new FormGroup({
       [EHero.NAME]: new FormControl<string>('', Validators.required),
@@ -20,6 +22,10 @@ export class FormBuilderService {
     });
   }
 
+  /**
+   * Возвращает форму фильтрации героев
+   * return {FormGroup}
+   */
   public get filterForm(): FormGroup {
     return new FormGroup( {
       [EFilters.BOTTOM_LEVEL]: new FormControl(),

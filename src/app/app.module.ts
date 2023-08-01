@@ -2,7 +2,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import {DxButtonModule, DxPopupModule, DxSelectBoxModule, DxTagBoxModule, DxTextBoxModule} from "devextreme-angular";
+import {
+    DxAccordionModule,
+    DxButtonModule,
+    DxPopupModule,
+    DxSelectBoxModule,
+    DxTagBoxModule,
+    DxTextBoxModule
+} from "devextreme-angular";
 import { CreateHeroComponent } from './entities/components/create-hero/create-hero.component';
 import { CreateAbilityComponent } from './entities/components/create-ability/create-ability.component';
 import { FiltersComponent } from './entities/components/filters/filters.component';
@@ -21,16 +28,17 @@ import { GetAbilitiesNamesByIdsPipe } from './pipes/get-abilities-names-by-ids.p
     OutputHeroComponent,
     GetAbilitiesNamesByIdsPipe,
   ],
-  imports: [
-    BrowserModule,
-    DxTextBoxModule,
-    DxSelectBoxModule,
-    DxButtonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    DxTagBoxModule,
-    DxPopupModule
-  ],
+    imports: [
+        BrowserModule,
+        DxTextBoxModule,
+        DxSelectBoxModule,
+        DxButtonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        DxTagBoxModule,
+        DxPopupModule,
+        DxAccordionModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

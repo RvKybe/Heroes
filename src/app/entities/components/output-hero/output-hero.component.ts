@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {IHero} from "../../../interfaces/hero.interface";
 import {ManageAbilitiesService} from "../../../services/manage-abilities.service";
 import {EHero} from "../../../enums/hero.enum";
+import {IndexHtmlTransformResult} from "@angular-devkit/build-angular/src/utils/index-file/index-html-generator";
 
 @Component({
     selector: 'app-output-hero',
@@ -12,25 +13,14 @@ export class OutputHeroComponent implements OnInit {
   @Input()
   public hero!: IHero;
 
-  public isVisible: boolean = false;
-  public icon: string = 'chevrondown';
-  public abilityNames: string[] = [];
+  public outputHero: IHero[] = [];
   public popupVisible: boolean = false;
+  public class: string = 'red';
 
-  constructor(
-    private readonly _manageAbilitiesService: ManageAbilitiesService
-  ) {}
+  constructor() {}
 
   public ngOnInit(): void {
-    this.abilityNames = this._manageAbilitiesService.getAbilityNamesByIds(this.hero[EHero.ABILITY_IDS]);
-  }
-
-  /**
-   * Функция смены иконки в кнопке сортировки
-   */
-  public changeDisplay(): void {
-    this.isVisible = !this.isVisible;
-    this.icon = this.isVisible ? 'chevronup' : 'chevrondown';
+    this.outputHero.push(this.hero);
   }
 
   /**

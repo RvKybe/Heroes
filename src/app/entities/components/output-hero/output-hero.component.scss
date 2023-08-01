@@ -1,14 +1,12 @@
 .hero {
   margin-bottom: 10px;
   background-color: beige;
-  padding: 10px;
   border-radius: 3px;
 }
 .hero__title {
   display: inline-flex;
   justify-content: space-between;
-  width: 87%;
-  padding: 0 30px;
+  width: 90%;
 }
 .ability-item {
   display: inline-block;
@@ -16,4 +14,7 @@
   border-radius: 3px;
   margin-right: 5px;
   padding: 3px;
+}
+.red {
+  background-color: red;
 }

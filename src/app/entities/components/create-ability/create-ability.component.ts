@@ -9,11 +9,8 @@ import {ManageAbilitiesService} from "../../../services/manage-abilities.service
 })
 export class CreateAbilityComponent {
   public abilityName: FormControl = new FormControl<string | null>(null, Validators.required);
-  public errorMessage: string = '';
 
-  public get abilityNameFormControl(): FormControl {
-    return this.abilityName;
-  }
+  public errorMessage: string = '';
 
   constructor(
       private readonly _manageAbilitiesServices: ManageAbilitiesService
@@ -32,5 +29,13 @@ export class CreateAbilityComponent {
     if (hasDuplicate) {
       this.errorMessage = 'Такая способность уже существует';
     }
+  }
+
+  /**
+   * Возвращает контроллер AbilityName формы
+   * return {FormControl}
+   */
+  public get abilityNameFormControl(): FormControl {
+    return this.abilityName;
   }
 }

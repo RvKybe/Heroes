@@ -3,24 +3,27 @@ import {IHero} from "../interfaces/hero.interface";
 import {BehaviorSubject, Observable} from "rxjs";
 import {EFilters} from "../enums/filterFrom.enum";
 import {FilterFormService} from "./filter-form.service";
-import {FormGroup} from "@angular/forms";
 import {EHero} from "../enums/hero.enum";
+import {IFilterFormValue} from "../interfaces/filterForm.interface";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ManageHeroesService{
+  private _filterFormValue!: IFilterFormValue;
 
-  private heroes:IHero[] = [];
-  private filteredHeroes: IHero[] = [];
-  private counter: number = 1;
-  private filterForm!: FormGroup;
+  private _heroes:IHero[] = [];
+  private _filteredHeroes: IHero[] = [];
+  private _counter: number = 1;
+  private _heroesStream$: BehaviorSubject<IHero[]> = new BehaviorSubject(this._heroes);
+  public heroesStream$: Observable<IHero[]> = this._heroesStream$.asObservable();
+
 
   constructor(
       private readonly _filterFormService: FilterFormService
   ) {
-      this._filterFormService.filterFormStream$.subscribe((form: FormGroup): void => {
-        this.filterForm = form;
+      this._filterFormService.filterFormStream$.subscribe((filterFormValue: IFilterFormValue): void => {
+        this._filterFormValue = filterFormValue;
       });
     }
 
@@ -29,61 +32,68 @@ export class ManageHeroesService{
    * @param {IHero} hero - объект героя
    */
   public add(hero:IHero): void {
-    hero.id = this.counter++;
-    this.heroes.push(hero);
-    this.sortHeroes(this.filterForm.get([EFilters.SORT_MODE])?.value);
-    this.filterHeroes(this.filterForm)
+    hero.id = this._counter++;
+    this._heroes.push(hero);
+    this.sortFilterHeroes(this._filterFormValue);
   }
 
   /**
    * Функция редактирования героя
-   * @param formHero - новый объект героя
+   * @param {IHero} formHero - новый объект героя
    */
   public edit(formHero:IHero): void {
-    const heroIndex: number = this.heroes.findIndex(hero => {
+    const heroIndex: number = this._heroes.findIndex((hero: IHero): boolean => {
         return hero.id === formHero.id;
     });
     if (heroIndex !== -1) {
-      this.heroes[heroIndex] = formHero;
-      this.sortHeroes(this.filterForm.get(`${[EFilters.SORT_MODE]}`)?.value);
-      this.filterHeroes(this.filterForm);
+      this._heroes[heroIndex] = formHero;
+      this.sortFilterHeroes(this._filterFormValue);
     }
   }
 
   /**
-   * Функция фильтрации героев
-   * @param form - параметры фильтрации
+   * Функция проверки героя на существование его дубликата
+   * @param {string} newHeroName - новое имя (или измененное имя существующего героя)
+   * @param {number | null} newHeroId - id нового героя (или измененного старого)
+   * return {boolean}
    */
-  public filterHeroes(form: any ): void {
-    this.filteredHeroes = this.heroes.filter((hero: IHero) => {
-      return ((!form.get(`${EFilters.BOTTOM_LEVEL}`).value && !form.get(`${EFilters.TOP_LEVEL}`).value) || (hero.level <= form.get(`${EFilters.TOP_LEVEL}`).value && !form.get(`${EFilters.BOTTOM_LEVEL}`).value)
-              || (hero.level >= form.get(`${EFilters.BOTTOM_LEVEL}`).value && !form.get(`${EFilters.TOP_LEVEL}`).value) || (hero.level <= form.get(`${EFilters.TOP_LEVEL}`).value && hero.level >= form.get(`${EFilters.BOTTOM_LEVEL}`).value))
-          && (!form.get(`${EFilters.ABILITIES}`).value || this._searchAbilityName(form.get(`${EFilters.ABILITIES}`).value, hero.abilityIds))
-          && (!form.get(`${EFilters.HERO_NAME}`).value || hero.name.indexOf(form.get(`${EFilters.HERO_NAME}`).value) > -1);
+  public hasDuplicate(newHeroName: string, newHeroId: number | null): boolean {
+    if (this._heroes.length === 0) return false;
+    return this._heroes.some((hero: IHero) => {
+      return hero[EHero.NAME] === newHeroName && newHeroId !== hero[EHero.ID];
     });
-    this._heroesStream$.next(this.filteredHeroes);
+  }
+
+  /**
+   * Функция запуска фильтрации и сортировки героев
+   * @param {IFilterFormValue} filterFormValue - форма фильтрации и сортировки
+   */
+  public sortFilterHeroes(filterFormValue: IFilterFormValue): void {
+    this._filterHeroes(filterFormValue);
+    this._sortFilteredHeroes(filterFormValue[EFilters.SORT_MODE]);
+    this._heroesStream$.next(this._filteredHeroes);
+  }
+  
+  /**
+   * Функция фильтрации героев
+   * @param {IFilterFormValue} filterFormValue - параметры фильтрации
+   */
+  private _filterHeroes(filterFormValue: IFilterFormValue ): void {
+    this._filteredHeroes = this._heroes.filter((hero: IHero) => {
+      return ((!filterFormValue[EFilters.BOTTOM_LEVEL] && !filterFormValue[EFilters.TOP_LEVEL]) || (hero.level <= filterFormValue[EFilters.TOP_LEVEL] && !filterFormValue[EFilters.BOTTOM_LEVEL])
+              || (hero.level >= filterFormValue[EFilters.BOTTOM_LEVEL] && !filterFormValue[EFilters.TOP_LEVEL]) || (hero.level <= filterFormValue[EFilters.TOP_LEVEL] && hero.level >= filterFormValue[EFilters.BOTTOM_LEVEL]))
+          && (!filterFormValue[EFilters.ABILITIES] || this._searchAbilityName(filterFormValue[EFilters.ABILITIES], hero.abilityIds))
+          && (!filterFormValue[EFilters.HERO_NAME] || hero.name.indexOf(filterFormValue[EFilters.HERO_NAME]) > -1);
+    });
   }
 
   /**
    * Функция сортировки отфильтрованного списка героев
-   * @param sortMode - режим сортировки
+   * @param {number} sortMode - режим сортировки
    */
-  public sortHeroes(sortMode: number): void {
-    this.heroes = this.heroes.sort((a: IHero, b: IHero) => {
+  private _sortFilteredHeroes(sortMode: number): void {
+    this._filteredHeroes = this._filteredHeroes.sort((a: IHero, b: IHero) => {
       return (a[EHero.LEVEL] - b[EHero.LEVEL]) * sortMode;
-    });
-    this._heroesStream$.next(this.heroes);
-  }
-
-  /**
-   * Функция проверки героя на существование его дубликата
-   * @param newHeroName - новое имя (или измененное имя существующего героя)
-   * @param newHeroId - id нового героя (или измененного старого)
-   */
-  public hasDuplicate(newHeroName: string, newHeroId: number | null): boolean {
-    if (this.heroes.length === 0) return false;
-    return this.heroes.some((hero: IHero) => {
-      return hero[EHero.NAME] === newHeroName && newHeroId !== hero[EHero.ID];
     });
   }
 
@@ -93,15 +103,13 @@ export class ManageHeroesService{
    * Если длина списка меньше суммы длин способностей героя и фильтрационных способностей
    * То это означает наличие совпадения в этих двух списках, что означает, что герой подходит
    * При длине уникального списка === 1, также происходит совпадение способностей
-   * @param filterAbilities - список фильтрационных способностей
-   * @param heroAbilities - список способностей героя
+   * @param {number[]} filterAbilities - список фильтрационных способностей
+   * @param {number[]} heroAbilities - список способностей героя
+   * return {boolean}
    * @private
    */
   private _searchAbilityName(filterAbilities: number[], heroAbilities: number[]): boolean {
     const set: Set<number> = new Set(filterAbilities.concat(heroAbilities).values());
     return set.size < filterAbilities.length || set.size === 1;
   }
-
-  private _heroesStream$: BehaviorSubject<IHero[]> = new BehaviorSubject(this.heroes);
-  public heroesStream$: Observable<IHero[]> = this._heroesStream$.asObservable();
 }

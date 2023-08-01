@@ -1,34 +1,38 @@
-<div class="hero">
-  <div class="hero__title">
-    <div>
-      {{ hero.name }}
+<dx-accordion [dataSource]="outputHero"
+              [collapsible]="true"
+              [animationDuration]="300"
+              [multiple]="false"
+              [selectedItem]="false"
+              class="hero">
+    <div *dxTemplate="let hero of 'title'">
+        <div class="hero__title">
+            <div>
+                {{ hero.name }}
+            </div>
+            <div>
+                {{ hero.level }} ур.
+            </div>
+        </div>
     </div>
-    <div>
-      {{ hero.level }} ур.
+    <div *dxTemplate="let hero of 'item'">
+        <div>
+            Сила: {{ hero.power }}
+        </div>
+        <div>
+            Способности:
+        </div>
+        <div *ngFor="let abilityId of hero.abilityIds"
+             class="ability-item">
+            {{ abilityId | getAbilitiesNamesByIds }}
+        </div>
+        <div class="button-container">
+            <dx-button (click)="switchPopupDisplay( true)"
+                       text="Редактировать"
+                       class="edit-button"
+            ></dx-button>
+        </div>
     </div>
-  </div>
-  <dx-button [icon]="icon"
-             (onClick)="changeDisplay()"
-  ></dx-button>
-  <ng-container *ngIf="isVisible">
-    <div>
-      Сила: {{ hero.power }}
-    </div>
-    <div>
-      Способности:
-    </div>
-    <div *ngFor="let abilityId of hero.abilityIds"
-         class="ability-item">
-      {{ abilityId | getAbilitiesNamesByIds }}
-    </div>
-    <div class="button-container">
-      <dx-button (click)="switchPopupDisplay( true)"
-                 text="Редактировать"
-                 class="edit-button"
-      ></dx-button>
-    </div>
-  </ng-container>
-</div>
+</dx-accordion>
 <dx-popup [(visible)]="popupVisible"
           [hideOnOutsideClick]="true"
           [showTitle]="true"

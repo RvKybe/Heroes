@@ -4,11 +4,10 @@
       <p>
         Добавление способности:
       </p>
-      <dx-text-box
-        [showClearButton]="true"
-        [isValid]="abilityNameFormControl.valid || abilityNameFormControl.untouched"
-        [formControl]="abilityNameFormControl"
-        placeholder="Laser eyes"
+      <dx-text-box [showClearButton]="true"
+                   [isValid]="abilityNameFormControl.valid || abilityNameFormControl.untouched"
+                   [formControl]="abilityNameFormControl"
+                   placeholder="Laser eyes"
       ></dx-text-box>
     </div>
     <div [textContent]="errorMessage"

@@ -33,7 +33,6 @@ export class CreateHeroComponent implements OnInit {
 
   public ngOnInit(): void {
     this.abilities$ = this._manageAbilitiesService.abilityStream$;
-    this._manageAbilitiesService.getAbilities();
     if (this.mode === 'create') {
       this.submitButtonText = 'Создать героя';
     } else {
@@ -64,18 +63,34 @@ export class CreateHeroComponent implements OnInit {
     this.form.reset();
   }
 
+  /**
+   * Возвращает контроллер name формы
+   * return {FormControl}
+   */
   public get nameFormControl(): FormControl<string | null> {
       return this.form.get(`${[EHero.NAME]}`) as FormControl<string | null>;
   }
 
+  /**
+   * Возвращает контроллер power формы
+   * return {FormControl}
+   */
   public get powerFormControl(): FormControl<string | null> {
       return this.form.get(`${[EHero.POWER]}`) as FormControl<string | null>;
   }
 
+  /**
+   * Возвращает контроллер abilities формы
+   * return {FormControl}
+   */
   public get abilityFormControl(): FormControl<string | null> {
       return this.form.get(`${[EHero.ABILITY_IDS]}`) as FormControl<string | null>;
   }
 
+  /**
+   * Возвращает контроллер level формы
+   * return {FormControl}
+   */
   public get levelFormControl(): FormControl<string | null> {
       return this.form.get(`${[EHero.LEVEL]}`) as FormControl<string | null>;
   }
