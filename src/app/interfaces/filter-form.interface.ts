@@ -1,4 +1,4 @@
-import {EFilters} from "../enums/filterFrom.enum";
+import {EFilters} from "../enums/filter-form.enum";
 
 export interface IFilterFormValue {
     [EFilters.BOTTOM_LEVEL]: number;

@@ -4,7 +4,7 @@ import {ManageHeroesService} from "../../../services/manage-heroes.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {IAbility} from "../../../interfaces/ability.interface";
 import {FormBuilderService} from "../../../services/form-builder.service";
-import {EFilters} from "../../../enums/filterFrom.enum";
+import {EFilters} from "../../../enums/filter-form.enum";
 import {FilterFormService} from "../../../services/filter-form.service";
 import {Subscription} from "rxjs";
 

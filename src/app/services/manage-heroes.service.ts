@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {IHero} from "../interfaces/hero.interface";
 import {BehaviorSubject, Observable} from "rxjs";
-import {EFilters} from "../enums/filterFrom.enum";
+import {EFilters} from "../enums/filter-form.enum";
 import {FilterFormService} from "./filter-form.service";
 import {EHero} from "../enums/hero.enum";
-import {IFilterFormValue} from "../interfaces/filterForm.interface";
+import {IFilterFormValue} from "../interfaces/filter-form.interface";
 
 @Injectable({
   providedIn: 'root'

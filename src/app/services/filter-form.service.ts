@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from "rxjs";
-import {IFilterFormValue} from "../interfaces/filterForm.interface";
+import {IFilterFormValue} from "../interfaces/filter-form.interface";
 
 @Injectable({
   providedIn: 'root'

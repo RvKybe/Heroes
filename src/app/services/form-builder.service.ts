@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EHero} from "../enums/hero.enum";
 import {numberValidator} from "../validators/number-validator.validator";
-import {EFilters} from "../enums/filterFrom.enum";
+import {EFilters} from "../enums/filter-form.enum";
 
 @Injectable({
   providedIn: 'root'
