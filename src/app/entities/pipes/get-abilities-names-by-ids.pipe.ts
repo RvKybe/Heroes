@@ -9,7 +9,8 @@ import {LItem} from "../labels/item.label";
 export class GetAbilitiesNamesByIdsPipe implements PipeTransform {
 
   /**
-   *  Пайп, который возвращает имена способностей героя по id способностей
+   * Пайп, который возвращает имена способностей героя по id способностей
+   *
    * @param heroAbility - id способности
    * @param possibleAbilities - все возможные способности героев
    * return {string}

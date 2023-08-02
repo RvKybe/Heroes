@@ -69,6 +69,7 @@ export class CreateHeroComponent implements OnInit {
 
   /**
    * Возвращает контроллер name формы
+   *
    * return {FormControl<string | null>}
    */
   public get nameFormControl(): FormControl<string | null> {
@@ -77,6 +78,7 @@ export class CreateHeroComponent implements OnInit {
 
   /**
    * Возвращает контроллер power формы
+   *
    * return {FormControl<string | null>}
    */
   public get powerFormControl(): FormControl<number | null> {
@@ -85,6 +87,7 @@ export class CreateHeroComponent implements OnInit {
 
   /**
    * Возвращает контроллер abilities формы
+   *
    * return {FormControl<string | null>}
    */
   public get abilityFormControl(): FormControl<number[] | null> {
@@ -93,6 +96,7 @@ export class CreateHeroComponent implements OnInit {
 
   /**
    * Возвращает контроллер level формы
+   *
    * return {FormControl<string | null>}
    */
   public get levelFormControl(): FormControl<number | null> {

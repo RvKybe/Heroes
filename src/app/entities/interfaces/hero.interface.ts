@@ -3,6 +3,7 @@ import {IItem} from "./item.interface";
 
 /**
  * Интерфейс героя
+ *
  * @param {number} POWER - сила героя
  * @param {number[]} ABILITY_IDS - список id способностей героя
  * @param {number} LEVEL - уровень героя

@@ -16,6 +16,7 @@ export class ManageHeroesService {
 
     /**
      * Функция создания героя
+     *
      * @param {IHero} hero - объект героя
      */
     public add(hero: IHero): void {
@@ -30,6 +31,7 @@ export class ManageHeroesService {
 
     /**
      * Функция редактирования героя
+     *
      * @param {IHero} formHero - новый объект героя
      */
     public edit(formHero: IHero): void {
@@ -41,6 +43,7 @@ export class ManageHeroesService {
 
     /**
      * Функция проверки героя на существование его дубликата
+     *
      * @param {string} newHeroName - новое имя (или измененное имя существующего героя)
      * @param {number | null} newHeroId - id нового героя (или измененного старого)
      * return {boolean}
@@ -53,6 +56,7 @@ export class ManageHeroesService {
 
     /**
      * Функция запуска фильтрации и сортировки героев
+     *
      * @param {IFilterForm} filterFormValue - форма фильтрации и сортировки
      */
     public sortHeroes(filterFormValue: IFilterForm): void {

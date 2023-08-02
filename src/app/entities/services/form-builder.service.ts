@@ -11,6 +11,7 @@ import {LItem} from "../labels/item.label";
 export class FormBuilderService {
   /**
    * Возвращает форму для создания или редактирования героя
+   *
    * return {FormGroup}
    */
   public get heroForm(): FormGroup {
@@ -25,6 +26,7 @@ export class FormBuilderService {
 
   /**
    * Возвращает форму фильтрации героев
+   *
    * return {FormGroup}
    */
   public get filterForm(): FormGroup {
@@ -39,6 +41,7 @@ export class FormBuilderService {
 
   /**
    * Возвращает контроллер формы создания способности
+   *
    * return {FormControl<string | null>}
    */
   public get createAbilityFormControl(): FormControl<string | null> {

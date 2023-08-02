@@ -28,6 +28,7 @@ export class OutputHeroComponent implements OnInit {
 
   /**
    * Функция, которая переключает режим отображения окна редактирования героя
+   *
    * @param {boolean} popupVisible - нужный режим отображения
    */
   public switchPopupDisplay(popupVisible: boolean): void {

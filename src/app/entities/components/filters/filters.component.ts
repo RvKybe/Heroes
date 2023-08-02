@@ -65,6 +65,7 @@ export class FiltersComponent implements OnInit {
 
   /**
    * Возвращает контроллер bottomLevel формы
+   *
    * return {FormControl<string | null>}
    */
   public get bottomLevelFormControl(): FormControl<string | null> {
@@ -73,6 +74,7 @@ export class FiltersComponent implements OnInit {
 
   /**
    * Возвращает контроллер topLevel формы
+   *
    * return {FormControl<string | null>}
    */
   public get topLevelFormControl(): FormControl<string | null> {
@@ -81,6 +83,7 @@ export class FiltersComponent implements OnInit {
 
   /**
    * Возвращает контроллер abilities формы
+   *
    * return {FormControl<string | null>}
    */
   public get abilitiesFormControl(): FormControl<string | null> {
@@ -89,6 +92,7 @@ export class FiltersComponent implements OnInit {
 
   /**
    * Возвращает контроллер heroName формы
+   *
    * return {FormControl<string | null>}
    */
   public get heroNameFormControl(): FormControl<string | null> {

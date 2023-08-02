@@ -30,6 +30,7 @@ export class ManageAbilitiesService {
 
   /**
    * Функция создания способности
+   *
    * @param {string} abilityName - название созданной способности
    */
   public add(abilityName: string): void {
@@ -45,6 +46,7 @@ export class ManageAbilitiesService {
 
   /**
    * Функция проверки способности на наличие дубликата
+   *
    * @param {string} abilityName - название новой способности
    * return {boolean}
    */

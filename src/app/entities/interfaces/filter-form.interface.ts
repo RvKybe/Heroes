@@ -2,6 +2,7 @@ import {LFilterForm} from "../labels/filter-form.label";
 
 /**
  * Интерфейс формы фильтрации
+ *
  * @param {number} BOTTOM_LEVEL - нижний пороговый уровень героя для фильтрации
  * @param {number} TOP_LEVEL - верхний пороговый уровень героя для фильтрации
  * @param {number[]} ABILITY_IDS - список id способностей для фильтрации
