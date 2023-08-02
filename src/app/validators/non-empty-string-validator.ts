@@ -1,7 +1,7 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
 
 /**
- * Функция-валидатор значения формы. Проверяет значение на число
+ * Функция-валидатор значения формы. Проверяет строку на пустоту
  * return {ValidatorFn}
  */
 export function nonEmptyStringValidator(): ValidatorFn {

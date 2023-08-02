@@ -7,15 +7,15 @@
     <div>
       от
     </div>
-    <dx-text-box [formControl]="bottomLevelFormControl"
-                 class="filter-form__input input--size-s"
-    ></dx-text-box>
+    <dx-number-box [formControl]="bottomLevelFormControl"
+                   class="filter-form__input input--size-s"
+    ></dx-number-box>
     <div>
       до
     </div>
-    <dx-text-box [formControl]="topLevelFormControl"
-                 class="input--size-s"
-    ></dx-text-box>
+    <dx-number-box [formControl]="topLevelFormControl"
+                   class="input--size-s"
+    ></dx-number-box>
   </div>
    <div class="filter-form__sort-item sort-item__abilities">
      <div>
@@ -27,7 +27,6 @@
                  [width]="'95%'"
                  displayExpr="name"
                  valueExpr="id"
-                 placeholder=""
      ></dx-tag-box>
    </div>
   <div class="filter-form__sort-item">

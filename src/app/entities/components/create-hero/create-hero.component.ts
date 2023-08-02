@@ -15,15 +15,15 @@ import {FormBuilderService} from "../../../services/form-builder.service";
 })
 export class CreateHeroComponent implements OnInit {
   @Input('mode')
-  public mode!: string;
+  public mode: string = '';
   @Input('hero')
   public hero!: IHero;
 
   public form: FormGroup = this._formBuilderService.heroForm;
 
   public abilities$!: Observable<IAbility[]>;
-  public submitButtonText!: string;
-  public errorMessage!: string;
+  public submitButtonText: string = '';
+  public errorMessage: string = '';
 
   constructor(
     private readonly _manageHeroesService: ManageHeroesService,

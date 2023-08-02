@@ -12,7 +12,6 @@ export class OutputHeroComponent implements OnInit {
 
   public outputHero: IHero[] = [];
   public popupVisible: boolean = false;
-  public class: string = 'red';
 
   constructor() {}
 

@@ -28,7 +28,6 @@
         <div class="button-container">
             <dx-button (click)="switchPopupDisplay( true)"
                        text="Редактировать"
-                       class="edit-button"
             ></dx-button>
         </div>
     </div>
@@ -40,7 +39,7 @@
           title="Edit Hero"
           container="body">
     <app-create-hero *ngIf="popupVisible"
-                     mode="edit"
                      [hero]="hero"
+                     mode="edit"
     ></app-create-hero>
 </dx-popup>

@@ -3,5 +3,5 @@ export enum EFilters {
     TOP_LEVEL = 'topLevel',
     ABILITIES = 'abilities',
     HERO_NAME = 'heroName',
-    SORT_MODE = 'sortMode'
+    SORT_MODE = 'sortMode',
 }

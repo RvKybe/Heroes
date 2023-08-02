@@ -21,9 +21,9 @@ export class CreateAbilityComponent {
    */
   public createAbility(): void {
     this.errorMessage = '';
-    const hasDuplicate: boolean = this._manageAbilitiesServices.hasDuplicate(<string>this.abilityName.value.abilityName);
+    const hasDuplicate: boolean = this._manageAbilitiesServices.hasDuplicate(<string>this.abilityName.value);
     if (this.abilityName.valid && !hasDuplicate) {
-      this._manageAbilitiesServices.add(<string>this.abilityName.value.abilityName);
+      this._manageAbilitiesServices.add(<string>this.abilityName.value);
       this.abilityName.reset();
     }
     if (hasDuplicate) {
