@@ -9,9 +9,9 @@ import {LFilterForm} from "../labels/filter-form.label";
 })
 export class FilterHeroesPipe implements PipeTransform {
     /**
-     *  Пайп, который фильтрует героев
+     * Пайп, который фильтрует героев
      *
-     *  @param {IHero[]} heroes - список героев для фильтрации
+     * @param {IHero[]} heroes - список героев для фильтрации
      * @param {IFilterForm} filterFormValue - значения полей формы фильтрации
      * return {IHero[]}
      */

@@ -11,8 +11,8 @@ export class GetAbilitiesNamesByIdsPipe implements PipeTransform {
     /**
      * Пайп, который возвращает имена способностей героя по id способностей
      *
-     * @param heroAbility - id способности
-     * @param possibleAbilities - все возможные способности героев
+     * @param {number} heroAbility - id способности
+     * @param {IItem[] | null} possibleAbilities - все возможные способности героев
      * return {string}
      */
     public transform(heroAbility: number, possibleAbilities: IItem[] | null): string {
