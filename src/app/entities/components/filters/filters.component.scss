@@ -4,7 +4,6 @@
   padding: 10px;
   justify-content: space-between;
   flex-wrap: wrap;
-  width: 90%;
   margin-bottom: 30px;
   border: 1px solid silver;
 }
@@ -12,21 +11,28 @@
 .filter-form__sort-item {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 50%;
   padding: 5px 0;
 }
 
 .input--size-s {
-  margin: 0 10px;
   width: 40px;
 }
 
 .sort-item__abilities {
-  width: 50%;
+  width: 67%;
 }
 
-.inline {
+.filter-form__row {
   width: 100%;
   display: inline-flex;
+}
+
+.margin-right {
+  margin-right: 10px;
+}
+
+.text-input {
+ width: 62%;
 }

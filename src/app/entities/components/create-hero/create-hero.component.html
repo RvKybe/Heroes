@@ -1,4 +1,8 @@
-<div class="dx-fieldset">
+<div [ngClass]="{
+'dx-fieldset': true,
+'create-mode': mode === EDialogMode.CREATE,
+'edit-mode': mode === EDialogMode.EDIT
+}">
     <div class="dx-field">
         <div class="dx-field-label">
             Имя:
@@ -42,17 +46,23 @@
         <div class="dx-field-label">
             Уровень:
         </div>
-        <div class="dx-field-value">
+        <div *ngIf="mode === EDialogMode.CREATE"
+                class="dx-field-value">
             <dx-number-box [isValid]="levelFormControl.valid || levelFormControl.untouched"
                            [formControl]="levelFormControl"
+                           [showClearButton]="true"
                            placeholder="13"
             ></dx-number-box>
+        </div>
+        <div *ngIf="mode === EDialogMode.EDIT">
+            <span>{{ levelFormControl.value }}</span>
         </div>
     </div>
     <div [textContent]="errorMessage"
     ></div>
     <div class="button-container">
         <dx-button [text]="submitButtonText"
+                   [type]="buttonType"
                    (onClick)="submit()"
         ></dx-button>
     </div>

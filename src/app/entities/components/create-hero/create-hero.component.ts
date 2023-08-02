@@ -28,6 +28,7 @@ export class CreateHeroComponent implements OnInit {
     public abilities$: Observable<IItem[]> = this._manageAbilitiesService.abilities$;
     public submitButtonText: string = '';
     public errorMessage: string = '';
+    public buttonType: string = '';
 
     constructor(
         private readonly _manageHeroesService: ManageHeroesService,
@@ -39,8 +40,10 @@ export class CreateHeroComponent implements OnInit {
     public ngOnInit(): void {
         if (this.mode === EDialogMode.CREATE) {
             this.submitButtonText = 'Создать героя';
+            this.buttonType = 'default';
         } else if (this.mode === EDialogMode.EDIT) {
             this.submitButtonText = 'Изменить героя';
+            this.buttonType = 'success';
             this.form.patchValue(<IHero>this.hero);
         }
     }
@@ -104,4 +107,6 @@ export class CreateHeroComponent implements OnInit {
     public get levelFormControl(): FormControl<number | null> {
         return this.form.get(LHero.LEVEL) as FormControl<number | null>;
     }
+
+    protected readonly EDialogMode = EDialogMode;
 }

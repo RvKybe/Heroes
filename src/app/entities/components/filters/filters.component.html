@@ -1,6 +1,6 @@
 <div class="filter-form">
-    <div class="inline">
-        <div class="filter-form__sort-item">
+    <div class="filter-form__row">
+        <div class="filter-form__sort-item margin-right">
             <div>
                 Уровень героя:
             </div>
@@ -8,7 +8,7 @@
                 от
             </div>
             <dx-number-box [formControl]="bottomLevelFormControl"
-                           class="filter-form__input input--size-s"
+                           class="input--size-s"
             ></dx-number-box>
             <div>
                 до
@@ -24,19 +24,20 @@
             <dx-tag-box [dataSource]="possibleAbilities$ | async"
                         [formControl]="abilitiesFormControl"
                         [hideSelectedItems]="true"
-                        [width]="'95%'"
                         displayExpr="name"
                         valueExpr="id"
+                        placeholder=""
                         class="sort-item__abilities"
             ></dx-tag-box>
         </div>
     </div>
-    <div class="inline">
-        <div class="filter-form__sort-item">
+    <div class="filter-form__row">
+        <div class="filter-form__sort-item margin-right">
             <div>
                 Поиск по имени:
             </div>
             <dx-text-box [formControl]="heroNameFormControl"
+                         class="text-input"
             ></dx-text-box>
         </div>
         <div class="filter-form__sort-item">

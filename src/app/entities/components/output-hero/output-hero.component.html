@@ -18,16 +18,19 @@
         <div>
             Сила: {{ hero.power }}
         </div>
-        <div>
-            Способности:
-        </div>
-        <div *ngFor="let abilityId of hero.abilityIds"
-             class="ability-item">
-            {{ abilityId | getAbilitiesNamesByIds: (possibleAbilities$ | async) }}
+        <div class="abilities-row">
+            <div>
+                Способности:
+            </div>
+            <div *ngFor="let abilityId of hero.abilityIds"
+                 class="ability-item">
+                {{ abilityId | getAbilitiesNamesByIds: (possibleAbilities$ | async) }}
+            </div>
         </div>
         <div class="button-container">
             <dx-button (click)="switchPopupDisplay( true)"
                        text="Редактировать"
+                       type="default"
             ></dx-button>
         </div>
     </div>
@@ -36,8 +39,11 @@
           [hideOnOutsideClick]="true"
           [showTitle]="true"
           [dragEnabled]="false"
-          title="Edit Hero"
-          container="body">
+          [width]="'30%'"
+          [height]="'330px'"
+          title="Редактировать героя"
+          container="body"
+          class="popup">
     <app-create-hero *ngIf="popupVisible"
                      [hero]="hero"
                      mode="edit"

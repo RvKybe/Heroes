@@ -14,6 +14,15 @@
   display: inline-block;
   background-color: cadetblue;
   border-radius: 3px;
-  margin-right: 5px;
+  margin: 0 5px;
   padding: 3px;
+}
+
+.abilities-row {
+  display: inline-flex;
+  align-items: center;
+}
+
+.popup {
+  overflow: hidden;
 }
