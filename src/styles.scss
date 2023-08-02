@@ -17,7 +17,14 @@ $background: beige;
   background-color: $background;
   padding: 10px;
   border-radius: 3px;
+  margin: 0  0 30px 0 ;
+  border: 1px solid silver;
+
 }
 form {
   width: 90%;
+}
+body {
+  overflow-y: hidden;
+  overflow-x: hidden;
 }

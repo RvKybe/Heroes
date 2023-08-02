@@ -23,7 +23,7 @@
         </div>
         <div *ngFor="let abilityId of hero.abilityIds"
              class="ability-item">
-            {{ abilityId | getAbilitiesNamesByIds }}
+            {{ abilityId | getAbilitiesNamesByIds: (possibleAbilities$ | async) }}
         </div>
         <div class="button-container">
             <dx-button (click)="switchPopupDisplay( true)"

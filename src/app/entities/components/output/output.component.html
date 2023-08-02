@@ -1,5 +1,5 @@
 <div class="heroes-list-container">
-    <app-output-hero *ngFor="let hero of heroes"
+    <app-output-hero *ngFor="let hero of ((heroes$ | async) | filterHeroes : (filterFormValue$ | async))"
                      [hero]="hero"
     ></app-output-hero>
 </div>

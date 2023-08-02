@@ -1,7 +1,5 @@
-export enum EHero {
-    NAME = 'name',
+export enum LHero {
     POWER = 'power',
     ABILITY_IDS = 'abilityIds',
     LEVEL = 'level',
-    ID = 'id',
 }

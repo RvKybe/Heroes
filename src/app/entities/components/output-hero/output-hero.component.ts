@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IHero} from "../../../interfaces/hero.interface";
+import {IHero} from "../../interfaces/hero.interface";
+import {ManageAbilitiesService} from "../../services/manage-abilities.service";
+import {Observable} from "rxjs";
+import {IItem} from "../../interfaces/item.interface";
 
 @Component({
     selector: 'app-output-hero',
@@ -12,11 +15,15 @@ export class OutputHeroComponent implements OnInit {
 
   public outputHero: IHero[] = [];
   public popupVisible: boolean = false;
+  public possibleAbilities$!: Observable<IItem[]>
 
-  constructor() {}
+  constructor(
+      private readonly _manageAbilitiesService: ManageAbilitiesService
+  ) {}
 
   public ngOnInit(): void {
     this.outputHero.push(this.hero);
+    this.possibleAbilities$ = this._manageAbilitiesService.abilities$;
   }
 
   /**

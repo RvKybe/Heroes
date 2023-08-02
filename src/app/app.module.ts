@@ -16,7 +16,8 @@ import { FiltersComponent } from './entities/components/filters/filters.componen
 import { OutputComponent } from './entities/components/output/output.component';
 import { OutputHeroComponent } from './entities/components/output-hero/output-hero.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { GetAbilitiesNamesByIdsPipe } from './pipes/get-abilities-names-by-ids.pipe';
+import { GetAbilitiesNamesByIdsPipe } from './entities/pipes/get-abilities-names-by-ids.pipe';
+import { FilterHeroesPipe } from './entities/pipes/filter-heroes.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { GetAbilitiesNamesByIdsPipe } from './pipes/get-abilities-names-by-ids.p
     OutputComponent,
     OutputHeroComponent,
     GetAbilitiesNamesByIdsPipe,
+    FilterHeroesPipe
   ],
     imports: [
         BrowserModule,

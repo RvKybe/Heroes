@@ -1,7 +1,7 @@
-export enum EFilters {
+export enum LFilterForm {
     BOTTOM_LEVEL = 'bottomLevel',
     TOP_LEVEL = 'topLevel',
-    ABILITIES = 'abilities',
+    ABILITY_IDS = 'abilityIds',
     HERO_NAME = 'heroName',
     SORT_MODE = 'sortMode',
 }

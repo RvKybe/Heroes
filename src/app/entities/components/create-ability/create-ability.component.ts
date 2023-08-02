@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
-import {ManageAbilitiesService} from "../../../services/manage-abilities.service";
+import {FormControl} from "@angular/forms";
+import {ManageAbilitiesService} from "../../services/manage-abilities.service";
+import {FormBuilderService} from "../../services/form-builder.service";
 
 @Component({
   selector: 'app-create-ability',
@@ -8,12 +9,13 @@ import {ManageAbilitiesService} from "../../../services/manage-abilities.service
   styleUrls: ['./create-ability.component.scss']
 })
 export class CreateAbilityComponent {
-  public abilityName: FormControl = new FormControl<string | null>(null, Validators.required);
+  public abilityNameFormControl: FormControl<string | null> = this._formBuilderService.createAbilityFormControl;
 
   public errorMessage: string = '';
 
   constructor(
-      private readonly _manageAbilitiesServices: ManageAbilitiesService
+      private readonly _manageAbilitiesServices: ManageAbilitiesService,
+      private readonly _formBuilderService: FormBuilderService,
   ) {}
 
   /**
@@ -21,21 +23,17 @@ export class CreateAbilityComponent {
    */
   public createAbility(): void {
     this.errorMessage = '';
-    const hasDuplicate: boolean = this._manageAbilitiesServices.hasDuplicate(<string>this.abilityName.value);
-    if (this.abilityName.valid && !hasDuplicate) {
-      this._manageAbilitiesServices.add(<string>this.abilityName.value);
-      this.abilityName.reset();
+    if (this.abilityNameFormControl.invalid) {
+      this.abilityNameFormControl.markAsTouched();
+      return;
     }
-    if (hasDuplicate) {
+    const abilityName: string = <string>this.abilityNameFormControl.value;
+    const hasDuplicate: boolean = this._manageAbilitiesServices.hasDuplicate(abilityName);
+    if (!hasDuplicate) {
+      this._manageAbilitiesServices.add(abilityName);
+      this.abilityNameFormControl.reset();
+    } else {
       this.errorMessage = 'Такая способность уже существует';
     }
-  }
-
-  /**
-   * Возвращает контроллер AbilityName формы
-   * return {FormControl}
-   */
-  public get abilityNameFormControl(): FormControl {
-    return this.abilityName;
   }
 }

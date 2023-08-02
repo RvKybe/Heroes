@@ -1,31 +1,28 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ManageAbilitiesService} from "../../../services/manage-abilities.service";
-import {ManageHeroesService} from "../../../services/manage-heroes.service";
+import {Component, OnInit} from '@angular/core';
+import {ManageHeroesService} from "../../services/manage-heroes.service";
 import {FormControl, FormGroup} from "@angular/forms";
-import {IAbility} from "../../../interfaces/ability.interface";
-import {FormBuilderService} from "../../../services/form-builder.service";
-import {EFilters} from "../../../enums/filter-form.enum";
-import {FilterFormService} from "../../../services/filter-form.service";
-import {Subscription} from "rxjs";
+import {IItem} from "../../interfaces/item.interface";
+import {FormBuilderService} from "../../services/form-builder.service";
+import {LFilterForm} from "../../labels/filter-form.label";
+import {FilterFormService} from "../../services/filter-form.service";
+import {Observable, Subscription} from "rxjs";
+import {IFilterForm} from "../../interfaces/filter-form.interface";
 
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html',
   styleUrls: ['./filters.component.scss']
 })
-export class FiltersComponent implements OnInit, OnDestroy {
+export class FiltersComponent implements OnInit {
+  public form: FormGroup = this._formBuilderService.filterForm;
 
-  form:FormGroup = this._formBuilderService.filterForm;
-
-  public possibleAbilities: IAbility[] = [];
+  public possibleAbilities$!: Observable<IItem[]>;
   public sort: string = 'fromLowLevel';
   public iconName: string = 'chevronup';
   public outputSortName: string = 'возрастанию';
-  public abilitySubscription!: Subscription;
   public formChangeSubscription!: Subscription;
 
   constructor(
-    private readonly _manageAbilitiesService: ManageAbilitiesService,
     private readonly _manageHeroesService: ManageHeroesService,
     private readonly _formBuilderService: FormBuilderService,
     private readonly _filterFormService: FilterFormService,
@@ -33,13 +30,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this._filterFormService.form = this.form.value;
-    this.initAbilitySubscription();
-    this.initFilterFormChangeSubscription();
-
-  }
-  public ngOnDestroy(): void {
-    this.abilitySubscription.unsubscribe();
-    this.formChangeSubscription.unsubscribe();
+    this._initFilterFormChangeSubscription();
   }
 
   /**
@@ -58,57 +49,49 @@ export class FiltersComponent implements OnInit, OnDestroy {
         break;
     }
     const sortMode: number = this.sort === 'fromLowLevel' ? 1 : -1;
-    this.form.get([EFilters.SORT_MODE])?.setValue(sortMode);
-  }
-
-  /**
-   * Создаёт подписку на поток способностей
-   * @private
-   */
-  private initAbilitySubscription(): void {
-    this.abilitySubscription = this._manageAbilitiesService.abilityStream$
-        .subscribe((abilities: IAbility[]) => this.possibleAbilities = abilities);
+    this.form.get([LFilterForm.SORT_MODE])?.setValue(sortMode);
   }
 
   /**
    * Создаёт подписку на изменения формы фильтрации
    * @private
    */
-  private initFilterFormChangeSubscription(): void {
-    this.formChangeSubscription = this.form.valueChanges.subscribe((): void => {
-          this._manageHeroesService.sortFilterHeroes(this.form.value);
-        });
+  private _initFilterFormChangeSubscription(): void {
+    this.formChangeSubscription = this.form.valueChanges.subscribe((value: IFilterForm): void => {
+      this._filterFormService.form = this.form.value;
+      this._manageHeroesService.sortHeroes(value);
+      });
   }
 
   /**
    * Возвращает контроллер bottomLevel формы
-   * return {FormControl}
+   * return {FormControl<string | null>}
    */
   public get bottomLevelFormControl(): FormControl<string | null> {
-    return this.form.get([EFilters.BOTTOM_LEVEL]) as FormControl<string | null>;
+    return this.form.get(LFilterForm.BOTTOM_LEVEL) as FormControl<string | null>;
   }
 
   /**
    * Возвращает контроллер topLevel формы
-   * return {FormControl}
+   * return {FormControl<string | null>}
    */
   public get topLevelFormControl(): FormControl<string | null> {
-    return this.form.get([EFilters.TOP_LEVEL]) as FormControl<string | null>;
+    return this.form.get(LFilterForm.TOP_LEVEL) as FormControl<string | null>;
   }
 
   /**
    * Возвращает контроллер abilities формы
-   * return {FormControl}
+   * return {FormControl<string | null>}
    */
   public get abilitiesFormControl(): FormControl<string | null> {
-    return this.form.get([EFilters.ABILITIES]) as FormControl<string | null>;
+    return this.form.get(LFilterForm.ABILITY_IDS) as FormControl<string | null>;
   }
 
   /**
    * Возвращает контроллер heroName формы
-   * return {FormControl}
+   * return {FormControl<string | null>}
    */
   public get heroNameFormControl(): FormControl<string | null> {
-    return this.form.get([EFilters.HERO_NAME]) as FormControl<string | null>;
+    return this.form.get(LFilterForm.HERO_NAME) as FormControl<string | null>;
   }
 }

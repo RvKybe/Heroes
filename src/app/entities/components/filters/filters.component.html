@@ -1,47 +1,51 @@
-<form [formGroup]="form"
-      class="filter-form">
-  <div class="filter-form__sort-item">
-    <div>
-      Уровень героя:
+<div class="filter-form">
+  <div class="inline">
+    <div class="filter-form__sort-item">
+        <div>
+            Уровень героя:
+        </div>
+        <div>
+            от
+        </div>
+        <dx-number-box [formControl]="bottomLevelFormControl"
+                       class="filter-form__input input--size-s"
+        ></dx-number-box>
+        <div>
+            до
+        </div>
+        <dx-number-box [formControl]="topLevelFormControl"
+                       class="input--size-s"
+        ></dx-number-box>
     </div>
-    <div>
-      от
+    <div class="filter-form__sort-item">
+        <div>
+            Способности:
+        </div>
+        <dx-tag-box [dataSource]="possibleAbilities$ | async"
+                    [formControl]="abilitiesFormControl"
+                    [hideSelectedItems]="true"
+                    [width]="'95%'"
+                    displayExpr="name"
+                    valueExpr="id"
+                    class="sort-item__abilities"
+        ></dx-tag-box>
     </div>
-    <dx-number-box [formControl]="bottomLevelFormControl"
-                   class="filter-form__input input--size-s"
-    ></dx-number-box>
-    <div>
-      до
-    </div>
-    <dx-number-box [formControl]="topLevelFormControl"
-                   class="input--size-s"
-    ></dx-number-box>
   </div>
-   <div class="filter-form__sort-item sort-item__abilities">
-     <div>
-       Способности:
-     </div>
-     <dx-tag-box [dataSource]="possibleAbilities"
-                 [formControl]="abilitiesFormControl"
-                 [hideSelectedItems]="true"
-                 [width]="'95%'"
-                 displayExpr="name"
-                 valueExpr="id"
-     ></dx-tag-box>
-   </div>
-  <div class="filter-form__sort-item">
-    <div>
-      Поиск по имени:
+  <div class="inline">
+    <div class="filter-form__sort-item">
+        <div>
+            Поиск по имени:
+        </div>
+        <dx-text-box [formControl]="heroNameFormControl"
+        ></dx-text-box>
     </div>
-    <dx-text-box [formControl]="heroNameFormControl"
-    ></dx-text-box>
-  </div>
-  <div class="filter-form__sort-item">
-    <div>
-      Сортировать по {{ outputSortName }} уровня:
+    <div class="filter-form__sort-item">
+        <div>
+            Сортировать по {{ outputSortName }} уровня:
+        </div>
+        <dx-button [icon]="iconName"
+                   (click)="switchSort()"
+        ></dx-button>
     </div>
-      <dx-button [icon]="iconName"
-                 (click)="switchSort()"
-      ></dx-button>
   </div>
-</form>
+</div>
