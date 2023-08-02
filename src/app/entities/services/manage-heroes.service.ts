@@ -20,8 +20,8 @@ export class ManageHeroesService {
      * @param {IHero} hero - объект героя
      */
     public add(hero: IHero): void {
-        if (!this._heroes.length)  {
-            hero[LItem.ID]  = 1;
+        if (!this._heroes.length) {
+            hero[LItem.ID] = 1;
         } else {
             const lastHero: IHero = <IHero>this._heroes.at(-1);
             hero[LItem.ID] = lastHero[LItem.ID] + 1;

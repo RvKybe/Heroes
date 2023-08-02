@@ -7,6 +7,6 @@ import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
  */
 export function nonEmptyStringValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-        return control.value?.trim() === '' ?  {emptyString: {value: control.value}} : null ;
+        return control.value?.trim() === '' ? {emptyString: {value: control.value}} : null;
     };
 }

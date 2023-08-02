@@ -7,7 +7,7 @@ import {LFilterForm} from "../labels/filter-form.label";
     name: 'filterHeroes',
     pure: false
 })
-export class FilterHeroesPipe implements PipeTransform  {
+export class FilterHeroesPipe implements PipeTransform {
     /**
      *  Пайп, который фильтрует героев
      *
@@ -20,15 +20,16 @@ export class FilterHeroesPipe implements PipeTransform  {
             return [];
         }
         return heroes.filter((hero: IHero): boolean => {
-            return ( (!filterFormValue[LFilterForm.BOTTOM_LEVEL] && !filterFormValue[LFilterForm.TOP_LEVEL])
-                || (hero.level <= filterFormValue[LFilterForm.TOP_LEVEL] && !filterFormValue[LFilterForm.BOTTOM_LEVEL])
-                || (hero.level >= filterFormValue[LFilterForm.BOTTOM_LEVEL] && !filterFormValue[LFilterForm.TOP_LEVEL])
-                || (hero.level <= filterFormValue[LFilterForm.TOP_LEVEL] && hero.level >= filterFormValue[LFilterForm.BOTTOM_LEVEL]) )
+            return ((!filterFormValue[LFilterForm.BOTTOM_LEVEL] && !filterFormValue[LFilterForm.TOP_LEVEL])
+                    || (hero.level <= filterFormValue[LFilterForm.TOP_LEVEL] && !filterFormValue[LFilterForm.BOTTOM_LEVEL])
+                    || (hero.level >= filterFormValue[LFilterForm.BOTTOM_LEVEL] && !filterFormValue[LFilterForm.TOP_LEVEL])
+                    || (hero.level <= filterFormValue[LFilterForm.TOP_LEVEL] && hero.level >= filterFormValue[LFilterForm.BOTTOM_LEVEL]))
                 && (!filterFormValue[LFilterForm.ABILITY_IDS] || this.searchAbilityName(filterFormValue[LFilterForm.ABILITY_IDS], hero.abilityIds))
                 && (!filterFormValue[LFilterForm.HERO_NAME] || hero.name.indexOf(filterFormValue[LFilterForm.HERO_NAME]) > -1);
         })
 
     }
+
     /**
      * Функция фильтрации по способностям.
      *

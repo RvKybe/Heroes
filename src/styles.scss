@@ -4,26 +4,31 @@ $background: beige;
 .textbox-attention {
   outline: 2px solid $highlight;
 }
-@mixin flexWrapper ($jc: flex-end) {
+
+@mixin flexWrapper($jc: flex-end) {
   display: flex;
   justify-content: $jc;
 }
+
 .button-container {
   @include flexWrapper(flex-end);
   width: 90%;
 }
+
 .dx-fieldset {
   width: 100%;
   background-color: $background;
   padding: 10px;
   border-radius: 3px;
-  margin: 0  0 30px 0 ;
+  margin: 0 0 30px 0;
   border: 1px solid silver;
 
 }
+
 form {
   width: 90%;
 }
+
 body {
   overflow-y: hidden;
   overflow-x: hidden;

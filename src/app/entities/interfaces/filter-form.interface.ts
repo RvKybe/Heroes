@@ -13,6 +13,6 @@ export interface IFilterForm {
     [LFilterForm.BOTTOM_LEVEL]: number;
     [LFilterForm.TOP_LEVEL]: number;
     [LFilterForm.ABILITY_IDS]: number[];
-    [LFilterForm.HERO_NAME]:string;
+    [LFilterForm.HERO_NAME]: string;
     [LFilterForm.SORT_MODE]: number;
 }

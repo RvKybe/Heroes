@@ -1,19 +1,19 @@
 <div class="dx-fieldset">
-  <div class="dx-field">
-    <p>
-      Добавление способности:
-    </p>
-    <dx-text-box [showClearButton]="true"
-                 [isValid]="abilityNameFormControl.valid || abilityNameFormControl.untouched"
-                 [formControl]="abilityNameFormControl"
-                 placeholder="Laser eyes"
-    ></dx-text-box>
-  </div>
-  <div [textContent]="errorMessage"
-  ></div>
-  <div class="button-container">
-    <dx-button (onClick)="createAbility()"
-               text="Добавить"
-    ></dx-button>
-  </div>
+    <div class="dx-field">
+        <p>
+            Добавление способности:
+        </p>
+        <dx-text-box [showClearButton]="true"
+                     [isValid]="abilityNameFormControl.valid || abilityNameFormControl.untouched"
+                     [formControl]="abilityNameFormControl"
+                     placeholder="Laser eyes"
+        ></dx-text-box>
+    </div>
+    <div [textContent]="errorMessage"
+    ></div>
+    <div class="button-container">
+        <dx-button (onClick)="createAbility()"
+                   text="Добавить"
+        ></dx-button>
+    </div>
 </div>
