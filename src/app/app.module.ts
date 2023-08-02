@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import {
     DxAccordionModule,
-    DxButtonModule,
+    DxButtonModule, DxNumberBoxModule,
     DxPopupModule,
     DxSelectBoxModule,
     DxTagBoxModule,
@@ -37,7 +37,8 @@ import { GetAbilitiesNamesByIdsPipe } from './pipes/get-abilities-names-by-ids.p
         FormsModule,
         DxTagBoxModule,
         DxPopupModule,
-        DxAccordionModule
+        DxAccordionModule,
+        DxNumberBoxModule
     ],
   providers: [],
   bootstrap: [AppComponent]

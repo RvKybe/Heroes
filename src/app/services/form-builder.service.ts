@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EHero} from "../enums/hero.enum";
-import {numberValidator} from "../validators/number-validator.validator";
 import {EFilters} from "../enums/filter-form.enum";
+import {nonEmptyStringValidator} from "../validators/non-empty-string-validator";
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +14,10 @@ export class FormBuilderService {
    */
   public get heroForm(): FormGroup {
     return new FormGroup({
-      [EHero.NAME]: new FormControl<string>('', Validators.required),
-      [EHero.POWER]: new FormControl<number | null>(null, [Validators.required, numberValidator()]),
+      [EHero.NAME]: new FormControl<string>('', [Validators.required, nonEmptyStringValidator()]),
+      [EHero.POWER]: new FormControl<number | null>(null, Validators.required),
       [EHero.ABILITY_IDS]: new FormControl<number[]>([], Validators.required),
-      [EHero.LEVEL]: new FormControl<number | null>(null, [Validators.required, numberValidator()]),
+      [EHero.LEVEL]: new FormControl<number | null>(null, Validators.required),
       [EHero.ID]: new FormControl<number | null>(null),
     });
   }

@@ -17,11 +17,11 @@
         Сила:
       </div>
       <div class="dx-field-value">
-        <dx-text-box [showClearButton]="true"
+        <dx-number-box  [showClearButton]="true"
                      [isValid]="powerFormControl.valid || powerFormControl.untouched"
                      [formControl]="powerFormControl"
                      placeholder="6"
-        ></dx-text-box>
+        ></dx-number-box>
       </div>
     </div>
     <div class="dx-field">
@@ -44,10 +44,10 @@
         Уровень:
       </div>
       <div class="dx-field-value">
-        <dx-text-box [isValid]="levelFormControl.valid || levelFormControl.untouched"
+        <dx-number-box [isValid]="levelFormControl.valid || levelFormControl.untouched"
                      [formControl]="levelFormControl"
                      placeholder="13"
-        ></dx-text-box>
+        ></dx-number-box>
       </div>
     </div>
     <div [textContent]="errorMessage"
