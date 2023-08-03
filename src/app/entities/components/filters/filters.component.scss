@@ -4,8 +4,8 @@
   padding: 10px;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-bottom: 30px;
   border: 1px solid silver;
+
 }
 
 .filter-form__sort-item {
@@ -35,4 +35,9 @@
 
 .text-input {
  width: 62%;
+}
+app-filters {
+  margin-bottom: 32px;
+  display: flex;
+  height: 120px;
 }
