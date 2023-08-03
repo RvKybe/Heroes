@@ -14,17 +14,22 @@
             </div>
         </div>
     </div>
-    <div *dxTemplate="let hero of 'item'">
-        <div>
-            Сила: {{ hero.power }}
-        </div>
-        <div class="abilities-row">
+    <div *dxTemplate="let hero of 'item'"
+         class="hero__body">
+        <div class="line">
             <div>
-                Способности:
+                Сила: {{ hero.power }}
             </div>
-            <div *ngFor="let abilityId of hero.abilityIds"
-                 class="ability-item">
-                {{ abilityId | getAbilitiesNamesByIds: (possibleAbilities$ | async) }}
+            <div class="ability-line">
+                <div class="ai-cen">
+                    Способности:
+                </div>
+                <div class="abilities-row">
+                    <div *ngFor="let abilityId of hero.abilityIds"
+                         class="ability-item">
+                        {{ abilityId | getAbilitiesNamesByIds: (possibleAbilities$ | async) }}
+                    </div>
+                </div>
             </div>
         </div>
         <div class="button-container">
@@ -40,7 +45,7 @@
           [showTitle]="true"
           [dragEnabled]="false"
           [width]="'30%'"
-          [height]="'340px'"
+          [height]="'350px'"
           title="Редактировать героя"
           container="body"
           class="popup">

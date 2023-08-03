@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {
     DxAccordionModule,
     DxButtonModule, DxNumberBoxModule,
-    DxPopupModule,
+    DxPopupModule, DxScrollViewModule,
     DxSelectBoxModule,
     DxTagBoxModule,
     DxTextBoxModule
@@ -40,7 +40,8 @@ import {FilterHeroesPipe} from './entities/pipes/filter-heroes.pipe';
         DxTagBoxModule,
         DxPopupModule,
         DxAccordionModule,
-        DxNumberBoxModule
+        DxNumberBoxModule,
+        DxScrollViewModule
     ],
     providers: [],
     bootstrap: [AppComponent]

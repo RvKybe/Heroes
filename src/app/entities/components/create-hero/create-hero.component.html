@@ -3,6 +3,9 @@
 'create-mode': mode === EDialogMode.CREATE,
 'edit-mode': mode === EDialogMode.EDIT
 }">
+    <dx-scroll-view [ngClass]="{
+'popup-view': mode === EDialogMode.EDIT
+}">
     <div class="dx-field">
         <div class="dx-field-label">
             Имя:
@@ -69,10 +72,14 @@
     </div>
     <div [textContent]="errorMessage"
     ></div>
+    </dx-scroll-view>
     <div class="button-container">
         <dx-button [disabled]="formGroupInvalid"
                    [text]="submitButtonText"
                    [type]="buttonType"
+                   [ngClass]="{
+                     'popup__edit-button': mode === EDialogMode.EDIT
+                     }"
                    (onClick)="submit()"
         ></dx-button>
     </div>

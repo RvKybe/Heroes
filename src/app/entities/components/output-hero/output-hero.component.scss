@@ -8,21 +8,42 @@
   display: inline-flex;
   justify-content: space-between;
   width: 90%;
+  padding: 5px;
 }
 
 .ability-item {
-  display: inline-block;
+  display: flex;
   background-color: cadetblue;
   border-radius: 3px;
-  margin: 0 5px;
+  align-items: center;
+  margin: 5px;
   padding: 3px;
 }
 
 .abilities-row {
-  display: inline-flex;
-  align-items: center;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .popup {
   overflow: hidden;
+}
+
+.hero__body {
+  font: 20px sans-serif Verdana;
+}
+
+.ability-line {
+  display: flex;
+  align-items: flex-start;
+}
+
+.ai-cen {
+  display: flex;
+  align-items: center;
+}
+
+.line {
+  margin-bottom: 10px;
 }

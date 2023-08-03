@@ -4,4 +4,16 @@
 
 .edit-mode {
   margin: 0;
+  border: none;
+  overflow-y: hidden;
+}
+
+.popup-view {
+  width: 100%;
+  height: 180px;
+  margin-bottom: 15px;
+}
+.popup__edit-button {
+  padding: 0 10px;
+  width: 215px;
 }

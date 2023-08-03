@@ -56,7 +56,7 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
             this.submitButtonText = 'Создать героя';
             this.buttonType = 'default';
         } else if (this.mode === EDialogMode.EDIT) {
-            this.submitButtonText = 'Изменить героя';
+            this.submitButtonText = 'Сохранить изменения';
             this.buttonType = 'success';
             this.form.patchValue(<IHero>this.hero);
         }
