@@ -3,6 +3,7 @@
   border-radius: 3px;
   padding: 10px;
   border: 1px solid silver;
+  width: calc(100% - 22px);
 }
 
 .filter-form__sort-item {
@@ -23,7 +24,7 @@
 
 .filter-form__row {
   width: 100%;
-  display: inline-flex;
+  display: flex;
 }
 
 .margin-right {

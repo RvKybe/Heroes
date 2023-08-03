@@ -1,8 +1,8 @@
 .heroes-list-container {
     background-color: gray;
     border-radius: 3px;
-    width: calc(100% - 20px);
+    width: 100%;
     height: 100%;
     padding: 10px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
