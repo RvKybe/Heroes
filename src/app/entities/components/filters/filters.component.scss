@@ -2,10 +2,7 @@
   background-color: beige;
   border-radius: 3px;
   padding: 10px;
-  justify-content: space-between;
-  flex-wrap: wrap;
   border: 1px solid silver;
-
 }
 
 .filter-form__sort-item {
@@ -21,7 +18,7 @@
 }
 
 .sort-item__abilities {
-  width: 67%;
+  width: calc(100% - 105px);
 }
 
 .filter-form__row {
@@ -34,10 +31,5 @@
 }
 
 .text-input {
- width: 62%;
-}
-app-filters {
-  margin-bottom: 32px;
-  display: flex;
-  height: 120px;
+ width: calc(100% - 125px);
 }

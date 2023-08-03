@@ -4,7 +4,7 @@
   gap: 32px;
   padding: 16px;
   height: calc(100% - 32px);
-  width: 100%;
+  width: calc(100% - 32px);
 }
 
 .left-column {
@@ -12,7 +12,7 @@
 }
 
 .right-column {
-  width: calc(60% - 64px);
+  width: calc(60% - 32px);
 }
 
 app-create-hero, app-filters {
