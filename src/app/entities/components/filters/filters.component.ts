@@ -7,6 +7,7 @@ import {LFilterForm} from "../../labels/filter-form.label";
 import {FilterFormService} from "../../services/filter-form.service";
 import {Observable, Subscription} from "rxjs";
 import {IFilterForm} from "../../interfaces/filter-form.interface";
+import {ManageAbilitiesService} from "../../services/manage-abilities.service";
 
 @Component({
     selector: 'app-filters',
@@ -16,7 +17,7 @@ import {IFilterForm} from "../../interfaces/filter-form.interface";
 export class FiltersComponent implements OnInit {
     public form: FormGroup = this._formBuilderService.filterForm;
 
-    public possibleAbilities$!: Observable<IItem[]>;
+    public possibleAbilities$: Observable<IItem[]> = this._manageAbilitiesService.abilities$;
     public sort: string = 'fromLowLevel';
     public iconName: string = 'chevronup';
     public outputSortName: string = 'возрастанию';
@@ -26,6 +27,7 @@ export class FiltersComponent implements OnInit {
         private readonly _manageHeroesService: ManageHeroesService,
         private readonly _formBuilderService: FormBuilderService,
         private readonly _filterFormService: FilterFormService,
+        private readonly _manageAbilitiesService: ManageAbilitiesService
     ) {
     }
 
