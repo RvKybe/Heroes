@@ -18,8 +18,10 @@ export class ManageHeroesService {
      * Функция создания героя
      *
      * @param {IHero} hero - объект героя
+     * @param filterFormValue
      */
-    public add(hero: IHero): void {
+    public add(hero: IHero, filterFormValue: IFilterForm): void {
+        hero[LHero.IS_SELECTED] = false;
         if (!this._heroes.length) {
             hero[LItem.ID] = 1;
         } else {
@@ -27,6 +29,7 @@ export class ManageHeroesService {
             hero[LItem.ID] = lastHero[LItem.ID] + 1;
         }
         this._heroes.push(hero);
+        this.sortHeroes(filterFormValue)
     }
 
     /**
@@ -37,6 +40,7 @@ export class ManageHeroesService {
     public edit(formHero: IHero): void {
         const heroIndex: number = this._heroes.findIndex((hero: IHero): boolean => hero[LItem.ID] === formHero[LItem.ID]);
         if (heroIndex !== -1) {
+            formHero[LHero.IS_SELECTED] = true;
             this._heroes[heroIndex] = formHero;
         }
     }

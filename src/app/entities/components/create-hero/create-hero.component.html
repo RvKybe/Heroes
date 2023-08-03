@@ -11,6 +11,8 @@
             <dx-text-box [showClearButton]="true"
                          [isValid]="nameFormControl.valid || nameFormControl.untouched"
                          [formControl]="nameFormControl"
+                         (onInput)="firstSpace(nameFormControl)"
+                         valueChangeEvent="input"
                          placeholder="John Smith"
             ></dx-text-box>
         </div>
@@ -23,6 +25,9 @@
             <dx-number-box [showClearButton]="true"
                            [isValid]="powerFormControl.valid || powerFormControl.untouched"
                            [formControl]="powerFormControl"
+                           [min]="0"
+                           [max]="100"
+                           [showSpinButtons]="true"
                            placeholder="6"
             ></dx-number-box>
         </div>
@@ -36,6 +41,7 @@
                         [hideSelectedItems]="true"
                         [isValid]="abilityFormControl.valid || abilityFormControl.untouched"
                         [formControl]="abilityFormControl"
+                        [multiline]="false"
                         displayExpr="name"
                         valueExpr="id"
                         placeholder="Teleportation"
@@ -51,6 +57,9 @@
             <dx-number-box [isValid]="levelFormControl.valid || levelFormControl.untouched"
                            [formControl]="levelFormControl"
                            [showClearButton]="true"
+                           [min]="0"
+                           [max]="100"
+                           [showSpinButtons]="true"
                            placeholder="13"
             ></dx-number-box>
         </div>
@@ -61,7 +70,8 @@
     <div [textContent]="errorMessage"
     ></div>
     <div class="button-container">
-        <dx-button [text]="submitButtonText"
+        <dx-button [disabled]="formGroupInvalid"
+                   [text]="submitButtonText"
                    [type]="buttonType"
                    (onClick)="submit()"
         ></dx-button>

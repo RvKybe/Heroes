@@ -6,13 +6,16 @@
         <dx-text-box [showClearButton]="true"
                      [isValid]="abilityNameFormControl.valid || abilityNameFormControl.untouched"
                      [formControl]="abilityNameFormControl"
+                     (onInput)="firstSpace(abilityNameFormControl)"
+                     valueChangeEvent="input"
                      placeholder="Laser eyes"
         ></dx-text-box>
     </div>
     <div [textContent]="errorMessage"
     ></div>
     <div class="button-container">
-        <dx-button (onClick)="createAbility()"
+        <dx-button [disabled]="formControlInvalid"
+                   (onClick)="createAbility()"
                    type="default"
                    text="Добавить"
         ></dx-button>

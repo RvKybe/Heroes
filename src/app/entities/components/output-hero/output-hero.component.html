@@ -2,7 +2,7 @@
               [collapsible]="true"
               [animationDuration]="300"
               [multiple]="false"
-              [selectedItem]="false"
+              [selectedItems]="needToSelect"
               class="hero">
     <div *dxTemplate="let hero of 'title'">
         <div class="hero__title">
@@ -40,7 +40,7 @@
           [showTitle]="true"
           [dragEnabled]="false"
           [width]="'30%'"
-          [height]="'330px'"
+          [height]="'340px'"
           title="Редактировать героя"
           container="body"
           class="popup">

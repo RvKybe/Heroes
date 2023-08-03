@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {ManageAbilitiesService} from "../../services/manage-abilities.service";
 import {FormBuilderService} from "../../services/form-builder.service";
+import {TestService} from "../../services/test.service";
 
 @Component({
     selector: 'app-create-ability',
@@ -16,7 +17,12 @@ export class CreateAbilityComponent {
     constructor(
         private readonly _manageAbilitiesServices: ManageAbilitiesService,
         private readonly _formBuilderService: FormBuilderService,
+        private readonly _testService: TestService,
     ) {
+    }
+
+    public firstSpace(nameControl: FormControl): void {
+        this._testService.firstSpace(nameControl);
     }
 
     /**
@@ -36,5 +42,13 @@ export class CreateAbilityComponent {
         } else {
             this.errorMessage = 'Такая способность уже существует';
         }
+    }
+
+    /**
+     * Возвращает валидность контроллера формы
+     * return {boolean}
+     */
+    public get formControlInvalid(): boolean {
+        return this.abilityNameFormControl.invalid;
     }
 }

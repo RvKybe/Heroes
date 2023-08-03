@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LHero} from "../labels/hero.label";
 import {LFilterForm} from "../labels/filter-form.label";
-import {nonEmptyStringValidator} from "../validators/non-empty-string-validator";
+import {nonEmptyStringValidator} from "../validators/non-empty-string.validator";
 import {LItem} from "../labels/item.label";
 
 @Injectable({
@@ -45,6 +45,6 @@ export class FormBuilderService {
      * return {FormControl<string | null>}
      */
     public get createAbilityFormControl(): FormControl<string | null> {
-        return new FormControl<string | null>(null, Validators.required)
+        return new FormControl<string | null>(null, [Validators.required, nonEmptyStringValidator()])
     }
 }

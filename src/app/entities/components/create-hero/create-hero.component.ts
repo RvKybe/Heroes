@@ -1,27 +1,30 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup,} from "@angular/forms";
 import {ManageHeroesService} from "../../services/manage-heroes.service";
 import {ManageAbilitiesService} from "../../services/manage-abilities.service";
 import {IHero} from "../../interfaces/hero.interface";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {LHero} from "../../labels/hero.label";
 import {FormBuilderService} from "../../services/form-builder.service";
 import {EDialogMode} from "../../enums/dialog-mode.enum";
 import {LItem} from "../../labels/item.label";
 import {IItem} from "../../interfaces/item.interface";
 import {EErrorMessages} from "../../enums/error-messages.enum";
+import {TestService} from "../../services/test.service";
+import {FilterFormService} from "../../services/filter-form.service";
+import {IFilterForm} from "../../interfaces/filter-form.interface";
 
 @Component({
     selector: 'app-create-hero',
     templateUrl: './create-hero.component.html',
     styleUrls: ['./create-hero.component.scss']
 })
-export class CreateHeroComponent implements OnInit {
+export class CreateHeroComponent implements OnInit, OnDestroy {
     @Input({'required': true})
     public mode: string = '';
 
     @Input()
-    public hero: IHero | null = null;
+    public hero!: IHero;
 
     public form: FormGroup = this._formBuilderService.heroForm;
 
@@ -29,15 +32,26 @@ export class CreateHeroComponent implements OnInit {
     public submitButtonText: string = '';
     public errorMessage: string = '';
     public buttonType: string = '';
+    public filterFormValue!: IFilterForm;
+
+    private filterFormSubscription!: Subscription;
 
     constructor(
         private readonly _manageHeroesService: ManageHeroesService,
         private readonly _manageAbilitiesService: ManageAbilitiesService,
         private readonly _formBuilderService: FormBuilderService,
+        private readonly _testService: TestService,
+        private readonly _filterFormService: FilterFormService,
     ) {
     }
 
+
+
     public ngOnInit(): void {
+        this.filterFormSubscription = this._filterFormService.form$
+            .subscribe((filterFormValue: IFilterForm): void => {
+                this.filterFormValue = filterFormValue;
+        })
         if (this.mode === EDialogMode.CREATE) {
             this.submitButtonText = 'Создать героя';
             this.buttonType = 'default';
@@ -47,6 +61,7 @@ export class CreateHeroComponent implements OnInit {
             this.form.patchValue(<IHero>this.hero);
         }
     }
+
 
     /**
      * Функция отправки формы
@@ -65,11 +80,20 @@ export class CreateHeroComponent implements OnInit {
             return;
         }
         if (this.mode === EDialogMode.CREATE) {
-            this._manageHeroesService.add(hero);
+            this._manageHeroesService.add(hero, this.filterFormValue);
+            this.form.reset();
         } else if (this.mode === EDialogMode.EDIT) {
+           // this.hero[LHero.IS_SELECTED] = true; // не нужно
             this._manageHeroesService.edit(hero);
         }
-        this.form.reset();
+    }
+
+    /**
+     * Функция, отслеживающая пробелы в инпуте
+     * @param {FormControl} nameControl
+     */
+    public firstSpace(nameControl: FormControl): void {
+        this._testService.firstSpace(nameControl);
     }
 
     /**
@@ -108,5 +132,18 @@ export class CreateHeroComponent implements OnInit {
         return this.form.get(LHero.LEVEL) as FormControl<number | null>;
     }
 
+    /**
+     * Возвращает валидность формы
+     *
+     * return {boolean}
+     */
+    public get formGroupInvalid(): boolean {
+        return this.form.invalid;
+    }
+
     protected readonly EDialogMode = EDialogMode;
+
+    public ngOnDestroy(): void {
+        this.filterFormSubscription.unsubscribe();
+    }
 }

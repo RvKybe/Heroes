@@ -3,6 +3,7 @@ import {IHero} from "../../interfaces/hero.interface";
 import {ManageAbilitiesService} from "../../services/manage-abilities.service";
 import {Observable} from "rxjs";
 import {IItem} from "../../interfaces/item.interface";
+import {LHero} from "../../labels/hero.label";
 
 @Component({
     selector: 'app-output-hero',
@@ -14,8 +15,10 @@ export class OutputHeroComponent implements OnInit {
     public hero!: IHero;
 
     public outputHero: IHero[] = [];
+    public needToSelect: any = [];
     public popupVisible: boolean = false;
-    public possibleAbilities$!: Observable<IItem[]>
+    public possibleAbilities$: Observable<IItem[]> = this._manageAbilitiesService.abilities$;
+
 
     constructor(
         private readonly _manageAbilitiesService: ManageAbilitiesService
@@ -24,7 +27,9 @@ export class OutputHeroComponent implements OnInit {
 
     public ngOnInit(): void {
         this.outputHero.push(this.hero);
-        this.possibleAbilities$ = this._manageAbilitiesService.abilities$;
+        if (this.hero[LHero.IS_SELECTED]) {
+            this.needToSelect.push(this.hero)
+        }
     }
 
     /**
@@ -35,4 +40,6 @@ export class OutputHeroComponent implements OnInit {
     public switchPopupDisplay(popupVisible: boolean): void {
         this.popupVisible = popupVisible;
     }
+
+    protected readonly LHero = LHero;
 }

@@ -4,6 +4,7 @@ import {IHero} from "../../interfaces/hero.interface";
 import {Observable} from "rxjs";
 import {FilterFormService} from "../../services/filter-form.service";
 import {IFilterForm} from "../../interfaces/filter-form.interface";
+import {LHero} from "../../labels/hero.label";
 
 @Component({
     selector: 'app-output',
@@ -19,4 +20,6 @@ export class OutputComponent {
         private readonly _filterFormService: FilterFormService
     ) {
     }
+
+    protected readonly LHero = LHero;
 }
