@@ -73,8 +73,9 @@
             <span>{{ levelFormControl.value }}</span>
         </div>
     </div>
-    <div [textContent]="errorMessage"
-    ></div>
+    <div>
+        {{ errorMessage }}
+    </div>
     </dx-scroll-view>
     <div class="button-container">
         <dx-button [disabled]="formGroupInvalid"

@@ -4,6 +4,7 @@ import {ManageAbilitiesService} from "../../services/manage-abilities.service";
 import {Observable} from "rxjs";
 import {IItem} from "../../interfaces/item.interface";
 import {LHero} from "../../labels/hero.label";
+import {LItem} from "../../labels/item.label";
 
 @Component({
     selector: 'app-output-hero',
@@ -18,7 +19,9 @@ export class OutputHeroComponent implements OnInit {
     public needToSelect: any = [];
     public popupVisible: boolean = false;
     public possibleAbilities$: Observable<IItem[]> = this._manageAbilitiesService.abilities$;
-    public readonly LHero = LHero;
+
+    protected readonly LHero = LHero;
+    protected readonly LItem = LItem;
 
     constructor(
         private readonly _manageAbilitiesService: ManageAbilitiesService
@@ -39,5 +42,4 @@ export class OutputHeroComponent implements OnInit {
     public switchPopupDisplay(popupVisible: boolean): void {
         this.popupVisible = popupVisible;
     }
-
 }

@@ -7,10 +7,10 @@
     <div *dxTemplate="let hero of 'title'">
         <div class="hero__title">
             <div>
-                {{ hero.name }}
+                {{ hero[LItem.NAME] }}
             </div>
             <div>
-                {{ hero.level }} ур.
+                {{ hero[LHero.LEVEL] }} ур.
             </div>
         </div>
     </div>
@@ -18,14 +18,14 @@
          class="hero__body">
         <div class="line">
             <div>
-                Сила: {{ hero.power }}
+                Сила: {{ hero[LHero.POWER] }}
             </div>
             <div class="ability-line">
                 <div class="ai-cen">
                     Способности:
                 </div>
                 <div class="abilities-row">
-                    <div *ngFor="let abilityId of hero.abilityIds"
+                    <div *ngFor="let abilityId of hero[LHero.ABILITY_IDS]"
                          class="ability-item">
                         {{ abilityId | getAbilitiesNamesByIds: (possibleAbilities$ | async) }}
                     </div>
@@ -33,10 +33,10 @@
             </div>
         </div>
         <div class="button-container">
-            <dx-button (click)="switchPopupDisplay( true)"
-                       text="Редактировать"
-                       type="default"
-            ></dx-button>
+            <dx-button (click)="switchPopupDisplay(true)"
+                       type="default">
+                Редактировать
+            </dx-button>
         </div>
     </div>
 </dx-accordion>

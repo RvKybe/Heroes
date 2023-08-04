@@ -12,8 +12,9 @@
                      placeholder="Laser eyes"
         ></dx-text-box>
     </div>
-    <div [textContent]="errorMessage"
-    ></div>
+    <div>
+        {{ errorMessage }}
+    </div>
     <div class="button-container">
         <dx-button [disabled]="formControlInvalid"
                    (onClick)="createAbility()"
