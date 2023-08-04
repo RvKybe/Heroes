@@ -1,3 +1,5 @@
+@import "src/assets/styles/mixins.scss";
+
 .create-mode {
   background-color: beige;
 }
@@ -13,7 +15,12 @@
   height: 180px;
   margin-bottom: 15px;
 }
+
 .popup__edit-button {
   padding: 0 10px;
   width: 215px;
+}
+
+.level-text {
+  @include flexWrapper(flex-start, center)
 }

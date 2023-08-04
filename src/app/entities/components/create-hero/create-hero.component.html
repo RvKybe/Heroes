@@ -54,13 +54,15 @@
             ></dx-tag-box>
         </div>
     </div>
-    <div class="dx-field">
+    <div [ngClass]="{'dx-field': true,
+    'level-text': mode === EDialogMode.EDIT
+    }">
         <div class="dx-field-label">
             Уровень:
         </div>
-        <div *ngIf="mode === EDialogMode.CREATE"
-                class="dx-field-value">
-            <dx-number-box [isValid]="levelFormControl.valid || levelFormControl.untouched"
+        <div class="dx-field-value">
+            <dx-number-box *ngIf="mode === EDialogMode.CREATE"
+                           [isValid]="levelFormControl.valid || levelFormControl.untouched"
                            [formControl]="levelFormControl"
                            [showClearButton]="true"
                            [min]="0"
@@ -70,9 +72,9 @@
                            [inputAttr]="{ 'aria-label': 'Integer Format' }"
                            placeholder="13"
             ></dx-number-box>
-        </div>
-        <div *ngIf="mode === EDialogMode.EDIT">
-            <span>{{ levelFormControl.value }}</span>
+            <span *ngIf="mode === EDialogMode.EDIT">
+                {{ levelFormControl.value }}
+            </span>
         </div>
     </div>
     <div>

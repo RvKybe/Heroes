@@ -1,3 +1,5 @@
+@import 'src/assets/styles/mixins.scss';
+
 .hero {
   margin-bottom: 10px;
   background-color: beige;
@@ -5,24 +7,21 @@
 }
 
 .hero__title {
-  display: inline-flex;
-  justify-content: space-between;
+  @include flexWrapper(space-between);
   width: 90%;
   padding: 5px;
 }
 
 .ability-item {
-  display: flex;
+  @include flexWrapper(flex-start, center);
   background-color: cadetblue;
   border-radius: 3px;
-  align-items: center;
   margin: 5px;
   padding: 3px;
 }
 
 .ability-block__abilities-row {
-  display: flex;
-  align-items: flex-start;
+  @include flexWrapper(flex-start, flex-start);
   flex-wrap: wrap;
 }
 
@@ -35,13 +34,11 @@
 }
 
 .ability-block {
-  display: flex;
-  align-items: flex-start;
+  @include flexWrapper(flex-start, flex-start);
 }
 
 .ability-line__abilities-declaration {
-  display: flex;
-  align-items: center;
+  @include flexWrapper(flex-start, center);
   margin-top: 8px;
 }
 

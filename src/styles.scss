@@ -1,8 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@mixin flexWrapper($jc: flex-end) {
-  display: flex;
-  justify-content: $jc;
-}
+@import './assets/styles/mixins.scss';
 
 .button-container {
   @include flexWrapper(flex-end);
@@ -24,6 +21,7 @@ body {
   height: 100%;
   width: 100%;
 }
+
 html {
   height: 100%;
   width: 100%;

@@ -1,0 +1,5 @@
+@mixin flexWrapper($jc: flex-end, $ai: center) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+}
