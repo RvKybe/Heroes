@@ -4,13 +4,14 @@ import {FormControl} from "@angular/forms";
 @Injectable({
     providedIn: 'root'
 })
-export class TestService {
+export class spaceControlService {
 
     /**
      * Функция, контролирующая пробелы в инпуте
+     *
      * @param {FormControl} nameControl
      */
-    public firstSpace(nameControl: FormControl): void {
+    public spaceControl(nameControl: FormControl): void {
         if (nameControl.value.trim() === '') {
             nameControl.patchValue('');
             return;

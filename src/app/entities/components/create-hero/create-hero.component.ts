@@ -10,7 +10,7 @@ import {EDialogMode} from "../../enums/dialog-mode.enum";
 import {LItem} from "../../labels/item.label";
 import {IItem} from "../../interfaces/item.interface";
 import {EErrorMessages} from "../../enums/error-messages.enum";
-import {TestService} from "../../services/test.service";
+import {spaceControlService} from "../../services/space-control.service";
 import {FilterFormService} from "../../services/filter-form.service";
 import {IFilterForm} from "../../interfaces/filter-form.interface";
 
@@ -33,6 +33,7 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
     public errorMessage: string = '';
     public buttonType: string = '';
     public filterFormValue!: IFilterForm;
+    public readonly EDialogMode = EDialogMode;
 
     private filterFormSubscription!: Subscription;
 
@@ -40,12 +41,10 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
         private readonly _manageHeroesService: ManageHeroesService,
         private readonly _manageAbilitiesService: ManageAbilitiesService,
         private readonly _formBuilderService: FormBuilderService,
-        private readonly _testService: TestService,
+        private readonly  _spaceControlService: spaceControlService,
         private readonly _filterFormService: FilterFormService,
     ) {
     }
-
-
 
     public ngOnInit(): void {
         this.filterFormSubscription = this._filterFormService.form$
@@ -93,7 +92,7 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
      * @param {FormControl} nameControl
      */
     public firstSpace(nameControl: FormControl): void {
-        this._testService.firstSpace(nameControl);
+        this. _spaceControlService.spaceControl(nameControl);
     }
 
     /**
@@ -140,8 +139,6 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
     public get formGroupInvalid(): boolean {
         return this.form.invalid;
     }
-
-    protected readonly EDialogMode = EDialogMode;
 
     public ngOnDestroy(): void {
         this.filterFormSubscription.unsubscribe();

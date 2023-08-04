@@ -18,12 +18,11 @@ export class OutputHeroComponent implements OnInit {
     public needToSelect: any = [];
     public popupVisible: boolean = false;
     public possibleAbilities$: Observable<IItem[]> = this._manageAbilitiesService.abilities$;
-
+    public readonly LHero = LHero;
 
     constructor(
         private readonly _manageAbilitiesService: ManageAbilitiesService
-    ) {
-    }
+    ) {}
 
     public ngOnInit(): void {
         this.outputHero.push(this.hero);
@@ -41,5 +40,4 @@ export class OutputHeroComponent implements OnInit {
         this.popupVisible = popupVisible;
     }
 
-    protected readonly LHero = LHero;
 }

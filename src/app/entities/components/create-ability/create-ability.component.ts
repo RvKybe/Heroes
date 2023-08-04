@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {ManageAbilitiesService} from "../../services/manage-abilities.service";
 import {FormBuilderService} from "../../services/form-builder.service";
-import {TestService} from "../../services/test.service";
+import {spaceControlService} from "../../services/space-control.service";
 
 @Component({
     selector: 'app-create-ability',
@@ -17,12 +17,12 @@ export class CreateAbilityComponent {
     constructor(
         private readonly _manageAbilitiesServices: ManageAbilitiesService,
         private readonly _formBuilderService: FormBuilderService,
-        private readonly _testService: TestService,
+        private readonly _spaceControlService: spaceControlService,
     ) {
     }
 
     public firstSpace(nameControl: FormControl): void {
-        this._testService.firstSpace(nameControl);
+        this._spaceControlService.spaceControl(nameControl);
     }
 
     /**

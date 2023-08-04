@@ -2,6 +2,8 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {IFilterForm} from "../interfaces/filter-form.interface";
 import {IHero} from "../interfaces/hero.interface";
 import {LFilterForm} from "../labels/filter-form.label";
+import {LHero} from "../labels/hero.label";
+import {LItem} from "../labels/item.label";
 
 @Pipe({
     name: 'filterHeroes',
@@ -21,11 +23,11 @@ export class FilterHeroesPipe implements PipeTransform {
         }
         return heroes.filter((hero: IHero): boolean => {
             return ((!filterFormValue[LFilterForm.BOTTOM_LEVEL] && !filterFormValue[LFilterForm.TOP_LEVEL])
-                    || (hero.level <= filterFormValue[LFilterForm.TOP_LEVEL] && !filterFormValue[LFilterForm.BOTTOM_LEVEL])
-                    || (hero.level >= filterFormValue[LFilterForm.BOTTOM_LEVEL] && !filterFormValue[LFilterForm.TOP_LEVEL])
-                    || (hero.level <= filterFormValue[LFilterForm.TOP_LEVEL] && hero.level >= filterFormValue[LFilterForm.BOTTOM_LEVEL]))
-                && (!filterFormValue[LFilterForm.ABILITY_IDS] || this.searchAbilityName(filterFormValue[LFilterForm.ABILITY_IDS], hero.abilityIds))
-                && (!filterFormValue[LFilterForm.HERO_NAME] || hero.name.indexOf(filterFormValue[LFilterForm.HERO_NAME]) > -1);
+                    || (hero[LHero.LEVEL] <= filterFormValue[LFilterForm.TOP_LEVEL] && !filterFormValue[LFilterForm.BOTTOM_LEVEL])
+                    || (hero[LHero.LEVEL] >= filterFormValue[LFilterForm.BOTTOM_LEVEL] && !filterFormValue[LFilterForm.TOP_LEVEL])
+                    || (hero[LHero.LEVEL] <= filterFormValue[LFilterForm.TOP_LEVEL] && hero[LHero.LEVEL] >= filterFormValue[LFilterForm.BOTTOM_LEVEL]))
+                && (!filterFormValue[LFilterForm.ABILITY_IDS] || this.searchAbilityName(filterFormValue[LFilterForm.ABILITY_IDS], hero[LHero.ABILITY_IDS]))
+                && (!filterFormValue[LFilterForm.HERO_NAME] || hero[LItem.NAME].indexOf(filterFormValue[LFilterForm.HERO_NAME]) > -1);
         })
 
     }

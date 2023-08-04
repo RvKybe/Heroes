@@ -14,12 +14,10 @@ import {LHero} from "../../labels/hero.label";
 export class OutputComponent {
     public heroes$: Observable<IHero[]> = this._manageHeroesService.heroesStream$;
     public filterFormValue$: Observable<IFilterForm> = this._filterFormService.form$;
+    public readonly LHero = LHero;
 
     constructor(
         private readonly _manageHeroesService: ManageHeroesService,
         private readonly _filterFormService: FilterFormService
-    ) {
-    }
-
-    protected readonly LHero = LHero;
+    ) {}
 }

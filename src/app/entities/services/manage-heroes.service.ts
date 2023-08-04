@@ -29,7 +29,7 @@ export class ManageHeroesService {
             hero[LItem.ID] = lastHero[LItem.ID] + 1;
         }
         this._heroes.push(hero);
-        this.sortHeroes(filterFormValue)
+        this.sortHeroes(filterFormValue);
     }
 
     /**
