@@ -15,16 +15,16 @@
         </div>
     </div>
     <div *dxTemplate="let hero of 'item'"
-         class="hero__body">
-        <div class="line">
+         class="hero__hero-body">
+        <div class="hero-body__description">
             <div>
                 Сила: {{ hero[LHero.POWER] }}
             </div>
-            <div class="ability-line">
-                <div class="ai-cen">
+            <div class="ability-block">
+                <div class="ability-line__abilities-declaration">
                     Способности:
                 </div>
-                <div class="abilities-row">
+                <div class="ability-block__abilities-row">
                     <div *ngFor="let abilityId of hero[LHero.ABILITY_IDS]"
                          class="ability-item">
                         {{ abilityId | getAbilitiesNamesByIds: (possibleAbilities$ | async) }}

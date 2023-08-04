@@ -20,7 +20,7 @@
   padding: 3px;
 }
 
-.abilities-row {
+.ability-block__abilities-row {
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
@@ -30,21 +30,21 @@
   overflow: hidden;
 }
 
-.hero__body {
+.hero__hero-body {
   font: 20px sans-serif Verdana;
 }
 
-.ability-line {
+.ability-block {
   display: flex;
   align-items: flex-start;
 }
 
-.ai-cen {
+.ability-line__abilities-declaration {
   display: flex;
   align-items: center;
   margin-top: 8px;
 }
 
-.line {
+.hero-body__description {
   margin-bottom: 10px;
 }
