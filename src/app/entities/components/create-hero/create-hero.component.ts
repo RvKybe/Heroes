@@ -83,8 +83,7 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
             this._manageHeroesService.add(hero, this.filterFormValue);
             this.form.reset();
         } else if (this.mode === EDialogMode.EDIT) {
-            // this.hero[LHero.IS_SELECTED] = true; // не нужно
-            this._manageHeroesService.edit(hero);
+            this._manageHeroesService.edit(hero, this.filterFormValue);
         }
     }
 

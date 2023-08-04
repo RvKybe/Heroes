@@ -1,5 +1,57 @@
 <div class="heroes-list-container">
-    <app-output-hero *ngFor="let hero of ((heroes$ | async) | filterHeroes : (filterFormValue$ | async))"
-                     [hero]="hero"
-    ></app-output-hero>
+    <dx-accordion *ngIf="!!heroes.length"
+                  [dataSource]="heroes"
+                  [collapsible]="false"
+                  [multiple]="false"
+                  [animationDuration]="300"
+                  class="hero">
+        <div *dxTemplate="let hero of 'title'">
+            <div class="hero__title">
+                <div>
+                    {{ hero[LItem.NAME] }}
+                </div>
+                <div>
+                    {{ hero[LHero.LEVEL] }} ур.
+                </div>
+            </div>
+        </div>
+        <div *dxTemplate="let hero of 'item'"
+             class="hero__hero-body">
+            <div class="hero-body__description">
+                <div>
+                    Сила: {{ hero[LHero.POWER] }}
+                </div>
+                <div class="ability-block">
+                    <div class="ability-line__abilities-declaration">
+                        Способности:
+                    </div>
+                    <div class="ability-block__abilities-row">
+                        <div *ngFor="let abilityId of hero[LHero.ABILITY_IDS]"
+                             class="ability-item">
+                            {{ abilityId | getAbilitiesNamesByIds: possibleAbilities }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="button-container">
+                <dx-button (onClick)="popup.visible = true"
+                           type="default">
+                    Редактировать
+                </dx-button>
+            </div>
+            <dx-popup #popup
+                      [hideOnOutsideClick]="true"
+                      [showTitle]="true"
+                      [dragEnabled]="false"
+                      [width]="'30%'"
+                      [height]="'340px'"
+                      title="Редактировать героя"
+                      container="body"
+                      class="popup">
+                <app-create-hero [hero]="hero"
+                                 mode="edit"
+                ></app-create-hero>
+            </dx-popup>
+        </div>
+    </dx-accordion>
 </div>
