@@ -33,9 +33,10 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
     public errorMessage: string = '';
     public buttonType: string = '';
     public filterFormValue!: IFilterForm;
-    public readonly EDialogMode = EDialogMode;
 
     private filterFormSubscription!: Subscription;
+
+    protected readonly EDialogMode = EDialogMode;
 
     constructor(
         private readonly _manageHeroesService: ManageHeroesService,
