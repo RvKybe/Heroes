@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ManageHeroesService} from "../../services/manage-heroes.service";
 import {IHero} from "../../interfaces/hero.interface";
-import {Observable, Subscription} from "rxjs";
+import {Observable} from "rxjs";
 import {FilterFormService} from "../../services/filter-form.service";
 import {IFilterForm} from "../../interfaces/filter-form.interface";
 import {LHero} from "../../labels/hero.label";

@@ -21,7 +21,10 @@ export class ManageHeroesService {
      * @param {IFilterForm} filterFormValue - значение формы фильтрации
      */
     public add(hero: IHero, filterFormValue: IFilterForm): void {
-        hero[LHero.IS_SELECTED] = false;
+        hero[LHero.IS_SELECTED] = true;
+        this._heroes.forEach((hero: IHero): void => {
+            hero[LHero.IS_SELECTED] = false
+        })
         if (!this._heroes.length) {
             hero[LItem.ID] = 1;
         } else {
@@ -38,6 +41,9 @@ export class ManageHeroesService {
      * @param {IHero} formHero - новый объект героя
      */
     public edit(formHero: IHero): void {
+        this._heroes.forEach((hero: IHero): void => {
+            hero[LHero.IS_SELECTED] = false
+        })
         const heroIndex: number = this._heroes.findIndex((hero: IHero): boolean => hero[LItem.ID] === formHero[LItem.ID]);
         if (heroIndex !== -1) {
             formHero[LHero.IS_SELECTED] = true;
