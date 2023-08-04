@@ -1,5 +1,12 @@
 @import 'src/assets/styles/mixins.scss';
 
+:host {
+  @include flexWrapper(flex-start, flex-start);
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+
 .filter-form {
   background-color: beige;
   border-radius: 3px;

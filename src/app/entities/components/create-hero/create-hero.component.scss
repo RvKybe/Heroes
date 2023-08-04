@@ -1,5 +1,11 @@
 @import "src/assets/styles/mixins.scss";
 
+:host {
+  @include flexWrapper(flex-start, flex-start);
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+
 .create-mode {
   background-color: beige;
 }
