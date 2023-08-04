@@ -8,7 +8,7 @@ export class spaceControlService {
     /**
      * Функция, контролирующая пробелы в инпуте
      *
-     * @param {FormControl} nameControl
+     * @param {FormControl} nameControl - контроллер формы (поле ввода имени)
      */
     public spaceControl(nameControl: FormControl): void {
         if (nameControl.value.trim() === '') {

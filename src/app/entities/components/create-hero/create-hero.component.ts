@@ -89,8 +89,9 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * Функция, отслеживающая пробелы в инпуте
-     * @param {FormControl} nameControl
+     * Передаёт контроллер формы в сервис по обработке пробелов
+     *
+     * @param {FormControl} nameControl - контроллер формы (поле ввода имени)
      */
     public firstSpace(nameControl: FormControl): void {
         this._spaceControlService.spaceControl(nameControl);

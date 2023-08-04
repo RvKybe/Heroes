@@ -21,6 +21,11 @@ export class CreateAbilityComponent {
     ) {
     }
 
+    /**
+     * Передаёт контроллер формы в сервис по обработке пробелов
+     *
+     * @param {FormControl} nameControl - контроллер формы (поле ввода имени)
+     */
     public firstSpace(nameControl: FormControl): void {
         this._spaceControlService.spaceControl(nameControl);
     }
@@ -46,6 +51,7 @@ export class CreateAbilityComponent {
 
     /**
      * Возвращает валидность контроллера формы
+     *
      * return {boolean}
      */
     public get formControlInvalid(): boolean {

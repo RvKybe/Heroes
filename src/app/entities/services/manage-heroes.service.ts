@@ -18,7 +18,7 @@ export class ManageHeroesService {
      * Функция создания героя
      *
      * @param {IHero} hero - объект героя
-     * @param filterFormValue
+     * @param {IFilterForm} filterFormValue - значение формы фильтрации
      */
     public add(hero: IHero, filterFormValue: IFilterForm): void {
         hero[LHero.IS_SELECTED] = false;
