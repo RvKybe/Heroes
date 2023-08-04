@@ -32,7 +32,7 @@ export class FormBuilderService {
         return new FormGroup({
             [LFilterForm.BOTTOM_LEVEL]: new FormControl(),
             [LFilterForm.TOP_LEVEL]: new FormControl(),
-            [LFilterForm.ABILITY_IDS]: new FormControl(),
+            [LFilterForm.ABILITY_IDS]: new FormControl([]),
             [LFilterForm.HERO_NAME]: new FormControl(),
             [LFilterForm.SORT_MODE]: new FormControl(1),
         });

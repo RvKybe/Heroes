@@ -3,23 +3,22 @@
 :host {
   @include flexWrapper(flex-start, flex-start);
   flex-direction: column;
-  margin-bottom: 32px;
 }
 
 .create-mode {
   background-color: beige;
+  margin-bottom: 32px;
 }
 
 .edit-mode {
   margin: 0;
   border: none;
-  overflow-y: hidden;
 }
 
 .popup-view {
   width: 100%;
   height: 180px;
-  margin-bottom: 15px;
+  margin-bottom: 13px;
 }
 
 .popup__edit-button {
@@ -29,4 +28,12 @@
 
 .level-text {
   @include flexWrapper(flex-start, center)
+}
+
+app-create-hero {
+  margin-bottom: 0;
+}
+
+dx-popup {
+  overflow-y: hidden;
 }

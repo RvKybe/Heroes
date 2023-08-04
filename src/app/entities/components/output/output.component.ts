@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ManageHeroesService} from "../../services/manage-heroes.service";
 import {IHero} from "../../interfaces/hero.interface";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {FilterFormService} from "../../services/filter-form.service";
 import {IFilterForm} from "../../interfaces/filter-form.interface";
 import {LHero} from "../../labels/hero.label";
@@ -13,7 +13,7 @@ import {LHero} from "../../labels/hero.label";
 })
 export class OutputComponent {
     public heroes$: Observable<IHero[]> = this._manageHeroesService.heroesStream$;
-    public filterFormValue$: Observable<IFilterForm> = this._filterFormService.form$;
+    public filterFormValue$: Observable<IFilterForm> = this._filterFormService.form$
 
     protected readonly LHero = LHero;
 

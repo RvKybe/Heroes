@@ -26,10 +26,9 @@ export class FilterHeroesPipe implements PipeTransform {
                     || (hero[LHero.LEVEL] <= filterFormValue[LFilterForm.TOP_LEVEL] && !filterFormValue[LFilterForm.BOTTOM_LEVEL])
                     || (hero[LHero.LEVEL] >= filterFormValue[LFilterForm.BOTTOM_LEVEL] && !filterFormValue[LFilterForm.TOP_LEVEL])
                     || (hero[LHero.LEVEL] <= filterFormValue[LFilterForm.TOP_LEVEL] && hero[LHero.LEVEL] >= filterFormValue[LFilterForm.BOTTOM_LEVEL]))
-                && (!filterFormValue[LFilterForm.ABILITY_IDS] || this.searchAbilityName(filterFormValue[LFilterForm.ABILITY_IDS], hero[LHero.ABILITY_IDS]))
+                && (!filterFormValue[LFilterForm.ABILITY_IDS].length || this.searchAbilityName(hero[LHero.ABILITY_IDS], filterFormValue[LFilterForm.ABILITY_IDS]))
                 && (!filterFormValue[LFilterForm.HERO_NAME] || hero[LItem.NAME].indexOf(filterFormValue[LFilterForm.HERO_NAME]) > -1);
         })
-
     }
 
     /**
@@ -40,13 +39,14 @@ export class FilterHeroesPipe implements PipeTransform {
      * То это означает наличие совпадения в этих двух списках, что означает, что герой подходит
      * При длине уникального списка === 1, также происходит совпадение способностей
      *
-     * @param {number[]} filterAbilities - список фильтрационных способностей
      * @param {number[]} heroAbilities - список способностей героя
+     * @param {number[]} filterAbilities - список фильтрационных способностей
      * return {boolean}
      * @private
      */
-    private searchAbilityName(filterAbilities: number[], heroAbilities: number[]): boolean {
-        const set: Set<number> = new Set(filterAbilities.concat(heroAbilities).values());
+    private searchAbilityName(heroAbilities: number[],filterAbilities: number[]): boolean {
+        filterAbilities = filterAbilities.concat(heroAbilities);
+        const set: Set<number> = new Set(filterAbilities);
         return set.size < filterAbilities.length || set.size === 1;
     }
 }
