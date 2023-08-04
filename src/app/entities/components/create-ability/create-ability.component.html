@@ -6,6 +6,7 @@
         <dx-text-box [showClearButton]="true"
                      [isValid]="abilityNameFormControl.valid || abilityNameFormControl.untouched"
                      [formControl]="abilityNameFormControl"
+                     [maxLength]="30"
                      (onInput)="firstSpace(abilityNameFormControl)"
                      valueChangeEvent="input"
                      placeholder="Laser eyes"

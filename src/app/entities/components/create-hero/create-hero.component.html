@@ -15,6 +15,7 @@
                          [isValid]="nameFormControl.valid || nameFormControl.untouched"
                          [formControl]="nameFormControl"
                          (onInput)="firstSpace(nameFormControl)"
+                         [maxLength]="30"
                          valueChangeEvent="input"
                          placeholder="John Smith"
             ></dx-text-box>
@@ -31,6 +32,7 @@
                            [min]="0"
                            [max]="100"
                            [showSpinButtons]="true"
+                           [maxlength]="3"
                            placeholder="6"
             ></dx-number-box>
         </div>
@@ -63,6 +65,7 @@
                            [min]="0"
                            [max]="100"
                            [showSpinButtons]="true"
+                           [maxlength]="3"
                            placeholder="13"
             ></dx-number-box>
         </div>
