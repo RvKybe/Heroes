@@ -41,7 +41,7 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
         private readonly _manageHeroesService: ManageHeroesService,
         private readonly _manageAbilitiesService: ManageAbilitiesService,
         private readonly _formBuilderService: FormBuilderService,
-        private readonly  _spaceControlService: spaceControlService,
+        private readonly _spaceControlService: spaceControlService,
         private readonly _filterFormService: FilterFormService,
     ) {
     }
@@ -50,7 +50,7 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
         this.filterFormSubscription = this._filterFormService.form$
             .subscribe((filterFormValue: IFilterForm): void => {
                 this.filterFormValue = filterFormValue;
-        })
+            })
         if (this.mode === EDialogMode.CREATE) {
             this.submitButtonText = 'Создать героя';
             this.buttonType = 'default';
@@ -82,7 +82,7 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
             this._manageHeroesService.add(hero, this.filterFormValue);
             this.form.reset();
         } else if (this.mode === EDialogMode.EDIT) {
-           // this.hero[LHero.IS_SELECTED] = true; // не нужно
+            // this.hero[LHero.IS_SELECTED] = true; // не нужно
             this._manageHeroesService.edit(hero);
         }
     }
@@ -92,7 +92,7 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
      * @param {FormControl} nameControl
      */
     public firstSpace(nameControl: FormControl): void {
-        this. _spaceControlService.spaceControl(nameControl);
+        this._spaceControlService.spaceControl(nameControl);
     }
 
     /**

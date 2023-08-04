@@ -25,7 +25,8 @@ export class OutputHeroComponent implements OnInit {
 
     constructor(
         private readonly _manageAbilitiesService: ManageAbilitiesService
-    ) {}
+    ) {
+    }
 
     public ngOnInit(): void {
         this.outputHero.push(this.hero);

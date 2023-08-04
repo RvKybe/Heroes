@@ -5,7 +5,6 @@ import {FormControl} from "@angular/forms";
     providedIn: 'root'
 })
 export class spaceControlService {
-
     /**
      * Функция, контролирующая пробелы в инпуте
      *
