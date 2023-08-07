@@ -7,7 +7,7 @@ import {LItem} from "../labels/item.label";
     providedIn: 'root'
 })
 export class ManageAbilitiesService {
-    private _abilities: IItem[] = [
+    private _abilities$$: BehaviorSubject<IItem[]> = new BehaviorSubject( [
         {
             id: 1,
             name: 'Суперсила'
@@ -24,8 +24,7 @@ export class ManageAbilitiesService {
             id: 4,
             name: 'Деньги'
         },
-    ];
-    private _abilities$$: BehaviorSubject<IItem[]> = new BehaviorSubject(this._abilities);
+    ]);
     public abilities$: Observable<IItem[]> = this._abilities$$.asObservable();
 
     /**
@@ -34,14 +33,15 @@ export class ManageAbilitiesService {
      * @param {string} abilityName - название созданной способности
      */
     public add(abilityName: string): void {
-        const lastAbility: IItem = <IItem>this._abilities.at(-1);
+        const abilities: IItem[] = this._abilities$$.getValue();
+        const lastAbility: IItem = <IItem>abilities.at(-1);
         let lastAbilityId: number = lastAbility[LItem.ID];
         const newAbility: IItem = {
             [LItem.ID]: ++lastAbilityId,
             [LItem.NAME]: abilityName,
         };
-        this._abilities.push(newAbility);
-        this._abilities$$.next(this._abilities);
+        abilities.push(newAbility);
+        this._abilities$$.next(abilities);
     }
 
     /**
@@ -51,6 +51,7 @@ export class ManageAbilitiesService {
      * @return {boolean}
      */
     public hasDuplicate(abilityName: string): boolean {
-        return this._abilities.some((ability: IItem) => ability[LItem.NAME] === abilityName);
+        const abilities: IItem[] = this._abilities$$.getValue();
+        return abilities.some((ability: IItem) => ability[LItem.NAME] === abilityName);
     }
 }
