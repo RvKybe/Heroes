@@ -14,5 +14,4 @@ export interface IHero extends IItem {
     [LHero.POWER]: number;
     [LHero.ABILITY_IDS]: number[];
     [LHero.LEVEL]: number;
-    [LHero.IS_SELECTED]: boolean;
 }

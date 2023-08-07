@@ -21,7 +21,6 @@ export class ManageHeroesService {
      */
     public add(hero: IHero, filterFormValue: IFilterForm): void {
         const heroes: IHero[] = this._heroes$$.getValue();
-        hero[LHero.IS_SELECTED] = true;
         if (!heroes.length) {
             hero[LItem.ID] = 1;
         } else {
