@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ManageHeroesService} from "../../services/manage-heroes.service";
 import {IHero} from "../../interfaces/hero.interface";
-import {Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {FilterFormService} from "../../services/filter-form.service";
 import {IFilterForm} from "../../interfaces/filter-form.interface";
 import {LHero} from "../../labels/hero.label";
@@ -10,21 +10,21 @@ import {ManageAbilitiesService} from "../../services/manage-abilities.service";
 import {IItem} from "../../interfaces/item.interface";
 
 @Component({
-    selector: 'app-output',
-    templateUrl: './output.component.html',
-    styleUrls: ['./output.component.scss']
+    selector: 'app-output-container',
+    templateUrl: './output-container.component.html',
+    styleUrls: ['./output-container.component.scss']
 })
-export class OutputComponent implements OnInit, OnDestroy {
-    public possibleAbilities!: IItem[];
+export class OutputContainerComponent implements OnInit, OnDestroy {
+    public abilities$: Observable<IItem[]> = this._manageAbilitiesService.abilities$;
     public heroes!: IHero[];
     public filterFormValue!: IFilterForm;
+    public selectedHero!: IHero;
 
     private _heroesSubscription!: Subscription;
-    private _abilitiesSubscription!: Subscription;
     private _filterFormSubscription!: Subscription;
 
-    protected readonly LHero = LHero;
-    protected readonly LItem = LItem;
+    protected readonly LHero: typeof LHero = LHero;
+    protected readonly LItem: typeof LItem = LItem;
 
     constructor(
         private readonly _manageHeroesService: ManageHeroesService,
@@ -33,23 +33,26 @@ export class OutputComponent implements OnInit, OnDestroy {
     ) {}
 
     public ngOnInit(): void {
-        this._abilitiesSubscription = this._manageAbilitiesService.abilities$
-            .subscribe((abilities: IItem[]): void => {
-                this.possibleAbilities = abilities;
-            })
         this._filterFormSubscription = this._filterFormService.form$
-            .subscribe((filterFormValue: IFilterForm): void => {
+            .subscribe((filterFormValue: IFilterForm) => {
                 this.filterFormValue = filterFormValue;
             })
-        this._heroesSubscription = this._manageHeroesService.heroesStream$
-            .subscribe((heroes: IHero[]): void => {
+        this._heroesSubscription = this._manageHeroesService.heroes$
+            .subscribe((heroes: IHero[]) => {
                 this.heroes = this._manageHeroesService.filterHeroes(heroes, this.filterFormValue);
             })
     }
 
     public ngOnDestroy(): void {
         this._heroesSubscription.unsubscribe();
-        this._abilitiesSubscription.unsubscribe();
         this._filterFormSubscription.unsubscribe();
+    }
+
+    /**
+     * Функция смены выбранного героя
+     * @param hero - выбранный герой
+     */
+    public switchSelection(hero: IHero): void {
+        this.selectedHero = hero;
     }
 }

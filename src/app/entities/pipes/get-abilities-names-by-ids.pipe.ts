@@ -4,21 +4,26 @@ import {LItem} from "../labels/item.label";
 
 
 @Pipe({
-    name: 'getAbilitiesNamesByIds'
+    name: 'getAbilityNameById'
 })
-export class GetAbilitiesNamesByIdsPipe implements PipeTransform {
-
+export class GetAbilityNameByIdPipe implements PipeTransform {
     /**
      * Пайп, который возвращает имена способностей героя по id способностей
      *
-     * @param {number} heroAbility - id способности
-     * @param {IItem[] | null} possibleAbilities - все возможные способности героев
-     * return {string}
+     * @param {number} abilityId - id способности
+     * @param {IItem[]} abilities - способности
+     * @return {string}
      */
-    public transform(heroAbility: number, possibleAbilities: IItem[] | null): string {
-        const a: IItem = <IItem>possibleAbilities?.find((ability: IItem): boolean => {
-            return ability[LItem.ID] === heroAbility;
-        });
-        return a[LItem.NAME];
+    public transform(abilityId: number, abilities: IItem[] | null): any {
+        if (!!abilities) {
+            const foundAbility: IItem = <IItem>abilities.find((ability: IItem) => {
+                return ability[LItem.ID] === abilityId;
+            });
+            if (!!foundAbility) {
+                return foundAbility[LItem.NAME];
+            }
+        } else {
+            return '';
+        }
     }
 }

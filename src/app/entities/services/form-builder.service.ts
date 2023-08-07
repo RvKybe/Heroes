@@ -11,7 +11,7 @@ export class FormBuilderService {
     /**
      * Возвращает форму для создания или редактирования героя
      *
-     * return {FormGroup}
+     * @return {FormGroup}
      */
     public get heroForm(): FormGroup {
         return new FormGroup({
@@ -26,7 +26,7 @@ export class FormBuilderService {
     /**
      * Возвращает форму фильтрации героев
      *
-     * return {FormGroup}
+     * @return {FormGroup}
      */
     public get filterForm(): FormGroup {
         return new FormGroup({
@@ -41,7 +41,7 @@ export class FormBuilderService {
     /**
      * Возвращает контроллер формы создания способности
      *
-     * return {FormControl<string | null>}
+     * @return {FormControl<string | null>}
      */
     public get createAbilityFormControl(): FormControl<string | null> {
         return new FormControl<string | null>(null, Validators.required)

@@ -1,11 +1,11 @@
 <div [ngClass]="{
-       'dx-fieldset': true,
        'create-mode': mode === EDialogMode.CREATE,
        'edit-mode': mode === EDialogMode.EDIT
-       }">
+     }"
+     class="dx-fieldset">
     <dx-scroll-view [ngClass]="{
                       'popup-view': mode === EDialogMode.EDIT
-                      }">
+                    }">
         <div class="dx-field">
             <div class="dx-field-label">
                 Имя:
@@ -57,25 +57,27 @@
         <div [ngClass]="{
                'dx-field': true,
                'level-text': mode === EDialogMode.EDIT
-               }">
+             }">
             <div class="dx-field-label">
                 Уровень:
             </div>
             <div class="dx-field-value">
-                <dx-number-box *ngIf="mode === EDialogMode.CREATE"
-                               [isValid]="levelFormControl.valid || levelFormControl.untouched"
-                               [formControl]="levelFormControl"
-                               [showClearButton]="true"
-                               [min]="1"
-                               [max]="100"
-                               [showSpinButtons]="true"
-                               [maxlength]="3"
-                               [inputAttr]="{ 'aria-label': 'Integer Format' }"
-                               placeholder="13"
-                ></dx-number-box>
-                <div *ngIf="mode === EDialogMode.EDIT">
-                    {{ levelFormControl.value }}
-                </div>
+                <ng-container [ngSwitch]="mode">
+                    <dx-number-box *ngSwitchCase="EDialogMode.CREATE"
+                                   [isValid]="levelFormControl.valid || levelFormControl.untouched"
+                                   [formControl]="levelFormControl"
+                                   [showClearButton]="true"
+                                   [min]="1"
+                                   [max]="100"
+                                   [showSpinButtons]="true"
+                                   [maxlength]="3"
+                                   [inputAttr]="{ 'aria-label': 'Integer Format' }"
+                                   placeholder="13"
+                    ></dx-number-box>
+                    <div *ngSwitchCase="EDialogMode.EDIT">
+                        {{ levelFormControl.value }}
+                    </div>
+                </ng-container>
             </div>
         </div>
         <div>
@@ -83,12 +85,12 @@
         </div>
     </dx-scroll-view>
     <div class="button-container">
-        <dx-button [disabled]="formGroupInvalid"
+        <dx-button [disabled]="form.invalid"
                    [text]="submitButtonText"
                    [type]="buttonType"
                    [ngClass]="{
                      'popup__edit-button': mode === EDialogMode.EDIT
-                     }"
+                   }"
                    (onClick)="submit()"
         ></dx-button>
     </div>

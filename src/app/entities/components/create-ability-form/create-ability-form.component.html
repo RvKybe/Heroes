@@ -16,7 +16,7 @@
         {{ errorMessage }}
     </div>
     <div class="button-container">
-        <dx-button [disabled]="formControlInvalid"
+        <dx-button [disabled]="abilityNameFormControl.invalid"
                    (onClick)="createAbility()"
                    type="default"
                    text="Добавить"

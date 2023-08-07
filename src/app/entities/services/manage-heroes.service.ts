@@ -10,9 +10,8 @@ import {LItem} from "../labels/item.label";
     providedIn: 'root'
 })
 export class ManageHeroesService {
-    private _heroes: IHero[] = [];
-    private _heroes$$: BehaviorSubject<IHero[]> = new BehaviorSubject(this._heroes);
-    public heroesStream$: Observable<IHero[]> = this._heroes$$.asObservable();
+    private _heroes$$: BehaviorSubject<IHero[]> = new BehaviorSubject<IHero[]>([]);
+    public heroes$: Observable<IHero[]> = this._heroes$$.asObservable();
 
     /**
      * Функция создания героя
@@ -21,40 +20,48 @@ export class ManageHeroesService {
      * @param {IFilterForm} filterFormValue - значение формы фильтрации
      */
     public add(hero: IHero, filterFormValue: IFilterForm): void {
-        hero[LHero.IS_VISIBLE] = false;
-        if (!this._heroes.length) {
+        const heroes: IHero[] = this._heroes$$.getValue();
+        hero[LHero.IS_SELECTED] = true;
+        if (!heroes.length) {
             hero[LItem.ID] = 1;
         } else {
-            const lastHero: IHero = <IHero>this._heroes.at(-1);
-            hero[LItem.ID] = lastHero[LItem.ID] + 1;
+            let lastHeroId = -1;
+            heroes.forEach((hero: IHero) => {
+                if (hero[LItem.ID] > lastHeroId) {
+                    lastHeroId = hero[LItem.ID];
+                }
+            })
+            hero[LItem.ID] = lastHeroId + 1;
         }
-        this._heroes.push(hero);
-        this.sortHeroes(filterFormValue);
+        heroes.push(hero);
+        this.sortHeroes(filterFormValue, heroes);
     }
 
     /**
      * Функция редактирования героя
      *
      * @param {IHero} formHero - новый объект героя
-     * @param filterFormValue
+     * @param {IFilterForm} filterFormValue - значение фильтрационной формы
      */
     public edit(formHero: IHero, filterFormValue: IFilterForm): void {
-        const heroIndex: number = this._heroes.findIndex((hero: IHero): boolean => hero[LItem.ID] === formHero[LItem.ID]);
+        const heroes: IHero[] = this._heroes$$.getValue();
+        const heroIndex: number = heroes.findIndex((hero: IHero) => hero[LItem.ID] === formHero[LItem.ID]);
         if (heroIndex !== -1) {
-            this._heroes[heroIndex] = formHero;
+            heroes[heroIndex] = formHero;
         }
-        this.sortHeroes(filterFormValue);
+        this.sortHeroes(filterFormValue, heroes);
     }
 
     /**
      * Функция проверки героя на существование его дубликата
      *
      * @param {string} newHeroName - новое имя (или измененное имя существующего героя)
-     * @param {number | null} newHeroId - id нового героя (или измененного старого)
-     * return {boolean}
+     * @param {number} newHeroId - id нового героя (или измененного старого)
+     * @return {boolean}
      */
     public hasDuplicate(newHeroName: string, newHeroId: number | null): boolean {
-        return !!this._heroes.length && this._heroes.some((hero: IHero) => {
+        const heroes: IHero[] = this._heroes$$.getValue();
+        return !!heroes.length && heroes.some((hero: IHero) => {
             return hero[LItem.NAME] === newHeroName && newHeroId !== hero[LItem.ID];
         });
     }
@@ -63,12 +70,16 @@ export class ManageHeroesService {
      * Функция запуска фильтрации и сортировки героев
      *
      * @param {IFilterForm} filterFormValue - форма фильтрации и сортировки
+     * @param {IHero[]} heroes - герои для сортировки и отправки
      */
-    public sortHeroes(filterFormValue: IFilterForm): void {
-        this._heroes.sort((a: IHero, b: IHero): number => {
+    public sortHeroes(filterFormValue: IFilterForm, heroes: IHero[] | null): void {
+        if (!heroes) {
+            heroes = this._heroes$$.getValue();
+        }
+        heroes.sort((a: IHero, b: IHero) => {
             return (a[LHero.LEVEL] - b[LHero.LEVEL]) * filterFormValue[LFilterForm.SORT_MODE];
         });
-        this._heroes$$.next(this._heroes);
+        this._heroes$$.next(heroes);
     }
 
     /**
@@ -76,10 +87,10 @@ export class ManageHeroesService {
      *
      * @param {IHero[]} heroes - список героев для фильтрации
      * @param {IFilterForm} filterFormValue - значения полей формы фильтрации
-     * return {IHero[]}
+     * @return {IHero[]}
      */
     public filterHeroes(heroes: IHero[], filterFormValue: IFilterForm): IHero[] {
-        return heroes.filter((hero: IHero): boolean => {
+        return heroes.filter((hero: IHero) => {
             return ((!filterFormValue[LFilterForm.BOTTOM_LEVEL] && !filterFormValue[LFilterForm.TOP_LEVEL])
                     || (hero[LHero.LEVEL] <= filterFormValue[LFilterForm.TOP_LEVEL] && !filterFormValue[LFilterForm.BOTTOM_LEVEL])
                     || (hero[LHero.LEVEL] >= filterFormValue[LFilterForm.BOTTOM_LEVEL] && !filterFormValue[LFilterForm.TOP_LEVEL])
@@ -99,8 +110,8 @@ export class ManageHeroesService {
      *
      * @param {number[]} heroAbilities - список способностей героя
      * @param {number[]} filterAbilities - список фильтрационных способностей
-     * return {boolean}
      * @private
+     * @return {boolean}
      */
     private searchAbilityName(heroAbilities: number[],filterAbilities: number[]): boolean {
         filterAbilities = filterAbilities.concat(heroAbilities);

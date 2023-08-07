@@ -10,21 +10,21 @@ import {
     DxTagBoxModule,
     DxTextBoxModule
 } from "devextreme-angular";
-import {CreateHeroComponent} from './entities/components/create-hero/create-hero.component';
-import {CreateAbilityComponent} from './entities/components/create-ability/create-ability.component';
-import {FiltersComponent} from './entities/components/filters/filters.component';
-import {OutputComponent} from './entities/components/output/output.component';
+import {CreateHeroFormComponent} from './entities/components/create-hero-form/create-hero-form.component';
+import {CreateAbilityFormComponent} from './entities/components/create-ability-form/create-ability-form.component';
+import {FiltersFormComponent} from './entities/components/filters-form/filters-form.component';
+import {OutputContainerComponent} from './entities/components/output-container/output-container.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {GetAbilitiesNamesByIdsPipe} from './entities/pipes/get-abilities-names-by-ids.pipe';
+import {GetAbilityNameByIdPipe} from './entities/pipes/get-abilities-names-by-ids.pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
-        CreateHeroComponent,
-        CreateAbilityComponent,
-        FiltersComponent,
-        OutputComponent,
-        GetAbilitiesNamesByIdsPipe,
+        CreateHeroFormComponent,
+        CreateAbilityFormComponent,
+        FiltersFormComponent,
+        OutputContainerComponent,
+        GetAbilityNameByIdPipe,
     ],
     imports: [
         BrowserModule,

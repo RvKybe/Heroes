@@ -4,8 +4,10 @@
                   [collapsible]="false"
                   [multiple]="false"
                   [animationDuration]="300"
+                  [selectedItem]="selectedHero"
                   class="hero">
-        <div *dxTemplate="let hero of 'title'">
+        <div *dxTemplate="let hero of 'title'"
+             (click)="switchSelection(hero)">
             <div class="hero__title">
                 <div>
                     {{ hero[LItem.NAME] }}
@@ -26,9 +28,9 @@
                         Способности:
                     </div>
                     <div class="ability-block__abilities-row">
-                        <div *ngFor="let abilityId of hero[LHero.ABILITY_IDS]"
+                        <div *ngFor="let abilityId of hero[LHero.ABILITY_IDS];"
                              class="ability-item">
-                            {{ abilityId | getAbilitiesNamesByIds: possibleAbilities }}
+                            {{ abilityId | getAbilityNameById: (abilities$ | async)}}
                         </div>
                     </div>
                 </div>
@@ -48,9 +50,9 @@
                       title="Редактировать героя"
                       container="body"
                       class="popup">
-                <app-create-hero [hero]="hero"
+                <app-create-hero-form [hero]="hero"
                                  mode="edit"
-                ></app-create-hero>
+                ></app-create-hero-form>
             </dx-popup>
         </div>
     </dx-accordion>

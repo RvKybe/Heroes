@@ -10,11 +10,11 @@ import {IFilterForm} from "../../interfaces/filter-form.interface";
 import {ManageAbilitiesService} from "../../services/manage-abilities.service";
 
 @Component({
-    selector: 'app-filters',
-    templateUrl: './filters.component.html',
-    styleUrls: ['./filters.component.scss']
+    selector: 'app-filters-form',
+    templateUrl: './filters-form.component.html',
+    styleUrls: ['./filters-form.component.scss']
 })
-export class FiltersComponent implements OnInit {
+export class FiltersFormComponent implements OnInit {
     public form: FormGroup = this._formBuilderService.filterForm;
 
     public possibleAbilities$: Observable<IItem[]> = this._manageAbilitiesService.abilities$;
@@ -57,20 +57,18 @@ export class FiltersComponent implements OnInit {
 
     /**
      * Создаёт подписку на изменения формы фильтрации
-     *
      * @private
      */
     private _initFilterFormChangeSubscription(): void {
-        this.formChangeSubscription = this.form.valueChanges.subscribe((value: IFilterForm): void => {
+        this.formChangeSubscription = this.form.valueChanges.subscribe((value: IFilterForm) => {
             this._filterFormService.form = this.form.value;
-            this._manageHeroesService.sortHeroes(value);
+            this._manageHeroesService.sortHeroes(value, null);
         });
     }
 
     /**
      * Возвращает контроллер bottomLevel формы
-     *
-     * return {FormControl<string | null>}
+     * @return {FormControl<string | null>}
      */
     public get bottomLevelFormControl(): FormControl<string | null> {
         return this.form.get(LFilterForm.BOTTOM_LEVEL) as FormControl<string | null>;
@@ -78,8 +76,7 @@ export class FiltersComponent implements OnInit {
 
     /**
      * Возвращает контроллер topLevel формы
-     *
-     * return {FormControl<string | null>}
+     * @return {FormControl<string | null>}
      */
     public get topLevelFormControl(): FormControl<string | null> {
         return this.form.get(LFilterForm.TOP_LEVEL) as FormControl<string | null>;
@@ -87,8 +84,7 @@ export class FiltersComponent implements OnInit {
 
     /**
      * Возвращает контроллер abilities формы
-     *
-     * return {FormControl<string | null>}
+     * @return {FormControl<string | null>}
      */
     public get abilitiesFormControl(): FormControl<string | null> {
         return this.form.get(LFilterForm.ABILITY_IDS) as FormControl<string | null>;
@@ -96,8 +92,7 @@ export class FiltersComponent implements OnInit {
 
     /**
      * Возвращает контроллер heroName формы
-     *
-     * return {FormControl<string | null>}
+     * @return {FormControl<string | null>}
      */
     public get heroNameFormControl(): FormControl<string | null> {
         return this.form.get(LFilterForm.HERO_NAME) as FormControl<string | null>;

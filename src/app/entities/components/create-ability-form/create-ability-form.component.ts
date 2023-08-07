@@ -2,14 +2,14 @@ import {Component} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {ManageAbilitiesService} from "../../services/manage-abilities.service";
 import {FormBuilderService} from "../../services/form-builder.service";
-import {spaceControlService} from "../../services/space-control.service";
+import {trimSpace} from "../../utils/trim-space.util";
 
 @Component({
-    selector: 'app-create-ability',
-    templateUrl: './create-ability.component.html',
-    styleUrls: ['./create-ability.component.scss']
+    selector: 'app-create-ability-form',
+    templateUrl: './create-ability-form.component.html',
+    styleUrls: ['./create-ability-form.component.scss']
 })
-export class CreateAbilityComponent {
+export class CreateAbilityFormComponent {
     public abilityNameFormControl: FormControl<string | null> = this._formBuilderService.createAbilityFormControl;
 
     public errorMessage: string = '';
@@ -17,17 +17,15 @@ export class CreateAbilityComponent {
     constructor(
         private readonly _manageAbilitiesServices: ManageAbilitiesService,
         private readonly _formBuilderService: FormBuilderService,
-        private readonly _spaceControlService: spaceControlService,
     ) {
     }
 
     /**
      * Передаёт контроллер формы в сервис по обработке пробелов
-     *
      * @param {FormControl} nameControl - контроллер формы (поле ввода имени)
      */
     public firstSpace(nameControl: FormControl): void {
-        this._spaceControlService.spaceControl(nameControl);
+        trimSpace(nameControl);
     }
 
     /**
@@ -47,14 +45,5 @@ export class CreateAbilityComponent {
         } else {
             this.errorMessage = 'Такая способность уже существует';
         }
-    }
-
-    /**
-     * Возвращает валидность контроллера формы
-     *
-     * return {boolean}
-     */
-    public get formControlInvalid(): boolean {
-        return this.abilityNameFormControl.invalid;
     }
 }

@@ -10,16 +10,16 @@ import {EDialogMode} from "../../enums/dialog-mode.enum";
 import {LItem} from "../../labels/item.label";
 import {IItem} from "../../interfaces/item.interface";
 import {EErrorMessages} from "../../enums/error-messages.enum";
-import {spaceControlService} from "../../services/space-control.service";
 import {FilterFormService} from "../../services/filter-form.service";
 import {IFilterForm} from "../../interfaces/filter-form.interface";
+import {trimSpace} from "../../utils/trim-space.util";
 
 @Component({
-    selector: 'app-create-hero',
-    templateUrl: './create-hero.component.html',
-    styleUrls: ['./create-hero.component.scss']
+    selector: 'app-create-hero-form',
+    templateUrl: './create-hero-form.component.html',
+    styleUrls: ['./create-hero-form.component.scss']
 })
-export class CreateHeroComponent implements OnInit, OnDestroy {
+export class CreateHeroFormComponent implements OnInit, OnDestroy {
     @Input({'required': true})
     public mode: string = '';
 
@@ -36,20 +36,19 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
 
     private filterFormSubscription!: Subscription;
 
-    protected readonly EDialogMode = EDialogMode;
+    protected readonly EDialogMode: typeof EDialogMode = EDialogMode;
 
     constructor(
         private readonly _manageHeroesService: ManageHeroesService,
         private readonly _manageAbilitiesService: ManageAbilitiesService,
         private readonly _formBuilderService: FormBuilderService,
-        private readonly _spaceControlService: spaceControlService,
         private readonly _filterFormService: FilterFormService,
     ) {
     }
 
     public ngOnInit(): void {
         this.filterFormSubscription = this._filterFormService.form$
-            .subscribe((filterFormValue: IFilterForm): void => {
+            .subscribe((filterFormValue: IFilterForm) => {
                 this.filterFormValue = filterFormValue;
             })
         if (this.mode === EDialogMode.CREATE) {
@@ -89,17 +88,15 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
 
     /**
      * Передаёт контроллер формы в сервис по обработке пробелов
-     *
      * @param {FormControl} nameControl - контроллер формы (поле ввода имени)
      */
-    public firstSpace(nameControl: FormControl): void {
-        this._spaceControlService.spaceControl(nameControl);
+    public firstSpace(nameControl: FormControl): void { // onChange
+        trimSpace(nameControl);
     }
 
     /**
      * Возвращает контроллер name формы
-     *
-     * return {FormControl<string | null>}
+     * @return {FormControl<string | null>}
      */
     public get nameFormControl(): FormControl<string | null> {
         return this.form.get(LItem.NAME) as FormControl<string | null>;
@@ -107,8 +104,7 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
 
     /**
      * Возвращает контроллер power формы
-     *
-     * return {FormControl<string | null>}
+     * @return {FormControl<string | null>}
      */
     public get powerFormControl(): FormControl<number | null> {
         return this.form.get(LHero.POWER) as FormControl<number | null>;
@@ -116,8 +112,7 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
 
     /**
      * Возвращает контроллер abilities формы
-     *
-     * return {FormControl<string | null>}
+     * @return {FormControl<string | null>}
      */
     public get abilityFormControl(): FormControl<number[] | null> {
         return this.form.get(LHero.ABILITY_IDS) as FormControl<number[] | null>;
@@ -125,20 +120,10 @@ export class CreateHeroComponent implements OnInit, OnDestroy {
 
     /**
      * Возвращает контроллер level формы
-     *
-     * return {FormControl<string | null>}
+     * @return {FormControl<string | null>}
      */
     public get levelFormControl(): FormControl<number | null> {
         return this.form.get(LHero.LEVEL) as FormControl<number | null>;
-    }
-
-    /**
-     * Возвращает валидность формы
-     *
-     * return {boolean}
-     */
-    public get formGroupInvalid(): boolean {
-        return this.form.invalid;
     }
 
     public ngOnDestroy(): void {
