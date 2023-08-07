@@ -15,7 +15,7 @@ import {CreateAbilityFormComponent} from './entities/components/create-ability-f
 import {FiltersFormComponent} from './entities/components/filters-form/filters-form.component';
 import {OutputContainerComponent} from './entities/components/output-container/output-container.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {GetAbilityNameByIdPipe} from './entities/pipes/get-abilities-names-by-ids.pipe';
+import {GetAbilityNameByIdPipe} from './entities/pipes/get-ability-name-by-id.pipe';
 
 @NgModule({
     declarations: [

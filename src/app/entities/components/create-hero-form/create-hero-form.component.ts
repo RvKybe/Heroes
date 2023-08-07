@@ -61,7 +61,6 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
         }
     }
 
-
     /**
      * Функция отправки формы
      */
