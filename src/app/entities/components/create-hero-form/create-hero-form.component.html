@@ -1,11 +1,11 @@
-<div [ngClass]="{
-       'create-mode': mode === EDialogMode.CREATE,
-       'edit-mode': mode === EDialogMode.EDIT
-     }"
-     class="dx-fieldset">
-    <dx-scroll-view [ngClass]="{
-                      'popup-view': mode === EDialogMode.EDIT
-                    }">
+<dx-scroll-view width="100%"
+                [ngClass]="{
+                  'popup-view': mode === EDialogMode.EDIT
+                }">
+    <div [ngClass]="{
+            'right-padding': mode === EDialogMode.EDIT
+         }"
+         class="dx-fieldset">
         <div class="dx-field">
             <div class="dx-field-label">
                 Имя:
@@ -14,7 +14,7 @@
                 <dx-text-box [showClearButton]="true"
                              [isValid]="nameFormControl.valid || nameFormControl.untouched"
                              [formControl]="nameFormControl"
-                             (onInput)="trimSpaceVoid(nameFormControl)"
+                             (onInput)="trimSpace(nameFormControl)"
                              [maxLength]="30"
                              valueChangeEvent="input"
                              placeholder="John Smith"
@@ -55,9 +55,9 @@
             </div>
         </div>
         <div [ngClass]="{
-               'dx-field': true,
-               'level-text': mode === EDialogMode.EDIT
-             }">
+                'level-text': mode === EDialogMode.EDIT
+             }"
+             class="dx-field">
             <div class="dx-field-label">
                 Уровень:
             </div>
@@ -83,15 +83,15 @@
         <div>
             {{ errorMessage }}
         </div>
-    </dx-scroll-view>
-    <div class="button-container">
-        <dx-button [disabled]="form.invalid"
-                   [text]="submitButtonText"
-                   [type]="buttonType"
-                   [ngClass]="{
-                     'popup__edit-button': mode === EDialogMode.EDIT
-                   }"
-                   (onClick)="submit()"
-        ></dx-button>
     </div>
+</dx-scroll-view>
+<div class="button-container">
+    <dx-button [disabled]="form.invalid"
+               [text]="submitButtonText"
+               [type]="buttonType"
+               [ngClass]="{
+                 'popup__edit-button': mode === EDialogMode.EDIT
+               }"
+               (onClick)="submit()"
+    ></dx-button>
 </div>

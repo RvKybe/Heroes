@@ -3,16 +3,20 @@
 :host {
   @include flexWrapper(flex-start, flex-start);
   flex-direction: column;
-}
 
-.create-mode {
-  background-color: beige;
-  margin-bottom: 32px;
-}
+  &.create-mode {
+    padding: 10px;
+    background-color: beige;
+    margin-bottom: 32px;
+    width: calc(100% - 22px);
+    border: 1px solid silver;
+  }
 
-.edit-mode {
-  margin: 0;
-  border: none;
+  &.edit-mode {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 0;
+  }
 }
 
 .popup-view {
@@ -30,10 +34,17 @@
   @include flexWrapper(flex-start, center)
 }
 
-app-create-hero {
-  margin-bottom: 0;
-}
-
 dx-popup {
   overflow-y: hidden;
 }
+
+.dx-fieldset {
+  padding: 0;
+  border: none
+}
+
+.popup__fieldSet--scroll-padding {
+  padding: 0 10px 0 0;
+}
+
+

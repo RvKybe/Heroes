@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup,} from "@angular/forms";
 import {ManageHeroesService} from "../../services/manage-heroes.service";
 import {ManageAbilitiesService} from "../../services/manage-abilities.service";
@@ -20,6 +20,9 @@ import {trimSpace} from "../../utils/trim-space.util";
     styleUrls: ['./create-hero-form.component.scss']
 })
 export class CreateHeroFormComponent implements OnInit, OnDestroy {
+    @HostBinding('class')
+    public hostClass: string = '';
+
     @Input({'required': true})
     public mode: string = '';
 
@@ -43,14 +46,14 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
         private readonly _manageAbilitiesService: ManageAbilitiesService,
         private readonly _formBuilderService: FormBuilderService,
         private readonly _filterFormService: FilterFormService,
-    ) {
-    }
+    ) {}
 
     public ngOnInit(): void {
+        this.switchFormClass();
         this.filterFormSubscription = this._filterFormService.form$
             .subscribe((filterFormValue: IFilterForm) => {
                 this.filterFormValue = filterFormValue;
-            })
+            });
         if (this.mode === EDialogMode.CREATE) {
             this.submitButtonText = 'Создать героя';
             this.buttonType = 'default';
@@ -58,6 +61,17 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
             this.submitButtonText = 'Сохранить изменения';
             this.buttonType = 'success';
             this.form.patchValue(<IHero>this.hero);
+        }
+    }
+
+    /**
+     * Функция, которая даёт класс родителю в зависимости от режима вызовы компонента
+     */
+    public switchFormClass(): void {
+        if (this.mode === EDialogMode.CREATE) {
+            this.hostClass = 'create-mode';
+        } else {
+            this.hostClass = 'edit-mode';
         }
     }
 
@@ -89,7 +103,7 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
      * Передаёт контроллер формы в сервис по обработке пробелов
      * @param {FormControl} nameControl - контроллер формы (поле ввода имени)
      */
-    public trimSpaceVoid(nameControl: FormControl): void { // onChange
+    public trimSpace(nameControl: FormControl): void { // onChange
         trimSpace(nameControl);
     }
 
