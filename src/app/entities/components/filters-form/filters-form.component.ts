@@ -68,26 +68,26 @@ export class FiltersFormComponent implements OnInit {
 
     /**
      * Возвращает контроллер bottomLevel формы
-     * @return {FormControl<string | null>}
+     * @return {FormControl<number | null>}
      */
-    public get bottomLevelFormControl(): FormControl<string | null> {
-        return this.form.get(LFilterForm.BOTTOM_LEVEL) as FormControl<string | null>;
+    public get bottomLevelFormControl(): FormControl<number | null> {
+        return this.form.get(LFilterForm.BOTTOM_LEVEL) as FormControl<number | null>;
     }
 
     /**
      * Возвращает контроллер topLevel формы
-     * @return {FormControl<string | null>}
+     * @return {FormControl<number | null>}
      */
-    public get topLevelFormControl(): FormControl<string | null> {
-        return this.form.get(LFilterForm.TOP_LEVEL) as FormControl<string | null>;
+    public get topLevelFormControl(): FormControl<number | null> {
+        return this.form.get(LFilterForm.TOP_LEVEL) as FormControl<number | null>;
     }
 
     /**
      * Возвращает контроллер abilities формы
-     * @return {FormControl<string | null>}
+     * @return {FormControl<number[] | null>}
      */
-    public get abilitiesFormControl(): FormControl<string | null> {
-        return this.form.get(LFilterForm.ABILITY_IDS) as FormControl<string | null>;
+    public get abilitiesFormControl(): FormControl<number[] | null> {
+        return this.form.get(LFilterForm.ABILITY_IDS) as FormControl<number[] | null>;
     }
 
     /**

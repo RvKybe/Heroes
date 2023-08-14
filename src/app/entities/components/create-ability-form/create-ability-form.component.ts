@@ -24,7 +24,7 @@ export class CreateAbilityFormComponent {
      * Передаёт контроллер формы в сервис по обработке пробелов
      * @param {FormControl} nameControl - контроллер формы (поле ввода имени)
      */
-    public firstSpace(nameControl: FormControl): void {
+    public trimSpaceVoid(nameControl: FormControl): void {
         trimSpace(nameControl);
     }
 

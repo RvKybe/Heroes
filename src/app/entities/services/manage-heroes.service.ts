@@ -24,7 +24,7 @@ export class ManageHeroesService {
         if (!heroes.length) {
             hero[LItem.ID] = 1;
         } else {
-            let lastHeroId = -1;
+            let lastHeroId: number = -1;
             heroes.forEach((hero: IHero) => {
                 if (hero[LItem.ID] > lastHeroId) {
                     lastHeroId = hero[LItem.ID];
@@ -69,7 +69,7 @@ export class ManageHeroesService {
      * Функция запуска фильтрации и сортировки героев
      *
      * @param {IFilterForm} filterFormValue - форма фильтрации и сортировки
-     * @param {IHero[]} heroes - герои для сортировки и отправки
+     * @param {IHero[]} heroes - герои для сортировки и отправка
      */
     public sortHeroes(filterFormValue: IFilterForm, heroes: IHero[] | null): void {
         if (!heroes) {
@@ -109,7 +109,7 @@ export class ManageHeroesService {
      *
      * @param {number[]} heroAbilities - список способностей героя
      * @param {number[]} filterAbilities - список фильтрационных способностей
-     * @private
+     * @private // что первее?
      * @return {boolean}
      */
     private searchAbilityName(heroAbilities: number[],filterAbilities: number[]): boolean {

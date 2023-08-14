@@ -43,16 +43,16 @@ export class OutputContainerComponent implements OnInit, OnDestroy {
             })
     }
 
-    public ngOnDestroy(): void {
-        this._heroesSubscription.unsubscribe();
-        this._filterFormSubscription.unsubscribe();
-    }
-
     /**
      * Функция смены выбранного героя
      * @param hero - выбранный герой
      */
     public switchSelection(hero: IHero): void {
         this.selectedHero = hero;
+    }
+
+    public ngOnDestroy(): void {
+        this._heroesSubscription.unsubscribe();
+        this._filterFormSubscription.unsubscribe();
     }
 }

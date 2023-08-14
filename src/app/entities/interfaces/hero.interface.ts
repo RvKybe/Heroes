@@ -7,7 +7,6 @@ import {IItem} from "./item.interface";
  * @param {number} POWER - сила героя
  * @param {number[]} ABILITY_IDS - список id способностей героя
  * @param {number} LEVEL - уровень героя
- * @param {boolean} IS_SELECTED - выбран ли герой в части вывода
  * @extends {IItem}
  */
 export interface IHero extends IItem {

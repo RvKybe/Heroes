@@ -7,7 +7,7 @@
                      [isValid]="abilityNameFormControl.valid || abilityNameFormControl.untouched"
                      [formControl]="abilityNameFormControl"
                      [maxLength]="30"
-                     (onInput)="firstSpace(abilityNameFormControl)"
+                     (onInput)="trimSpaceVoid(abilityNameFormControl)"
                      valueChangeEvent="input"
                      placeholder="Laser eyes"
         ></dx-text-box>

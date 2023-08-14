@@ -89,7 +89,7 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
      * Передаёт контроллер формы в сервис по обработке пробелов
      * @param {FormControl} nameControl - контроллер формы (поле ввода имени)
      */
-    public firstSpace(nameControl: FormControl): void { // onChange
+    public trimSpaceVoid(nameControl: FormControl): void { // onChange
         trimSpace(nameControl);
     }
 

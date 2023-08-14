@@ -14,7 +14,7 @@
                 <dx-text-box [showClearButton]="true"
                              [isValid]="nameFormControl.valid || nameFormControl.untouched"
                              [formControl]="nameFormControl"
-                             (onInput)="firstSpace(nameFormControl)"
+                             (onInput)="trimSpaceVoid(nameFormControl)"
                              [maxLength]="30"
                              valueChangeEvent="input"
                              placeholder="John Smith"
