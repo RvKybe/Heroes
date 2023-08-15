@@ -527,6 +527,7 @@
 </details>
 <br>
 
+
 6. [ ] Пиксели заменять на SASS функцию rem(?px)
 
 <details>

@@ -52,7 +52,7 @@ export class FiltersFormComponent implements OnInit {
                 break;
         }
         const sortMode: number = this.sort === 'fromLowLevel' ? 1 : -1;
-        this.form.get([LFilterForm.SORT_MODE])?.setValue(sortMode);
+        this.form.get(LFilterForm.SORT_MODE)?.setValue(sortMode);
     }
 
     /**
