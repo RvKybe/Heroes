@@ -24,7 +24,7 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
     public hostClass: string = '';
 
     @Input({'required': true})
-    public mode: string = '';
+    public formMode: string = '';
 
     @Input()
     public hero!: IHero;
@@ -54,10 +54,10 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
             .subscribe((filterFormValue: IFilterForm) => {
                 this.filterFormValue = filterFormValue;
             });
-        if (this.mode === EHeroFormMode.CREATE) {
+        if (this.formMode === EHeroFormMode.CREATE) {
             this.submitButtonText = 'Создать героя';
             this.buttonType = 'default';
-        } else if (this.mode === EHeroFormMode.EDIT) {
+        } else if (this.formMode === EHeroFormMode.EDIT) {
             this.submitButtonText = 'Сохранить изменения';
             this.buttonType = 'success';
             this.form.patchValue(<IHero>this.hero);
@@ -68,7 +68,7 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
      * Присваивает класс родителю в зависимости от режима работы компонента
      */
     public switchFormClass(): void {
-        if (this.mode === EHeroFormMode.CREATE) {
+        if (this.formMode === EHeroFormMode.CREATE) {
             this.hostClass = 'create-mode';
         } else {
             this.hostClass = 'edit-mode';
@@ -91,10 +91,10 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
             this.errorMessage = EErrorMessage.HERO_EXIST;
             return;
         }
-        if (this.mode === EHeroFormMode.CREATE) {
+        if (this.formMode === EHeroFormMode.CREATE) {
             this._manageHeroesService.add(hero, this.filterFormValue);
             this.form.reset();
-        } else if (this.mode === EHeroFormMode.EDIT) {
+        } else if (this.formMode === EHeroFormMode.EDIT) {
             this._manageHeroesService.edit(hero, this.filterFormValue);
         }
     }

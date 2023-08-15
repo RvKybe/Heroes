@@ -1,9 +1,9 @@
 <dx-scroll-view width="100%"
                 [ngClass]="{
-                  'popup-view': mode === EDialogMode.EDIT
+                  'popup-view': formMode === EDialogMode.EDIT
                 }">
     <div [ngClass]="{
-            'popup__fieldSet--scroll-padding': mode === EDialogMode.EDIT
+            'popup__fieldSet--scroll-padding': formMode === EDialogMode.EDIT
          }"
          class="dx-fieldset">
         <div class="dx-field">
@@ -55,14 +55,14 @@
             </div>
         </div>
         <div [ngClass]="{
-                'level-text': mode === EDialogMode.EDIT
+                'level-text': formMode === EDialogMode.EDIT
              }"
              class="dx-field">
             <div class="dx-field-label">
                 Уровень:
             </div>
             <div class="dx-field-value">
-                <ng-container [ngSwitch]="mode">
+                <ng-container [ngSwitch]="formMode">
                     <dx-number-box *ngSwitchCase="EDialogMode.CREATE"
                                    [isValid]="levelFormControl.valid || levelFormControl.untouched"
                                    [formControl]="levelFormControl"
@@ -90,7 +90,7 @@
                [text]="submitButtonText"
                [type]="buttonType"
                [ngClass]="{
-                 'popup__edit-button': mode === EDialogMode.EDIT
+                 'popup__edit-button': formMode === EDialogMode.EDIT
                }"
                (onClick)="submit()"
     ></dx-button>
