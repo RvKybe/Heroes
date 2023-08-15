@@ -3,6 +3,7 @@ import {FormControl} from "@angular/forms";
 import {ManageAbilitiesService} from "../../services/manage-abilities.service";
 import {FormBuilderService} from "../../services/form-builder.service";
 import {trimSpace} from "../../utils/trim-space.util";
+import {EErrorMessage} from "../../enums/error-message.enum";
 
 @Component({
     selector: 'app-create-ability-form',
@@ -29,7 +30,7 @@ export class CreateAbilityFormComponent {
     }
 
     /**
-     * Функция создания способности героя.
+     * Создаёт способность героя
      */
     public createAbility(): void {
         this.errorMessage = '';
@@ -43,7 +44,7 @@ export class CreateAbilityFormComponent {
             this._manageAbilitiesServices.add(abilityName);
             this.abilityNameFormControl.reset();
         } else {
-            this.errorMessage = 'Такая способность уже существует';
+            this.errorMessage = EErrorMessage.ABILITY_EXIST;
         }
     }
 }

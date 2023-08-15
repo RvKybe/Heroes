@@ -30,11 +30,11 @@ export class FormBuilderService {
      */
     public get filterForm(): FormGroup {
         return new FormGroup({
-            [LFilterForm.BOTTOM_LEVEL]: new FormControl(),
-            [LFilterForm.TOP_LEVEL]: new FormControl(),
-            [LFilterForm.ABILITY_IDS]: new FormControl([]),
-            [LFilterForm.HERO_NAME]: new FormControl(),
-            [LFilterForm.SORT_MODE]: new FormControl(1),
+            [LFilterForm.BOTTOM_LEVEL]: new FormControl<number | null>(null),
+            [LFilterForm.TOP_LEVEL]: new FormControl<number | null>(null),
+            [LFilterForm.ABILITY_IDS]: new FormControl<number[]>([]),
+            [LFilterForm.HERO_NAME]: new FormControl<string>(''),
+            [LFilterForm.SORT_MODE]: new FormControl<number>(1),
         });
     }
 

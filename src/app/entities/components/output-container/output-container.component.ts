@@ -44,8 +44,8 @@ export class OutputContainerComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * Функция смены выбранного героя
-     * @param hero - выбранный герой
+     * Меняет выбранного героя
+     * @param {IHero} hero - выбранный герой
      */
     public switchSelection(hero: IHero): void {
         this.selectedHero = hero;

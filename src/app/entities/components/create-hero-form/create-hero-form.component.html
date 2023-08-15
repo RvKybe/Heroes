@@ -45,8 +45,8 @@
             <div class="dx-field-value">
                 <dx-tag-box [dataSource]="(abilities$ | async)"
                             [hideSelectedItems]="true"
-                            [isValid]="abilityFormControl.valid || abilityFormControl.untouched"
-                            [formControl]="abilityFormControl"
+                            [isValid]="abilityIdsFormControl.valid || abilityIdsFormControl.untouched"
+                            [formControl]="abilityIdsFormControl"
                             [multiline]="false"
                             displayExpr="name"
                             valueExpr="id"
@@ -80,7 +80,7 @@
                 </ng-container>
             </div>
         </div>
-        <div>
+        <div class="error-message">
             {{ errorMessage }}
         </div>
     </div>

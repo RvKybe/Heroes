@@ -82,7 +82,7 @@ export class ManageHeroesService {
     }
 
     /**
-     * Пайп, который фильтрует героев
+     * Фильтрация героев
      *
      * @param {IHero[]} heroes - список героев для фильтрации
      * @param {IFilterForm} filterFormValue - значения полей формы фильтрации
@@ -100,7 +100,7 @@ export class ManageHeroesService {
     }
 
     /**
-     * Функция фильтрации по способностям.
+     * Фильтрация по способностям
      *
      * Способности героя и фильтрационные способности образуют список уникальных значений
      * Если длина списка меньше суммы длин способностей героя и фильтрационных способностей
@@ -109,8 +109,8 @@ export class ManageHeroesService {
      *
      * @param {number[]} heroAbilities - список способностей героя
      * @param {number[]} filterAbilities - список фильтрационных способностей
-     * @private // что первее?
      * @return {boolean}
+     * @private
      */
     private searchAbilityName(heroAbilities: number[],filterAbilities: number[]): boolean {
         filterAbilities = filterAbilities.concat(heroAbilities);

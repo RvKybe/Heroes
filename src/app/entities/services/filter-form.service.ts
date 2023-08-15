@@ -10,7 +10,7 @@ export class FilterFormService {
     public form$: Observable<IFilterForm> = this._form$$.asObservable();
 
     /**
-     * Сеттер для передачи значения формы слушателям
+     * Передаёт значения формы фильтрации слушателям
      *
      * @param {IFilterForm} formValue - значение формы фильтрации
      */

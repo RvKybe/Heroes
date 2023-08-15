@@ -1,3 +1,5 @@
+@import 'src/assets/styles/mixins.scss';
+
 :host {
     display: flex;
     flex-direction: column;
@@ -5,61 +7,59 @@
     justify-content: flex-start;
     height: calc(100% - 156px);
     width: calc(100% - 20px);
-}
 
-.heroes-list-container {
-    background-color: gray;
-    border-radius: 3px;
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-    overflow-y: auto;
-}
+    .heroes-list-container {
+        background-color: gray;
+        border-radius: 3px;
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        overflow-y: auto;
+    }
 
-@import 'src/assets/styles/mixins.scss';
+    .hero {
+        margin-bottom: 10px;
+        background-color: beige;
+        border-radius: 3px;
+    }
 
-.hero {
-    margin-bottom: 10px;
-    background-color: beige;
-    border-radius: 3px;
-}
+    .hero__title {
+        @include flexWrapper(row,space-between);
+        width: 90%;
+        padding: 5px;
+    }
 
-.hero__title {
-    @include flexWrapper(space-between);
-    width: 90%;
-    padding: 5px;
-}
+    .ability-item {
+        @include flexWrapper(row, flex-start, center);
+        background-color: cadetblue;
+        border-radius: 3px;
+        margin: 5px;
+        padding: 3px;
+    }
 
-.ability-item {
-    @include flexWrapper(flex-start, center);
-    background-color: cadetblue;
-    border-radius: 3px;
-    margin: 5px;
-    padding: 3px;
-}
+    .ability-block__abilities-row {
+        @include flexWrapper(row, flex-start, flex-start);
+        flex-wrap: wrap;
+    }
 
-.ability-block__abilities-row {
-    @include flexWrapper(flex-start, flex-start);
-    flex-wrap: wrap;
-}
+    .popup {
+        overflow: hidden;
+    }
 
-.popup {
-    overflow: hidden;
-}
+    .hero__hero-body {
+        font: 20px sans-serif Verdana;
+    }
 
-.hero__hero-body {
-    font: 20px sans-serif Verdana;
-}
+    .ability-block {
+        @include flexWrapper(row, flex-start, flex-start);
+    }
 
-.ability-block {
-    @include flexWrapper(flex-start, flex-start);
-}
+    .ability-line__abilities-declaration {
+        @include flexWrapper(row, flex-start, center);
+        margin-top: 8px;
+    }
 
-.ability-line__abilities-declaration {
-    @include flexWrapper(flex-start, center);
-    margin-top: 8px;
-}
-
-.hero-body__description {
-    margin-bottom: 10px;
+    .hero-body__description {
+        margin-bottom: 10px;
+    }
 }

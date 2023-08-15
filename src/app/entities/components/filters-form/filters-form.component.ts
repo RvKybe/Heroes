@@ -66,34 +66,18 @@ export class FiltersFormComponent implements OnInit {
         });
     }
 
-    /**
-     * Возвращает контроллер bottomLevel формы
-     * @return {FormControl<number | null>}
-     */
     public get bottomLevelFormControl(): FormControl<number | null> {
         return this.form.get(LFilterForm.BOTTOM_LEVEL) as FormControl<number | null>;
     }
 
-    /**
-     * Возвращает контроллер topLevel формы
-     * @return {FormControl<number | null>}
-     */
     public get topLevelFormControl(): FormControl<number | null> {
         return this.form.get(LFilterForm.TOP_LEVEL) as FormControl<number | null>;
     }
 
-    /**
-     * Возвращает контроллер abilities формы
-     * @return {FormControl<number[] | null>}
-     */
-    public get abilitiesFormControl(): FormControl<number[] | null> {
+    public get abilityIdsFormControl(): FormControl<number[] | null> {
         return this.form.get(LFilterForm.ABILITY_IDS) as FormControl<number[] | null>;
     }
 
-    /**
-     * Возвращает контроллер heroName формы
-     * @return {FormControl<string | null>}
-     */
     public get heroNameFormControl(): FormControl<string | null> {
         return this.form.get(LFilterForm.HERO_NAME) as FormControl<string | null>;
     }

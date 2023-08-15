@@ -1,7 +1,7 @@
 import {FormControl} from "@angular/forms";
 
 /**
- * Функция, контролирующая пробелы в инпуте
+ * Контролирует пробелы в инпуте
  *
  * @param {FormControl} nameControl - контроллер формы (поле ввода имени)
  */

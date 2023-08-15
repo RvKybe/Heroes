@@ -1,5 +1,6 @@
-@mixin flexWrapper($jc: flex-end, $ai: center) {
+@mixin flexWrapper($fd: row, $jc: normal, $ai: normal) {
   display: flex;
+  flex-direction: $fd;
   justify-content: $jc;
   align-items: $ai;
 }

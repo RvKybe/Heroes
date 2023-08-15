@@ -6,10 +6,10 @@ import {IHero} from "../../interfaces/hero.interface";
 import {Observable, Subscription} from "rxjs";
 import {LHero} from "../../labels/hero.label";
 import {FormBuilderService} from "../../services/form-builder.service";
-import {EDialogMode} from "../../enums/dialog-mode.enum";
+import {EHeroFormMode} from "../../enums/hero-form-mode.enum";
 import {LItem} from "../../labels/item.label";
 import {IItem} from "../../interfaces/item.interface";
-import {EErrorMessages} from "../../enums/error-messages.enum";
+import {EErrorMessage} from "../../enums/error-message.enum";
 import {FilterFormService} from "../../services/filter-form.service";
 import {IFilterForm} from "../../interfaces/filter-form.interface";
 import {trimSpace} from "../../utils/trim-space.util";
@@ -39,7 +39,7 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
 
     private filterFormSubscription!: Subscription;
 
-    protected readonly EDialogMode: typeof EDialogMode = EDialogMode;
+    protected readonly EDialogMode: typeof EHeroFormMode = EHeroFormMode;
 
     constructor(
         private readonly _manageHeroesService: ManageHeroesService,
@@ -54,10 +54,10 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
             .subscribe((filterFormValue: IFilterForm) => {
                 this.filterFormValue = filterFormValue;
             });
-        if (this.mode === EDialogMode.CREATE) {
+        if (this.mode === EHeroFormMode.CREATE) {
             this.submitButtonText = 'Создать героя';
             this.buttonType = 'default';
-        } else if (this.mode === EDialogMode.EDIT) {
+        } else if (this.mode === EHeroFormMode.EDIT) {
             this.submitButtonText = 'Сохранить изменения';
             this.buttonType = 'success';
             this.form.patchValue(<IHero>this.hero);
@@ -65,10 +65,10 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * Функция, которая даёт класс родителю в зависимости от режима вызовы компонента
+     * Присваивает класс родителю в зависимости от режима работы компонента
      */
     public switchFormClass(): void {
-        if (this.mode === EDialogMode.CREATE) {
+        if (this.mode === EHeroFormMode.CREATE) {
             this.hostClass = 'create-mode';
         } else {
             this.hostClass = 'edit-mode';
@@ -76,7 +76,7 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * Функция отправки формы
+     * Отправляет форму
      */
     public submit(): void {
         const hero: IHero = <IHero>this.form.value;
@@ -88,13 +88,13 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
             return;
         }
         if (hasDuplicate) {
-            this.errorMessage = EErrorMessages.HERO_EXIST;
+            this.errorMessage = EErrorMessage.HERO_EXIST;
             return;
         }
-        if (this.mode === EDialogMode.CREATE) {
+        if (this.mode === EHeroFormMode.CREATE) {
             this._manageHeroesService.add(hero, this.filterFormValue);
             this.form.reset();
-        } else if (this.mode === EDialogMode.EDIT) {
+        } else if (this.mode === EHeroFormMode.EDIT) {
             this._manageHeroesService.edit(hero, this.filterFormValue);
         }
     }
@@ -107,34 +107,18 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
         trimSpace(nameControl);
     }
 
-    /**
-     * Возвращает контроллер name формы
-     * @return {FormControl<string | null>}
-     */
     public get nameFormControl(): FormControl<string | null> {
         return this.form.get(LItem.NAME) as FormControl<string | null>;
     }
 
-    /**
-     * Возвращает контроллер power формы
-     * @return {FormControl<string | null>}
-     */
     public get powerFormControl(): FormControl<number | null> {
         return this.form.get(LHero.POWER) as FormControl<number | null>;
     }
 
-    /**
-     * Возвращает контроллер abilities формы
-     * @return {FormControl<string | null>}
-     */
-    public get abilityFormControl(): FormControl<number[] | null> {
+    public get abilityIdsFormControl(): FormControl<number[] | null> {
         return this.form.get(LHero.ABILITY_IDS) as FormControl<number[] | null>;
     }
 
-    /**
-     * Возвращает контроллер level формы
-     * @return {FormControl<string | null>}
-     */
     public get levelFormControl(): FormControl<number | null> {
         return this.form.get(LHero.LEVEL) as FormControl<number | null>;
     }

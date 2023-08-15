@@ -5,12 +5,12 @@
   padding: 16px;
   height: calc(100% - 32px);
   width: calc(100% - 32px);
-}
 
-.left-column {
-  width: 40%;
-}
+  .left-column {
+    width: 40%;
+  }
 
-.right-column {
-  width: calc(60% - 32px);
+  .right-column {
+    width: calc(60% - 32px);
+  }
 }

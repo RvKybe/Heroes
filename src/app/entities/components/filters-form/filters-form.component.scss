@@ -1,52 +1,51 @@
 @import 'src/assets/styles/mixins.scss';
 
 :host {
-  @include flexWrapper(flex-start, flex-start);
+  @include flexWrapper(column, flex-start, flex-start);
   width: 100%;
-  flex-direction: column;
   margin-bottom: 32px;
-}
 
-.filter-form {
-  background-color: beige;
-  border-radius: 3px;
-  padding: 10px;
-  border: 1px solid silver;
-  width: calc(100% - 22px);
-}
+  .filter-form {
+    background-color: beige;
+    border-radius: 3px;
+    padding: 10px;
+    border: 1px solid silver;
+    width: calc(100% - 22px);
+  }
 
-.filter-form__sort-item {
-  @include flexWrapper(space-between, center);
-  width: 50%;
-  padding: 5px 0;
-}
+  .filter-form__sort-item {
+    @include flexWrapper(row, space-between, center);
+    width: 50%;
+    padding: 5px 0;
+  }
 
-.input--size-s {
-  width: 80px;
-}
+  .input--size-s {
+    width: 80px;
+  }
 
-.sort-item__abilities-input {
-  width: calc(100% - 105px);
-}
+  .sort-item__abilities-input {
+    width: calc(100% - 105px);
+  }
 
-.filter-form__row {
-  width: 100%;
-  display: flex;
-}
+  .filter-form__row {
+    width: 100%;
+    display: flex;
+  }
 
-.sort-item--margin-right {
-  margin-right: 10px;
-}
+  .sort-item--margin-right {
+    margin-right: 10px;
+  }
 
-.sort-item__name-input {
- width: calc(100% - 125px);
-}
+  .sort-item__name-input {
+    width: calc(100% - 125px);
+  }
 
-.sort-item--flex-start {
-  @include flexWrapper(flex-start, center);
-}
+  .sort-item--flex-start {
+    @include flexWrapper(row, flex-start, center);
+  }
 
-.sort-item__range-input {
-  margin-left: 30px;
-  width: calc(100% - 132px);
+  .sort-item__range-input {
+    margin-left: 30px;
+    width: calc(100% - 132px);
+  }
 }
