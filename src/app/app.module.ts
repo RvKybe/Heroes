@@ -16,6 +16,7 @@ import {FiltersFormComponent} from './entities/components/filters-form/filters-f
 import {OutputContainerComponent} from './entities/components/output-container/output-container.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {GetAbilityNameByIdPipe} from './entities/pipes/get-ability-name-by-id.pipe';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
     declarations: [
@@ -37,9 +38,10 @@ import {GetAbilityNameByIdPipe} from './entities/pipes/get-ability-name-by-id.pi
         DxPopupModule,
         DxAccordionModule,
         DxNumberBoxModule,
-        DxScrollViewModule
+        DxScrollViewModule,
+        HttpClientModule
     ],
-    providers: [],
+    providers: [HttpClientModule ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

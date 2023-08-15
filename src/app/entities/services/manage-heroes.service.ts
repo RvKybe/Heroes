@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {IHero} from "../interfaces/hero.interface";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, lastValueFrom, Observable} from "rxjs";
 import {LFilterForm} from "../labels/filter-form.label";
 import {LHero} from "../labels/hero.label";
 import {IFilterForm} from "../interfaces/filter-form.interface";
 import {LItem} from "../labels/item.label";
+import {LRequest} from "../labels/request.label";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +15,42 @@ export class ManageHeroesService {
     private _heroes$$: BehaviorSubject<IHero[]> = new BehaviorSubject<IHero[]>([]);
     public heroes$: Observable<IHero[]> = this._heroes$$.asObservable();
 
+    constructor (private readonly _http: HttpClient) {
+    }
+
+    public getHeroes(): void {
+        lastValueFrom(this._http.get(LRequest.GET_HEROES)).then((res: any) => {
+            this._heroes$$.next(res)
+        });
+    }
+
+    /**
+     * todo
+     */
+    public postHero(hero: IHero): void{
+        fetch(LRequest.POST_HERO, {
+            method: 'POST',
+            headers: {
+                'accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(hero)
+        }).then();
+    }
+
+    /**
+     * todo
+     */
+    public putHero(hero: IHero): void{
+        fetch(LRequest.PUT_HERO+`${hero[LItem.ID]}`, {
+            method: 'PUT',
+            headers: {
+                'accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(hero)
+        }).then();
+    }
     /**
      * Функция создания героя
      *
@@ -20,20 +58,9 @@ export class ManageHeroesService {
      * @param {IFilterForm} filterFormValue - значение формы фильтрации
      */
     public add(hero: IHero, filterFormValue: IFilterForm): void {
-        const heroes: IHero[] = this._heroes$$.getValue();
-        if (!heroes.length) {
-            hero[LItem.ID] = 1;
-        } else {
-            let lastHeroId: number = -1;
-            heroes.forEach((hero: IHero) => {
-                if (hero[LItem.ID] > lastHeroId) {
-                    lastHeroId = hero[LItem.ID];
-                }
-            })
-            hero[LItem.ID] = lastHeroId + 1;
-        }
-        heroes.push(hero);
-        this.sortHeroes(filterFormValue, heroes);
+        this.postHero(hero);
+        this.getHeroes();
+        this.sortHeroes(filterFormValue);
     }
 
     /**
@@ -43,12 +70,9 @@ export class ManageHeroesService {
      * @param {IFilterForm} filterFormValue - значение фильтрационной формы
      */
     public edit(formHero: IHero, filterFormValue: IFilterForm): void {
-        const heroes: IHero[] = this._heroes$$.getValue();
-        const heroIndex: number = heroes.findIndex((hero: IHero) => hero[LItem.ID] === formHero[LItem.ID]);
-        if (heroIndex !== -1) {
-            heroes[heroIndex] = formHero;
-        }
-        this.sortHeroes(filterFormValue, heroes);
+        this.putHero(formHero);
+        this.getHeroes();
+        this.sortHeroes(filterFormValue);
     }
 
     /**
@@ -69,12 +93,9 @@ export class ManageHeroesService {
      * Функция запуска фильтрации и сортировки героев
      *
      * @param {IFilterForm} filterFormValue - форма фильтрации и сортировки
-     * @param {IHero[]} heroes - герои для сортировки и отправка
      */
-    public sortHeroes(filterFormValue: IFilterForm, heroes: IHero[] | null): void {
-        if (!heroes) {
-            heroes = this._heroes$$.getValue();
-        }
+    public sortHeroes(filterFormValue: IFilterForm): void {
+        const heroes: IHero[] = this._heroes$$.getValue();
         heroes.sort((a: IHero, b: IHero) => {
             return (a[LHero.LEVEL] - b[LHero.LEVEL]) * filterFormValue[LFilterForm.SORT_MODE];
         });

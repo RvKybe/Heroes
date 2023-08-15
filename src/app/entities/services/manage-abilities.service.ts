@@ -1,31 +1,47 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, lastValueFrom, Observable} from "rxjs";
 import {IItem} from "../interfaces/item.interface";
 import {LItem} from "../labels/item.label";
+import {LRequest} from "../labels/request.label";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ManageAbilitiesService {
-    private _abilities$$: BehaviorSubject<IItem[]> = new BehaviorSubject( [
-        {
-            id: 1,
-            name: 'Суперсила'
-        },
-        {
-            id: 2,
-            name: 'Суперскорость'
-        },
-        {
-            id: 3,
-            name: 'Телепортация'
-        },
-        {
-            id: 4,
-            name: 'Деньги'
-        },
-    ]);
+    private _abilities$$: BehaviorSubject<IItem[]> = new BehaviorSubject<IItem[]>([]);
     public abilities$: Observable<IItem[]> = this._abilities$$.asObservable();
+
+    constructor (private readonly _http: HttpClient) {this.getAbilities()}
+
+    /**
+     * todo
+     */
+    public  getAbilities(): void {
+        lastValueFrom(this._http.get(LRequest.GET_ABILITIES)).then((res: any) => {
+            this._abilities$$.next(res)
+        });
+    }
+
+    /**
+     * todo
+     */
+    public postAbility(ability: {[LItem.NAME]: string}): void {
+        /*this._http.post(LRequest.POST_ABILITY, JSON.stringify(ability), {
+           headers: {
+               'accept': 'application/json',
+               'Content-Type': 'application/json'
+           }
+       })*/
+        fetch(LRequest.POST_ABILITY, {
+            method: 'POST',
+            headers: {
+                'accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(ability)
+        }).then();
+    }
 
     /**
      * Функция создания способности
@@ -33,15 +49,11 @@ export class ManageAbilitiesService {
      * @param {string} abilityName - название созданной способности
      */
     public add(abilityName: string): void {
-        const abilities: IItem[] = this._abilities$$.getValue();
-        const lastAbility: IItem = <IItem>abilities.at(-1);
-        let lastAbilityId: number = lastAbility[LItem.ID];
-        const newAbility: IItem = {
-            [LItem.ID]: ++lastAbilityId,
+        const newAbility: {[LItem.NAME]: string} = {
             [LItem.NAME]: abilityName,
         };
-        abilities.push(newAbility);
-        this._abilities$$.next(abilities);
+        this.postAbility(newAbility);
+        this.getAbilities();
     }
 
     /**

@@ -62,7 +62,7 @@ export class FiltersFormComponent implements OnInit {
     private _initFilterFormChangeSubscription(): void {
         this.formChangeSubscription = this.form.valueChanges.subscribe((value: IFilterForm) => {
             this._filterFormService.form = this.form.value;
-            this._manageHeroesService.sortHeroes(value, null);
+            this._manageHeroesService.sortHeroes(value);
         });
     }
 
