@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, lastValueFrom, Observable} from "rxjs";
+import {BehaviorSubject, lastValueFrom, Observable, subscribeOn} from "rxjs";
 import {IItem} from "../interfaces/item.interface";
 import {LItem} from "../labels/item.label";
 import {LRequest} from "../labels/request.label";
@@ -18,7 +18,10 @@ export class ManageAbilitiesService {
      * todo
      */
     public  getAbilities(): void {
-        lastValueFrom(this._http.get(LRequest.GET_ABILITIES)).then((res: any) => {
+        /*lastValueFrom(this._http.get(LRequest.GET_ABILITIES)).then((res: any) => {
+            this._abilities$$.next(res);
+        });*/
+        this._http.get(LRequest.GET_ABILITIES).subscribe((res: any) => {
             this._abilities$$.next(res);
         });
     }
@@ -27,14 +30,17 @@ export class ManageAbilitiesService {
      * todo
      */
     public postAbility(ability: {[LItem.NAME]: string}): void {
-        fetch(LRequest.POST_ABILITY, {
+        this._http.post(LRequest.POST_ABILITY, ability).subscribe((res: any) => {
+            this._abilities$$.next(res);
+        });
+        /*fetch(LRequest.POST_ABILITY, {
             method: 'POST',
             headers: {
                 'accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(ability)
-        }).then();
+        }).then();*/
     }
 
     /**
