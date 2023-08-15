@@ -19,7 +19,7 @@ export class ManageAbilitiesService {
      */
     public  getAbilities(): void {
         lastValueFrom(this._http.get(LRequest.GET_ABILITIES)).then((res: any) => {
-            this._abilities$$.next(res)
+            this._abilities$$.next(res);
         });
     }
 
@@ -27,12 +27,6 @@ export class ManageAbilitiesService {
      * todo
      */
     public postAbility(ability: {[LItem.NAME]: string}): void {
-        /*this._http.post(LRequest.POST_ABILITY, JSON.stringify(ability), {
-           headers: {
-               'accept': 'application/json',
-               'Content-Type': 'application/json'
-           }
-       })*/
         fetch(LRequest.POST_ABILITY, {
             method: 'POST',
             headers: {

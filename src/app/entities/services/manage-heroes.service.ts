@@ -20,7 +20,7 @@ export class ManageHeroesService {
 
     public getHeroes(): void {
         lastValueFrom(this._http.get(LRequest.GET_HEROES)).then((res: any) => {
-            this._heroes$$.next(res)
+            this._heroes$$.next(res);
         });
     }
 
