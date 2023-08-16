@@ -5,6 +5,6 @@ import {Component} from "@angular/core";
     templateUrl: './preloader.component.html',
     styleUrls: ['./preloader.component.scss']
 })
-export class PreloaderComponent   {
+export class PreloaderComponent {
 
 }

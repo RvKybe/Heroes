@@ -58,7 +58,7 @@ export class HeroFormComponent implements OnInit, OnDestroy {
                 this.filterFormValue = filterFormValue;
             });
         if (this.formMode === EHeroFormMode.CREATE) {
-            this._manageAbilitiesService.getAbilities();
+            this._manageAbilitiesService.getAll();
             this.submitButtonText = 'Создать героя';
             this.buttonType = 'default';
         } else if (this.formMode === EHeroFormMode.EDIT) {

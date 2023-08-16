@@ -1,36 +1,18 @@
-import {Injectable, OnDestroy} from "@angular/core";
-import {ManageHeroesService} from "./manage-heroes.service";
-import {ManageAbilitiesService} from "./manage-abilities.service";
-import {BehaviorSubject, Observable, Subscription} from "rxjs";
+import {Injectable} from "@angular/core";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
-export class PreloaderService implements OnDestroy {
+export class PreloaderService {
     private _isVisible$$: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public isVisible$: Observable<boolean> = this._isVisible$$ as Observable<boolean>;
 
-    private _heroesPreloaderSubscription: Subscription = this._manageHeroesService.showPreloader$
-        .subscribe((value: boolean) => {
-            if (value !== this._isVisible$$.getValue()) {
-                this._isVisible$$.next(value);
-
-            }
-        });
-    private _abilitiesPreloaderSubscription: Subscription = this._manageAbilitiesService.showPreloader$
-        .subscribe((value: boolean) => {
-            if (value !== this._isVisible$$.getValue()) {
-                this._isVisible$$.next(value);
-            }
-        });
-
-    constructor (
-        private readonly _manageHeroesService: ManageHeroesService,
-        private readonly _manageAbilitiesService: ManageAbilitiesService
-    ) {}
-
-    public ngOnDestroy(): void {
-        this._abilitiesPreloaderSubscription.unsubscribe();
-        this._heroesPreloaderSubscription.unsubscribe();
+    /**
+     * Передаёт значение в поток
+     * @param value - значение видимости прелоадера
+     */
+    public set visible(value: boolean) {
+        this._isVisible$$.next(value);
     }
 }

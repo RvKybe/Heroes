@@ -40,7 +40,7 @@ export class OutputContainerComponent implements OnInit, OnDestroy {
             })
         this._heroesSubscription = this._manageHeroesService.heroes$
             .subscribe((heroes: IHero[]) => {
-                this.heroes = this._manageHeroesService.filterHeroes(heroes, this.filterFormValue);
+                this.heroes = this._manageHeroesService.filter(heroes, this.filterFormValue);
                 this.selectedHero = this._selectedHero;
             })
     }

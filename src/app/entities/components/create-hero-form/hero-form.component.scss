@@ -3,8 +3,6 @@
 :host {
   @include flexWrapper(column, flex-start, flex-start);
 
-  z-index: 1;
-
   &.create-mode {
     padding: 10px;
     background-color: beige;

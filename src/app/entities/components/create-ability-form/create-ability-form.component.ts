@@ -16,7 +16,7 @@ export class CreateAbilityFormComponent {
     public errorMessage: string = '';
 
     constructor(
-        private readonly _manageAbilitiesServices: ManageAbilitiesService,
+        private readonly _manageAbilitiesService: ManageAbilitiesService,
         private readonly _formBuilderService: FormBuilderService,
     ) {
     }
@@ -39,9 +39,9 @@ export class CreateAbilityFormComponent {
             return;
         }
         const abilityName: string = <string>this.abilityNameFormControl.value;
-        const hasDuplicate: boolean = this._manageAbilitiesServices.hasDuplicate(abilityName);
+        const hasDuplicate: boolean = this._manageAbilitiesService.hasDuplicate(abilityName);
         if (!hasDuplicate) {
-            this._manageAbilitiesServices.add(abilityName);
+            this._manageAbilitiesService.add(abilityName);
             this.abilityNameFormControl.reset();
         } else {
             this.errorMessage = EErrorMessage.ABILITY_EXIST;
