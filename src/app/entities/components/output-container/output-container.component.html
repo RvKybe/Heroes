@@ -7,7 +7,7 @@
                   [selectedItem]="selectedHero"
                   class="hero">
         <div *dxTemplate="let hero of 'title'"
-             (click)="switchSelection(hero)">
+             (click)="switchSelectedHero(hero)">
             <div class="hero__title">
                 <div>
                     {{ hero[LItem.NAME] }}

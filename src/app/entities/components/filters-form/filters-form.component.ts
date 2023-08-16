@@ -57,6 +57,7 @@ export class FiltersFormComponent implements OnInit {
 
     /**
      * Создаёт подписку на изменения формы фильтрации
+     *
      * @private
      */
     private _initFilterFormChangeSubscription(): void {

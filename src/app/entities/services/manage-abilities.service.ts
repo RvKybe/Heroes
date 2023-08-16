@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, lastValueFrom, Observable, subscribeOn} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {IItem} from "../interfaces/item.interface";
 import {LItem} from "../labels/item.label";
 import {LRequest} from "../labels/request.label";
@@ -11,40 +11,14 @@ import {HttpClient} from "@angular/common/http";
 export class ManageAbilitiesService {
     private _abilities$$: BehaviorSubject<IItem[]> = new BehaviorSubject<IItem[]>([]);
     public abilities$: Observable<IItem[]> = this._abilities$$.asObservable();
+    private _preloaderIsVisible$$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    public showPreloader$: Observable<boolean> = this._preloaderIsVisible$$.asObservable();
 
-    constructor (private readonly _http: HttpClient) {this.getAbilities()}
-
-    /**
-     * todo
-     */
-    public  getAbilities(): void {
-        /*lastValueFrom(this._http.get(LRequest.GET_ABILITIES)).then((res: any) => {
-            this._abilities$$.next(res);
-        });*/
-        this._http.get(LRequest.GET_ABILITIES).subscribe((res: any) => {
-            this._abilities$$.next(res);
-        });
+    constructor (private readonly _httpClient: HttpClient) {
     }
 
     /**
-     * todo
-     */
-    public postAbility(ability: {[LItem.NAME]: string}): void {
-        this._http.post(LRequest.POST_ABILITY, ability).subscribe((res: any) => {
-            this._abilities$$.next(res);
-        });
-        /*fetch(LRequest.POST_ABILITY, {
-            method: 'POST',
-            headers: {
-                'accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(ability)
-        }).then();*/
-    }
-
-    /**
-     * Функция создания способности
+     * Создание способности
      *
      * @param {string} abilityName - название созданной способности
      */
@@ -52,12 +26,12 @@ export class ManageAbilitiesService {
         const newAbility: {[LItem.NAME]: string} = {
             [LItem.NAME]: abilityName,
         };
-        this.postAbility(newAbility);
-        this.getAbilities();
+        this._postAbility(newAbility)
+            .then(() => this._getAbilities());
     }
 
     /**
-     * Функция проверки способности на наличие дубликата
+     * Проверка способности на наличие дубликата
      *
      * @param {string} abilityName - название новой способности
      * @return {boolean}
@@ -65,5 +39,35 @@ export class ManageAbilitiesService {
     public hasDuplicate(abilityName: string): boolean {
         const abilities: IItem[] = this._abilities$$.getValue();
         return abilities.some((ability: IItem) => ability[LItem.NAME] === abilityName);
+    }
+
+    /**
+     * Первичное получение способностей
+     */
+    public getAbilities(): void {
+        this._getAbilities();
+    }
+
+    /**
+     * GET - запрос способностей
+     *
+     * @private
+     */
+    private _getAbilities(): void {
+        this._preloaderIsVisible$$.next(true);
+        this._httpClient.get<IItem[]>(LRequest.GET_ABILITIES).subscribe((abilitiesFromBack: IItem[]) => {
+            this._abilities$$.next(abilitiesFromBack);
+            this._preloaderIsVisible$$.next(false);
+        });
+    }
+
+    /**
+     * GET - запрос способностей
+     *
+     * @param {{[LItem.NAME]: string}} ability - название способности
+     * @private
+     */
+    private async _postAbility(ability: {[LItem.NAME]: string}): Promise<void> {
+        this._httpClient.post(LRequest.POST_ABILITY, ability).subscribe();
     }
 }

@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-//const {LItem} = require("../src/app/entities/labels/item.label.ts");
+const {LItem} = require("../src/app/entities/labels/item.label.ts");
 const app = express();
 
 app.use(cors());
@@ -11,7 +11,7 @@ let heroId = 1;
 let abilityId = 5;
 const heroes = [];
 const abilities = [
-    /*{
+    {
         [LItem.ID]: 1,
         [LItem.NAME]: 'Суперсила'
     },
@@ -26,23 +26,7 @@ const abilities = [
     {
         [LItem.ID]: 4,
         [LItem.NAME]: 'Деньги'
-    },*/
-    {
-        id: 1,
-        name: 'Суперсила'
-    },
-    {
-        id: 2,
-        name: 'Суперскорость'
-    },
-    {
-        id: 3,
-        name: 'Телепортация'
-    },
-    {
-        id: 4,
-        name: 'Деньги'
-    },
+    }
 ];
 
 app.get('/abilities', (req, res) => {

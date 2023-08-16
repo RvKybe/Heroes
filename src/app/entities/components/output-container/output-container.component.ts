@@ -20,6 +20,7 @@ export class OutputContainerComponent implements OnInit, OnDestroy {
     public filterFormValue!: IFilterForm;
     public selectedHero!: IHero;
 
+    private _selectedHeroId!: number;
     private _heroesSubscription!: Subscription;
     private _filterFormSubscription!: Subscription;
 
@@ -40,15 +41,28 @@ export class OutputContainerComponent implements OnInit, OnDestroy {
         this._heroesSubscription = this._manageHeroesService.heroes$
             .subscribe((heroes: IHero[]) => {
                 this.heroes = this._manageHeroesService.filterHeroes(heroes, this.filterFormValue);
+                this.selectedHero = this._selectedHero;
             })
     }
 
     /**
      * Меняет выбранного героя
-     * @param {IHero} hero - выбранный герой
+     * @param {IHero} newSelectedHero - выбранный герой
      */
-    public switchSelection(hero: IHero): void {
-        this.selectedHero = hero;
+    public switchSelectedHero(newSelectedHero: IHero): void {
+        this._selectedHeroId = newSelectedHero[LItem.ID];
+        this.selectedHero = this._selectedHero;
+    }
+
+    /**
+     * Возвращает выбранного героя
+     *
+     * @private
+     */
+    private get _selectedHero(): IHero {
+        return <IHero>this.heroes.find((hero: IHero) => {
+            return hero[LItem.ID] === this._selectedHeroId;
+        });
     }
 
     public ngOnDestroy(): void {

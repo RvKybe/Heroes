@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {
     DxAccordionModule,
-    DxButtonModule, DxNumberBoxModule,
+    DxButtonModule, DxLoadIndicatorModule, DxLoadPanelModule, DxNumberBoxModule,
     DxPopupModule, DxScrollViewModule,
     DxSelectBoxModule,
     DxTagBoxModule,
@@ -17,6 +17,7 @@ import {OutputContainerComponent} from './entities/components/output-container/o
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {GetAbilityNameByIdPipe} from './entities/pipes/get-ability-name-by-id.pipe';
 import {HttpClientModule} from "@angular/common/http";
+import {PreloaderComponent} from "./entities/components/preloader/preloader.component";
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import {HttpClientModule} from "@angular/common/http";
         FiltersFormComponent,
         OutputContainerComponent,
         GetAbilityNameByIdPipe,
+        PreloaderComponent
     ],
     imports: [
         BrowserModule,
@@ -39,7 +41,9 @@ import {HttpClientModule} from "@angular/common/http";
         DxAccordionModule,
         DxNumberBoxModule,
         DxScrollViewModule,
-        HttpClientModule
+        HttpClientModule,
+        DxLoadIndicatorModule,
+        DxLoadPanelModule
     ],
     providers: [HttpClientModule ],
     bootstrap: [AppComponent]
