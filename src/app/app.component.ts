@@ -8,7 +8,7 @@ import {PreloaderService} from "./entities/services/preloader.service";
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    public preloaderIsVisible$: Observable<boolean> = this._preloaderService.IsVisible$;
+    public preloaderIsVisible$: Observable<boolean> = this._preloaderService.isVisible$;
     constructor (private readonly _preloaderService: PreloaderService) {
     }
 }

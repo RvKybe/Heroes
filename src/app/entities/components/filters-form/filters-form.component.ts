@@ -33,7 +33,10 @@ export class FiltersFormComponent implements OnInit {
 
     public ngOnInit(): void {
         this._filterFormService.form = this.form.value;
-        this._initFilterFormChangeSubscription();
+        this.formChangeSubscription = this.form.valueChanges.subscribe((value: IFilterForm) => {
+            this._filterFormService.form = this.form.value;
+            this._manageHeroesService.sortHeroes(value);
+        });
     }
 
     /**
@@ -53,18 +56,6 @@ export class FiltersFormComponent implements OnInit {
         }
         const sortMode: number = this.sort === 'fromLowLevel' ? 1 : -1;
         this.form.get(LFilterForm.SORT_MODE)?.setValue(sortMode);
-    }
-
-    /**
-     * Создаёт подписку на изменения формы фильтрации
-     *
-     * @private
-     */
-    private _initFilterFormChangeSubscription(): void {
-        this.formChangeSubscription = this.form.valueChanges.subscribe((value: IFilterForm) => {
-            this._filterFormService.form = this.form.value;
-            this._manageHeroesService.sortHeroes(value);
-        });
     }
 
     public get bottomLevelFormControl(): FormControl<number | null> {

@@ -6,27 +6,28 @@ import {BehaviorSubject, Observable, Subscription} from "rxjs";
 @Injectable({
     providedIn: 'root'
 })
-export class PreloaderService implements OnDestroy{
-    private _preloaderIsVisible$$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-    public IsVisible$: Observable<boolean> = this._preloaderIsVisible$$ as Observable<boolean>;
-    constructor (
-        private readonly _manageHeroesService: ManageHeroesService,
-        private readonly _manageAbilitiesService: ManageAbilitiesService
-    ) {}
+export class PreloaderService implements OnDestroy {
+    private _isVisible$$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    public isVisible$: Observable<boolean> = this._isVisible$$ as Observable<boolean>;
 
     private _heroesPreloaderSubscription: Subscription = this._manageHeroesService.showPreloader$
         .subscribe((value: boolean) => {
-            if (value !== this._preloaderIsVisible$$.getValue()) {
-                this._preloaderIsVisible$$.next(value);
+            if (value !== this._isVisible$$.getValue()) {
+                this._isVisible$$.next(value);
 
             }
         });
     private _abilitiesPreloaderSubscription: Subscription = this._manageAbilitiesService.showPreloader$
         .subscribe((value: boolean) => {
-            if (value !== this._preloaderIsVisible$$.getValue()) {
-                this._preloaderIsVisible$$.next(value);
+            if (value !== this._isVisible$$.getValue()) {
+                this._isVisible$$.next(value);
             }
         });
+
+    constructor (
+        private readonly _manageHeroesService: ManageHeroesService,
+        private readonly _manageAbilitiesService: ManageAbilitiesService
+    ) {}
 
     public ngOnDestroy(): void {
         this._abilitiesPreloaderSubscription.unsubscribe();

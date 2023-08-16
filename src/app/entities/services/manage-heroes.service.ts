@@ -17,7 +17,7 @@ export class ManageHeroesService {
     private _showPreloader$$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public showPreloader$: Observable<boolean> = this._showPreloader$$.asObservable();
 
-    constructor(private readonly _httpClient: HttpClient) {
+    constructor (private readonly _httpClient: HttpClient) {
     }
 
     /**
