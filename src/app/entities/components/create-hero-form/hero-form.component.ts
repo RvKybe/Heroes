@@ -1,4 +1,4 @@
-import {Component, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup,} from "@angular/forms";
 import {ManageHeroesService} from "../../services/manage-heroes.service";
 import {ManageAbilitiesService} from "../../services/manage-abilities.service";
@@ -16,10 +16,10 @@ import {trimSpace} from "../../utils/trim-space.util";
 
 @Component({
     selector: 'app-create-hero-form',
-    templateUrl: './create-hero-form.component.html',
-    styleUrls: ['./create-hero-form.component.scss']
+    templateUrl: './hero-form.component.html',
+    styleUrls: ['./hero-form.component.scss']
 })
-export class CreateHeroFormComponent implements OnInit, OnDestroy {
+export class HeroFormComponent implements OnInit, OnDestroy {
     @HostBinding('class')
     public hostClass: string = '';
 
@@ -28,6 +28,9 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
 
     @Input()
     public hero!: IHero;
+
+    @Output()
+    public closePopupEvent: EventEmitter<boolean> = new EventEmitter();
 
     public form: FormGroup = this._formBuilderService.heroForm;
 
@@ -97,6 +100,7 @@ export class CreateHeroFormComponent implements OnInit, OnDestroy {
             this.form.reset();
         } else if (this.formMode === EHeroFormMode.EDIT) {
             this._manageHeroesService.edit(hero, this.filterFormValue);
+            this.closePopupEvent.emit(false);
         }
     }
 

@@ -51,6 +51,7 @@
                       container="body"
                       class="popup">
                 <app-create-hero-form [hero]="hero"
+                                      (closePopupEvent)="popup.visible = $event"
                                       formMode="edit"
                 ></app-create-hero-form>
             </dx-popup>
