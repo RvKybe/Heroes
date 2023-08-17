@@ -6,10 +6,10 @@ import {FormControl} from "@angular/forms";
  */
 export function trimSpace(nameControl: FormControl): void {
     if (nameControl.value.trim() === '') {
-        nameControl.patchValue('');
+        nameControl.setValue('', {emitEvent: false});
         return;
     }
     if (nameControl.value.length > 1 && nameControl.value.at(-1) === ' ' && nameControl.value.at(-2) === ' ') { // Убирает повторный пробел при вводе
-        nameControl.patchValue(nameControl.value.slice(0, -1));
+        nameControl.setValue(nameControl.value.slice(0, -1), {emitEvent: false});
     }
 }

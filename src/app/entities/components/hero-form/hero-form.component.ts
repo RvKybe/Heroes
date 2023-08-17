@@ -50,7 +50,6 @@ export class HeroFormComponent implements OnInit {
         private readonly _formBuilderService: FormBuilderService,
         private readonly _filterFormService: FilterFormService,
         private readonly _destroyRef: DestroyRef
-
     ) {}
 
     public ngOnInit(): void {
@@ -63,14 +62,18 @@ export class HeroFormComponent implements OnInit {
             .subscribe(() => {
                 trimSpace(this.nameFormControl);
             })
-        this.formMode === EHeroFormMode.CREATE ? this._manageAbilitiesService.getAllAbilities() : this.form.patchValue(<IHero>this.hero);
+        if (this.formMode === EHeroFormMode.CREATE) {
+            this._manageAbilitiesService.getAllAbilities();
+        } else {
+            this.form.patchValue(<IHero>this.hero);
+        }
     }
 
     /**
      * Присваивает класс родителю в зависимости от режима работы компонента
      */
     public switchFormClass(): void {
-        this.formMode === EHeroFormMode.CREATE ? this.hostClass = 'create-mode' : this.hostClass = 'edit-mode';
+        this.hostClass = this.formMode === EHeroFormMode.CREATE ? 'create-mode' : 'edit-mode';
     }
 
     /**
@@ -96,14 +99,6 @@ export class HeroFormComponent implements OnInit {
             this._manageHeroesService.editHero(hero, this.filterFormValue);
             this.closePopupEvent.emit(false);
         }
-    }
-
-    /**
-     * Передаёт контроллер формы в сервис по обработке пробелов
-     * @param {FormControl} nameControl - контроллер формы (поле ввода имени)
-     */
-    public trimSpace(nameControl: FormControl): void {
-        trimSpace(nameControl);
     }
 
     public get nameFormControl(): FormControl<string | null> {

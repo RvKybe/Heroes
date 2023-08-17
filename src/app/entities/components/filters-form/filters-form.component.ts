@@ -47,20 +47,10 @@ export class FiltersFormComponent implements OnInit {
      * Переключение сортировки
      */
     public switchSort(): void {
-        let sortMode!: number;
         this.sort = this.sort === 'fromLowLevel' ? 'fromHighLevel' : 'fromLowLevel';
-        switch (this.sort) {
-            case 'fromLowLevel':
-                this.iconName = 'chevronup';
-                this.outputSortName = 'возрастанию';
-                sortMode = 1;
-                break;
-            case 'fromHighLevel':
-                this.iconName = 'chevrondown';
-                this.outputSortName = 'убыванию';
-                sortMode = -1;
-                break;
-        }
+        const sortMode: number = this.sort === 'fromLowLevel' ? 1 : -1;
+        this.iconName = this.sort === 'fromLowLevel' ? 'chevronup' : 'chevrondown';
+        this.outputSortName = this.sort === 'fromLowLevel' ? 'возрастанию' : 'убыванию';
         this.form.get(LFilterForm.SORT_MODE)?.setValue(sortMode);
     }
 

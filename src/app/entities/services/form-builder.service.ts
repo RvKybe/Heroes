@@ -15,11 +15,11 @@ export class FormBuilderService {
      */
     public get heroForm(): FormGroup {
         return this._formBuilder.group({
-            [LItem.ID]: new FormControl<number | null>(null),
-            [LItem.NAME]: new FormControl<string>('', Validators.required),
-            [LHero.POWER]: new FormControl<number | null>(null, Validators.required),
-            [LHero.ABILITY_IDS]: new FormControl<number[]>([], Validators.required),
-            [LHero.LEVEL]: new FormControl<number | null>(null, Validators.required),
+            [LItem.ID]: null,
+            [LItem.NAME]: ['', Validators.required],
+            [LHero.POWER]: [null, Validators.required],
+            [LHero.ABILITY_IDS]: [[], Validators.required],
+            [LHero.LEVEL]: [null, Validators.required],
         });
     }
 
@@ -29,19 +29,19 @@ export class FormBuilderService {
      */
     public get filterForm(): FormGroup {
         return this._formBuilder.group({
-            [LFilterForm.BOTTOM_LEVEL]: new FormControl<number | null>(null),
-            [LFilterForm.TOP_LEVEL]: new FormControl<number | null>(null),
-            [LFilterForm.ABILITY_IDS]: new FormControl<number[]>([]),
-            [LFilterForm.HERO_NAME]: new FormControl<string>(''),
-            [LFilterForm.SORT_MODE]: new FormControl<number>(1),
+            [LFilterForm.BOTTOM_LEVEL]: null,
+            [LFilterForm.TOP_LEVEL]: null,
+            [LFilterForm.ABILITY_IDS]: [],
+            [LFilterForm.HERO_NAME]: '',
+            [LFilterForm.SORT_MODE]: 1,
         });
     }
 
     /**
      * Возвращает контроллер формы создания способности
-     * @return {FormControl<string | null>}
+     * @return {FormControl<string>}
      */
-    public get createAbilityFormControl(): FormControl<string | null> {
-        return this._formBuilder.control<string | null>(null, Validators.required);
+    public get createAbilityFormControl(): FormControl<string> {
+        return this._formBuilder.control('', Validators.required) as FormControl;
     }
 }
