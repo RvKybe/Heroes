@@ -1,10 +1,10 @@
 <div class="filter-form">
     <div class="filter-form__row">
-        <div class="filter-form__sort-item sort-item--margin-right sort-item--flex-start">
+        <div class="filter-form__sort-item filter-form__sort-item--margin-right filter-form__sort-item--flex-start">
             <div>
                 Уровень героя:
             </div>
-            <div class="filter-form__sort-item sort-item__range-input">
+            <div class="filter-form__sort-item__range-input">
                 <div>
                     от
                 </div>
@@ -38,18 +38,18 @@
                         [displayExpr]="LItem.NAME"
                         [valueExpr]="LItem.ID"
                         placeholder=""
-                        class="sort-item__abilities-input"
+                        class="filter-form__sort-item__abilities-input"
             ></dx-tag-box>
         </div>
     </div>
     <div class="filter-form__row">
-        <div class="filter-form__sort-item sort-item--margin-right">
+        <div class="filter-form__sort-item--margin-right">
             <div>
                 Поиск по имени:
             </div>
             <dx-text-box [formControl]="heroNameFormControl"
                          [maxLength]="30"
-                         class="sort-item__name-input"
+                         class="filter-form__sort-item__name-input"
             ></dx-text-box>
         </div>
         <div class="filter-form__sort-item">
