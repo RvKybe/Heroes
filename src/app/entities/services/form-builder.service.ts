@@ -31,7 +31,7 @@ export class FormBuilderService {
         return this._formBuilder.group({
             [LFilterForm.BOTTOM_LEVEL]: null,
             [LFilterForm.TOP_LEVEL]: null,
-            [LFilterForm.ABILITY_IDS]: [],
+            [LFilterForm.ABILITY_IDS]: [[]],
             [LFilterForm.HERO_NAME]: '',
             [LFilterForm.SORT_MODE]: 1,
         });
