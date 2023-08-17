@@ -22,31 +22,27 @@
         width: calc(100% - 105px);
       }
 
-      &---margin-right {
+      &--margin-right {
         margin-right: 10px;
       }
 
       &__name-input {
         width: calc(100% - 125px);
       }
+      &__range-input {
+         margin-left: 30px;
+         width: calc(100% - 132px);
+        @include flexWrapper(row, space-between, center)
+       }
     }
 
     &__row {
       width: 100%;
       display: flex;
     }
-
-    &--flex-start {
-      @include flexWrapper(row, flex-start, center);
-    }
-
-    &__range-input {
-      margin-left: 30px;
-      width: calc(100% - 132px);
-    }
   }
+}
 
-
-}.input--size-s {
+.input--size-s {
    width: 80px;
  }
