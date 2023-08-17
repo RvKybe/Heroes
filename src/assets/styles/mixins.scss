@@ -4,3 +4,8 @@
   justify-content: $jc;
   align-items: $ai;
 }
+
+@mixin fullSize($wd: 100%, $ht: 100%) {
+  width: $wd;
+  height: $ht;
+}

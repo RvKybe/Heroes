@@ -20,25 +20,23 @@ export class ManageAbilitiesService {
 
     /**
      * Создание способности
-     *
      * @param {string} abilityName - название созданной способности
      */
-    public add(abilityName: string): void {
+    public addAbility(abilityName: string): void {
         const newAbility: Record<LItem.NAME, string> = {
             [LItem.NAME]: abilityName
         };
         this._httpClient.post<IItem>(LRequest.POST_ABILITY, newAbility).subscribe(() => {
-            this.getAll();
+            this.getAllAbilities();
         });
     }
 
     /**
      * Проверка способности на наличие дубликата
-     *
      * @param {string} abilityName - название новой способности
      * @return {boolean}
      */
-    public hasDuplicate(abilityName: string): boolean {
+    public abilityHasDuplicate(abilityName: string): boolean {
         const abilities: IItem[] = this._abilities$$.getValue();
         return abilities.some((ability: IItem) => ability[LItem.NAME] === abilityName);
     }
@@ -46,11 +44,11 @@ export class ManageAbilitiesService {
     /**
      * GET - запрос способностей
      */
-    public getAll(): void {
-        this._preloaderService.visible = true;
+    public getAllAbilities(): void {
+        this._preloaderService.isVisible = true;
         this._httpClient.get<IItem[]>(LRequest.GET_ABILITIES).subscribe((abilities: IItem[]) => {
             this._abilities$$.next(abilities);
-            this._preloaderService.visible = false;
+            this._preloaderService.isVisible = false;
         });
     }
 }

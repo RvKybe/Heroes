@@ -1,13 +1,13 @@
 @import 'src/assets/styles/mixins.scss';
+@import "src/assets/styles/palette.scss";
 
 :host {
   z-index: 99999;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: white;
+  @include fullSize();
+  background-color: $preloader-color;
   opacity: 60%;
 
   .preloader-wrapper {

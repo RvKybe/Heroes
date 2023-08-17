@@ -35,8 +35,8 @@
                         [formControl]="abilityIdsFormControl"
                         [hideSelectedItems]="true"
                         [multiline]="false"
-                        displayExpr="name"
-                        valueExpr="id"
+                        [displayExpr]="LItem.NAME"
+                        [valueExpr]="LItem.ID"
                         placeholder=""
                         class="sort-item__abilities-input"
             ></dx-tag-box>

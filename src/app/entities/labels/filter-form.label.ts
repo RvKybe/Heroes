@@ -3,5 +3,5 @@ export enum LFilterForm {
     TOP_LEVEL = 'topLevel',
     ABILITY_IDS = 'abilityIds',
     HERO_NAME = 'heroName',
-    SORT_MODE = 'sortMode',
+    SORT_MODE = 'sortMode'
 }

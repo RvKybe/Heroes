@@ -6,5 +6,5 @@
  */
 export enum EErrorMessage {
     HERO_EXIST = 'Такой герой уже существует',
-    ABILITY_EXIST = 'Такая способность уже существует',
+    ABILITY_EXIST = 'Такая способность уже существует'
 }

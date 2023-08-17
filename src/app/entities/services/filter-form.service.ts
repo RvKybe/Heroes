@@ -11,7 +11,6 @@ export class FilterFormService {
 
     /**
      * Передаёт значения формы фильтрации слушателям
-     *
      * @param {IFilterForm} formValue - значение формы фильтрации
      */
     public set form(formValue: IFilterForm) {

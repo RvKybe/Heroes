@@ -1,4 +1,5 @@
 @import 'src/assets/styles/mixins.scss';
+@import "src/assets/styles/palette.scss";
 
 :host {
   @include flexWrapper(column, flex-start, flex-start);
@@ -6,46 +7,46 @@
   margin-bottom: 32px;
 
   .filter-form {
-    background-color: beige;
+    background-color: $base-color;
     border-radius: 3px;
     padding: 10px;
-    border: 1px solid silver;
+    border: 1px solid $border-color;
     width: calc(100% - 22px);
-  }
 
-  .filter-form__sort-item {
-    @include flexWrapper(row, space-between, center);
-    width: 50%;
-    padding: 5px 0;
+    &__sort-item {
+      @include flexWrapper(row, space-between, center);
+      width: 50%;
+      padding: 5px 0;
+
+      &__abilities-input {
+        width: calc(100% - 105px);
+      }
+
+      &---margin-right {
+        margin-right: 10px;
+      }
+
+      &__name-input {
+        width: calc(100% - 125px);
+      }
+    }
+
+    &__row {
+      width: 100%;
+      display: flex;
+    }
+
+    &--flex-start {
+      @include flexWrapper(row, flex-start, center);
+    }
+
+    &__range-input {
+      margin-left: 30px;
+      width: calc(100% - 132px);
+    }
   }
 
   .input--size-s {
     width: 80px;
-  }
-
-  .sort-item__abilities-input {
-    width: calc(100% - 105px);
-  }
-
-  .filter-form__row {
-    width: 100%;
-    display: flex;
-  }
-
-  .sort-item--margin-right {
-    margin-right: 10px;
-  }
-
-  .sort-item__name-input {
-    width: calc(100% - 125px);
-  }
-
-  .sort-item--flex-start {
-    @include flexWrapper(row, flex-start, center);
-  }
-
-  .sort-item__range-input {
-    margin-left: 30px;
-    width: calc(100% - 132px);
   }
 }

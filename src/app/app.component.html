@@ -1,10 +1,14 @@
 <app-preloader *ngIf="preloaderIsVisible$ | async"></app-preloader>
 <div class="left-column">
-    <app-create-hero-form formMode="create"></app-create-hero-form>
-    <app-create-ability-form></app-create-ability-form>
+    <app-hero-form [formMode]="EHeroFormMode.CREATE"
+    ></app-hero-form>
+    <app-create-ability-form
+    ></app-create-ability-form>
 </div>
 <div class="right-column">
-    <app-filters-form></app-filters-form>
-    <app-output-container></app-output-container>
+    <app-filters-form
+    ></app-filters-form>
+    <app-output-container
+    ></app-output-container>
 </div>
 

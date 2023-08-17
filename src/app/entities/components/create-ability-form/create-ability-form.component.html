@@ -7,7 +7,6 @@
                      [isValid]="abilityNameFormControl.valid || abilityNameFormControl.untouched"
                      [formControl]="abilityNameFormControl"
                      [maxLength]="30"
-                     (onInput)="trimSpace(abilityNameFormControl)"
                      valueChangeEvent="input"
                      placeholder="Laser eyes"
         ></dx-text-box>
@@ -17,7 +16,7 @@
     </div>
     <div class="button-container">
         <dx-button [disabled]="abilityNameFormControl.invalid"
-                   (onClick)="createAbility()"
+                   (click)="createAbility()"
                    type="default"
                    text="Добавить"
         ></dx-button>

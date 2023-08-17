@@ -11,7 +11,7 @@ export class GetAbilityNameByIdPipe implements PipeTransform {
      * Получение наименования способности по идентификатору
      *
      * @param {number} abilityId - id способности у героя
-     * @param {IItem[]} abilities - способности
+     * @param {IItem[] | null} abilities - способности
      * @return {string}
      */
     public transform(abilityId: number, abilities: IItem[] | null): string {

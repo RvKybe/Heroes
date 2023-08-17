@@ -10,7 +10,7 @@ import {
     DxTagBoxModule,
     DxTextBoxModule
 } from "devextreme-angular";
-import {HeroFormComponent} from './entities/components/create-hero-form/hero-form.component';
+import {HeroFormComponent} from './entities/components/hero-form/hero-form.component';
 import {CreateAbilityFormComponent} from './entities/components/create-ability-form/create-ability-form.component';
 import {FiltersFormComponent} from './entities/components/filters-form/filters-form.component';
 import {OutputContainerComponent} from './entities/components/output-container/output-container.component';

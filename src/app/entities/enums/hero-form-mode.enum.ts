@@ -6,5 +6,5 @@
  */
 export enum EHeroFormMode {
     CREATE = 'create',
-    EDIT = 'edit',
+    EDIT = 'edit'
 }

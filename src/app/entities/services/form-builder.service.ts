@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, NonNullableFormBuilder, Validators} from "@angular/forms";
 import {LHero} from "../labels/hero.label";
 import {LFilterForm} from "../labels/filter-form.label";
 import {LItem} from "../labels/item.label";
@@ -8,13 +8,13 @@ import {LItem} from "../labels/item.label";
     providedIn: 'root'
 })
 export class FormBuilderService {
+    private _formBuilder: NonNullableFormBuilder = new FormBuilder().nonNullable;
     /**
      * Возвращает форму для создания или редактирования героя
-     *
      * @return {FormGroup}
      */
     public get heroForm(): FormGroup {
-        return new FormGroup({
+        return this._formBuilder.group({
             [LItem.ID]: new FormControl<number | null>(null),
             [LItem.NAME]: new FormControl<string>('', Validators.required),
             [LHero.POWER]: new FormControl<number | null>(null, Validators.required),
@@ -25,11 +25,10 @@ export class FormBuilderService {
 
     /**
      * Возвращает форму фильтрации героев
-     *
      * @return {FormGroup}
      */
     public get filterForm(): FormGroup {
-        return new FormGroup({
+        return this._formBuilder.group({
             [LFilterForm.BOTTOM_LEVEL]: new FormControl<number | null>(null),
             [LFilterForm.TOP_LEVEL]: new FormControl<number | null>(null),
             [LFilterForm.ABILITY_IDS]: new FormControl<number[]>([]),
@@ -40,10 +39,9 @@ export class FormBuilderService {
 
     /**
      * Возвращает контроллер формы создания способности
-     *
      * @return {FormControl<string | null>}
      */
     public get createAbilityFormControl(): FormControl<string | null> {
-        return new FormControl<string | null>(null, Validators.required)
+        return this._formBuilder.control<string | null>(null, Validators.required);
     }
 }

@@ -1,65 +1,62 @@
 @import 'src/assets/styles/mixins.scss';
+@import "src/assets/styles/palette.scss";
 
 :host {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
+    @include flexWrapper(column, flex-start, flex-start);
     height: calc(100% - 156px);
     width: calc(100% - 20px);
 
-    .heroes-list-container {
-        background-color: gray;
+    .heroes {
+        background-color: $output-area-color;
         border-radius: 3px;
-        width: 100%;
-        height: 100%;
+        @include fullSize();
         padding: 10px;
         overflow-y: auto;
-    }
 
-    .hero {
-        margin-bottom: 10px;
-        background-color: beige;
-        border-radius: 3px;
-    }
+        &__hero {
+            margin-bottom: 10px;
+            background-color: $base-color;
+            border-radius: 3px;
 
-    .hero__title {
-        @include flexWrapper(row,space-between);
-        width: 90%;
-        padding: 5px;
-    }
+            &__title {
+                @include flexWrapper(row,space-between);
+                width: 90%;
+                padding: 5px;
+            }
 
-    .ability-item {
-        @include flexWrapper(row, flex-start, center);
-        background-color: cadetblue;
-        border-radius: 3px;
-        margin: 5px;
-        padding: 3px;
-    }
+            &__hero-body {
+                font: 20px sans-serif Verdana;
 
-    .ability-block__abilities-row {
-        @include flexWrapper(row, flex-start, flex-start);
-        flex-wrap: wrap;
+                &__description {
+                    margin-bottom: 10px;
+
+                    &__ability-block {
+                        @include flexWrapper(row, flex-start, flex-start);
+
+                        &__abilities-declaration {
+                            @include flexWrapper(row, flex-start, center);
+                            margin-top: 8px;
+                        }
+
+                        &__abilities-row {
+                            @include flexWrapper(row, flex-start, flex-start);
+                            flex-wrap: wrap;
+
+                            &__ability-item {
+                                @include flexWrapper(row, flex-start, center);
+                                background-color: $ability-color;
+                                border-radius: 3px;
+                                margin: 5px;
+                                padding: 3px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .popup {
         overflow: hidden;
-    }
-
-    .hero__hero-body {
-        font: 20px sans-serif Verdana;
-    }
-
-    .ability-block {
-        @include flexWrapper(row, flex-start, flex-start);
-    }
-
-    .ability-line__abilities-declaration {
-        @include flexWrapper(row, flex-start, center);
-        margin-top: 8px;
-    }
-
-    .hero-body__description {
-        margin-bottom: 10px;
     }
 }

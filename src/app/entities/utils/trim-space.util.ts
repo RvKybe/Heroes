@@ -2,7 +2,6 @@ import {FormControl} from "@angular/forms";
 
 /**
  * Контролирует пробелы в инпуте
- *
  * @param {FormControl} nameControl - контроллер формы (поле ввода имени)
  */
 export function trimSpace(nameControl: FormControl): void {
@@ -10,7 +9,7 @@ export function trimSpace(nameControl: FormControl): void {
         nameControl.patchValue('');
         return;
     }
-    if (nameControl.value.length > 1 && nameControl.value.at(-1) === ' ' && nameControl.value.at(-2) === ' ') {
+    if (nameControl.value.length > 1 && nameControl.value.at(-1) === ' ' && nameControl.value.at(-2) === ' ') { // Убирает повторный пробел при вводе
         nameControl.patchValue(nameControl.value.slice(0, -1));
     }
 }

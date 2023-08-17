@@ -1,5 +1,7 @@
+@import "src/assets/styles/palette.scss";
+
 :host {
   .dx-fieldset {
-    background-color: beige;
+    background-color: $base-color;
   }
 }

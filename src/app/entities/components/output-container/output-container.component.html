@@ -1,14 +1,14 @@
-<div class="heroes-list-container">
+<div class="heroes">
     <dx-accordion *ngIf="!!heroes.length"
                   [dataSource]="heroes"
                   [collapsible]="false"
                   [multiple]="false"
                   [animationDuration]="300"
                   [selectedItem]="selectedHero"
-                  class="hero">
+                  class="heroes__hero">
         <div *dxTemplate="let hero of 'title'"
              (click)="switchSelectedHero(hero)">
-            <div class="hero__title">
+            <div class="heroes__hero__title">
                 <div>
                     {{ hero[LItem.NAME] }}
                 </div>
@@ -18,42 +18,42 @@
             </div>
         </div>
         <div *dxTemplate="let hero of 'item'"
-             class="hero__hero-body">
-            <div class="hero-body__description">
+             class="heroes__hero__hero-body">
+            <div class="heroes__hero__hero-body__description">
                 <div>
                     Сила: {{ hero[LHero.POWER] }}
                 </div>
-                <div class="ability-block">
-                    <div class="ability-line__abilities-declaration">
+                <div class="heroes__hero__hero-body__description__ability-block">
+                    <div class="heroes__hero__hero-body__description__ability-block__abilities-declaration">
                         Способности:
                     </div>
-                    <div class="ability-block__abilities-row">
+                    <div class="heroes__hero__hero-body__description__ability-block__abilities-row">
                         <div *ngFor="let abilityId of hero[LHero.ABILITY_IDS];"
-                             class="ability-item">
-                            {{ abilityId | getAbilityNameById: (abilities$ | async)}}
+                             class="heroes__hero__hero-body__description__ability-block__abilities-row__ability-item">
+                            {{ abilityId | getAbilityNameById: (abilities$ | async) }}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="button-container">
-                <dx-button (onClick)="popup.visible = true"
+                <dx-button (click)="switchPopupVisible(true)"
                            type="default">
                     Редактировать
                 </dx-button>
             </div>
-            <dx-popup #popup
-                      [hideOnOutsideClick]="true"
+            <dx-popup [hideOnOutsideClick]="true"
                       [showTitle]="true"
                       [dragEnabled]="false"
                       [width]="'30%'"
                       [height]="'323px'"
+                      [(visible)]="isVisible"
                       title="Редактировать героя"
                       container="body"
                       class="popup">
-                <app-create-hero-form [hero]="hero"
-                                      (closePopupEvent)="popup.visible = $event"
-                                      formMode="edit"
-                ></app-create-hero-form>
+                <app-hero-form [hero]="hero"
+                               [formMode]="EHeroFormMode.EDIT"
+                               (closePopupEvent)="switchPopupVisible($event)"
+                ></app-hero-form>
             </dx-popup>
         </div>
     </dx-accordion>

@@ -1,4 +1,4 @@
 export enum LItem {
     ID = 'id',
-    NAME = 'name',
+    NAME = 'name'
 }
